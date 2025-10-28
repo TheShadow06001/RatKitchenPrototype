@@ -4,20 +4,17 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
-    private Transform startPosition;
-    private Transform endPosition;
+    private Vector3 startPosition;
+    private Vector3 endPosition;
 
     private bool isComplete;
 
 
     void Start()
     {
-        startPosition = gameObject.transform;
-        endPosition = gameObject.transform;
-        endPosition.position = new Vector3(endPosition.position.x, -9.5f, endPosition.position.z);
-
-        Debug.Log(startPosition);
-        Debug.Log(endPosition);
+        startPosition = transform.position;
+        
+        endPosition = new Vector3(startPosition.x, -0.65f, startPosition.z);
 
         StartCoroutine(Chop());
         isComplete = false;
@@ -26,8 +23,7 @@ public class Knife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(startPosition.position);
-        Debug.Log(endPosition.position);
+        
         if (isComplete) 
         {
             isComplete = false;
@@ -39,12 +35,12 @@ public class Knife : MonoBehaviour
     {
         for (float i = 0; i < 1; i += Time.deltaTime * speed)
         {
-            transform.position = Vector3.Lerp(startPosition.position, endPosition.position, i);
+            transform.position = Vector3.Lerp(startPosition, endPosition, i);
             yield return null;
         }
         for (float i = 0; i < 1; i += Time.deltaTime * speed)
         {
-            transform.position = Vector3.Lerp(endPosition.position, startPosition.position, i);
+            transform.position = Vector3.Lerp(endPosition, startPosition, i);
             yield return null;
         }
         isComplete = true;
