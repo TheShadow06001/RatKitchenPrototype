@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    [SerializeField] float moveSpeed = 5f;
 
+    Vector3 moveDirection;
     void Start()
     {
-        Vector3 playerPosition = player.transform.position;
+        
     }
 
     void Update()
@@ -15,7 +16,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerMove()
     {
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
-        
+        Vector3 moveDirection = new Vector3(moveX, 0, moveZ).normalized;
+        transform.position += moveDirection * moveSpeed * Time.deltaTime;
     }
 }
