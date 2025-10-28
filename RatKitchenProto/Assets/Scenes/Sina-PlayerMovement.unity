@@ -410,8 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29cfa96eed7d3f4fb8ba78e0a129ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  Camera: {fileID: 1227496607}
-  anchor: {fileID: 1946156825}
+  laneChangeSpeed: 10
 --- !u!1 &1227496607
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +557,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227496607}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0c89e2993f08c74f82cc85947f214b3, type: 3}
   m_Name: 
