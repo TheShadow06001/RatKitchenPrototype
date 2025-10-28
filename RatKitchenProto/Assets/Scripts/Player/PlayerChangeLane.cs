@@ -22,8 +22,7 @@ public class PlayerChangeLane : MonoBehaviour
         Vector3 currentPos = transform.position;
 
         float newX = Mathf.Lerp(currentPos.x, targetHorizontalX, Time.deltaTime * laneChangeSpeed);
-        float newZ = currentPos.z;
-        transform.position = new Vector3(newX, currentPos.y, newZ);
+        transform.position = new Vector3(newX, currentPos.y, currentPos.z);
     }
     void PlayerChangeLine()
     {
