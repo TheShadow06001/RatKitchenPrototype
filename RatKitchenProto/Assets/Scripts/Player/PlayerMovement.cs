@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -12,9 +13,9 @@ public class PlayerMovement : MonoBehaviour
 
     private int lane = 1;
 
-    Vector3 left;
-    Vector3 right;
-    Vector3 middle;
+    float leftLaneX = -0.5f;
+    float middleLaneX = 0f;
+    float rightLaneX = 0.5f;
 
     Vector3 moveDirection;
     
@@ -23,10 +24,6 @@ public class PlayerMovement : MonoBehaviour
         baseSpeed = Camera.GetComponent<CameraScript>().moveSpeed;
 
         moveSpeed = baseSpeed;
-
-        left = new Vector3(-0.5f, transform.position.y, transform.position.z);
-        right = new Vector3(0.5f, transform.position.y, transform.position.z);
-        middle = new Vector3(0f, transform.position.y, transform.position.z);
 
     }
 
@@ -62,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerChangeLine()
     {
-
-
         if (Input.GetKeyDown(KeyCode.D))
         {
             if (lane < 2)
@@ -87,18 +82,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void SwapLane(int value)
     {
+        Vector3 currentPos = transform.position;
         if (value == 1)
         {
-            transform.position = middle;
+            currentPos.x = middleLaneX;
         }
         else if (value == 2)
         {
-            transform.position = right;
+            currentPos.x = rightLaneX;
         }
         else
         {
-            transform.position = left;
+            currentPos.x = leftLaneX;
         }
+        transform.position = currentPos;
     }
 
 
