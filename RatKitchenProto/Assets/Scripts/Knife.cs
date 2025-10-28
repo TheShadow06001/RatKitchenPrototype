@@ -4,17 +4,17 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
-    private Vector3 startPosition;
-    private Vector3 endPosition;
+
+    private Quaternion startRotation;
+    private Quaternion endRotation;
 
     private bool isComplete;
 
 
     void Start()
     {
-        startPosition = transform.position;
-        
-        endPosition = new Vector3(startPosition.x, -0.65f, startPosition.z);
+        startRotation = transform.rotation;
+        endRotation = new Quaternion(20, startRotation.y, startRotation.y, 21);
 
         StartCoroutine(Chop());
         isComplete = false;
@@ -35,12 +35,12 @@ public class Knife : MonoBehaviour
     {
         for (float i = 0; i < 1; i += Time.deltaTime * speed)
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition, i);
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, i);
             yield return null;
         }
         for (float i = 0; i < 1; i += Time.deltaTime * speed)
         {
-            transform.position = Vector3.Lerp(endPosition, startPosition, i);
+            transform.rotation = Quaternion.Lerp(endRotation, startRotation, i);
             yield return null;
         }
         isComplete = true;
