@@ -10,9 +10,12 @@ public class PlayerChangeLane : MonoBehaviour
     private float targetHorizontalX;
     [SerializeField] private float laneChangeSpeed = 10f;
 
+    public bool isChangingLanes;
+    [SerializeField] private float laneChangeThreshold = 0.1f;
     void Start()
     {
         targetHorizontalX = middleLaneX;
+        isChangingLanes = false;
     }
 
     void Update()
@@ -20,6 +23,12 @@ public class PlayerChangeLane : MonoBehaviour
         PlayerChangeLine();
 
         Vector3 currentPos = transform.position;
+
+        if (Mathf.Abs(currentPos.x - targetHorizontalX) > laneChangeThreshold)
+        {
+            isChangingLanes = true;
+        }
+        else { isChangingLanes = false; } 
 
         float newX = Mathf.Lerp(currentPos.x, targetHorizontalX, Time.deltaTime * laneChangeSpeed);
         transform.position = new Vector3(newX, currentPos.y, currentPos.z);

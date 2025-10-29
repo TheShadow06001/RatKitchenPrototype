@@ -7,12 +7,13 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeed;
     float cameraSpeed;
     [SerializeField] float jumpForce = 5f;
-
-    PlayerChangeLane laneChanger;
+    [SerializeField] PlayerChangeLane laneChanger;
     void Start()
     {
         cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
         moveSpeed = cameraSpeed;
+
+        laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
     }
 
     void Update()
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null && Input.GetKeyDown(KeyCode.F) && transform.position.y < 1.05)
+        if (rb != null && Input.GetKeyDown(KeyCode.F) && transform.position.y < 1.05 && !laneChanger.isChangingLanes)
         {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
