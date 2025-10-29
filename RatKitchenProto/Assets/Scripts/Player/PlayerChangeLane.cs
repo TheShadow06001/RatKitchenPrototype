@@ -4,9 +4,9 @@ public class PlayerChangeLane : MonoBehaviour
 {
     private int lane = 1;
 
-    float leftLaneX = -0.5f;
-    float middleLaneX = 0f;
-    float rightLaneX = 0.5f;
+    public float leftLaneX = -0.5f;
+    public float middleLaneX = 0f;
+    public float rightLaneX = 0.5f;
     private float targetHorizontalX;
     [SerializeField] private float laneChangeSpeed = 10f;
 

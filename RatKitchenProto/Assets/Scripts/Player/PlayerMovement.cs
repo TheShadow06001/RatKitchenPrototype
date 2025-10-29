@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] GameObject camera;
+    [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject anchorPoint;
     float moveSpeed;
     float cameraSpeed;
+    [SerializeField] float jumpForce = 5f;
+
+    PlayerChangeLane laneChanger;
     void Start()
     {
-        cameraSpeed = camera.GetComponent<CameraScript>().moveSpeed;
+        cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
         moveSpeed = cameraSpeed;
     }
 
     void Update()
     {
         HandleForwardSpeed();
-        
+        Jump();
         Vector3 currentPos = transform.position;
 
         if (Input.GetKey(KeyCode.Space) == false)
@@ -36,6 +39,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             moveSpeed = cameraSpeed;
+        }
+    }
+    void Jump()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null && Input.GetKeyDown(KeyCode.F) && transform.position.y < 1.05)
+        {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 }
