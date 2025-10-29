@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
+    [Tooltip("Represents Player and Camera movement speed")] 
     public float moveSpeed = 5f;
     void Start()
     {

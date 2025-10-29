@@ -4,9 +4,10 @@ public class PlayerChangeLane : MonoBehaviour
 {
     private int lane = 1;
 
-    float leftLaneX = -0.5f;
-    float middleLaneX = 0f;
-    float rightLaneX = 0.5f;
+    [SerializeField] private float switchTime;
+    [SerializeField] float leftLaneX = -1.5f;
+    [SerializeField] float middleLaneX = 0f;
+    [SerializeField] float rightLaneX = 1.5f;
     private float targetHorizontalX;
     [SerializeField] private float laneChangeSpeed = 10f;
 
@@ -17,6 +18,7 @@ public class PlayerChangeLane : MonoBehaviour
 
     void Update()
     {
+
         PlayerChangeLine();
 
         Vector3 currentPos = transform.position;
@@ -52,6 +54,18 @@ public class PlayerChangeLane : MonoBehaviour
         else if (lane == 2)
         {
             targetHorizontalX = rightLaneX;
+        }
+    }
+
+    public bool GetLane()
+    {
+        if (transform.position.x == leftLaneX || transform.position.x == rightLaneX || transform.position.x == middleLaneX)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }
