@@ -179,5 +179,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e36ead931e4cebc4288981af8ce84f4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1462497870455792108}
   m_SourcePrefab: {fileID: 100100000, guid: e36ead931e4cebc4288981af8ce84f4e, type: 3}
+--- !u!1 &331472388353560714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e36ead931e4cebc4288981af8ce84f4e, type: 3}
+  m_PrefabInstance: {fileID: 601452309828283867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1462497870455792108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331472388353560714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee229b2668329b04e8d81f827b556f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Oven
+  ovenPrefab: {fileID: 0}

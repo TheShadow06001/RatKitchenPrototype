@@ -148,18 +148,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd43e3723318b04c8e74680b0fcc42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateKitchen
-  piecesByLevel: 10
-  counterElements:
+  sinkPrefab: {fileID: 4865522045984054999, guid: 40cf4af67eeea8a428bd0d02930a6552, type: 3}
+  ovenPrefab: {fileID: 331472388353560714, guid: 9e96829494752554ca60248f698ad45b, type: 3}
+  counterPrefabs:
   - {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
   - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
   - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
-  sinkElements:
-  - {fileID: 4865522045984054999, guid: 40cf4af67eeea8a428bd0d02930a6552, type: 3}
-  stoveElements:
-  - {fileID: 331472388353560714, guid: 9e96829494752554ca60248f698ad45b, type: 3}
-  counterNumber: 2
-  sinkNumber: 2
-  stoveNumber: 2
+  maxSinks: 2
+  maxOvens: 2
+  amountOfElements: 30
 --- !u!4 &213628231
 Transform:
   m_ObjectHideFlags: 0

@@ -6,64 +6,68 @@ using Random = UnityEngine.Random;
 
 public class GenerateKitchen : MonoBehaviour
 {
-    public int piecesByLevel = 10;
-
-    public GameObject[] counterElements;
-    public GameObject[] sinkElements;
-    public GameObject[] stoveElements;
-
-    public int counterNumber = 2;
-    public int sinkNumber = 2;
-    public int stoveNumber = 2;
-
-  
-   
+    [SerializeField] private GameObject sinkPrefab;
+    [SerializeField] private GameObject ovenPrefab;
+    [SerializeField] private GameObject[] counterPrefabs;
+    public int maxSinks = 1;
+    public int maxOvens = 1;
+    public int amountOfElements = 10;
 
     private void Awake()
     {
-        GeneratePieces();
+        GenerateRandomKitchen();
     }
-
-    private void GeneratePieces()
+    private void GenerateRandomKitchen()
     {
-        int targetPieces = piecesByLevel;
-        float xOffset = 0; // 85
-        
-        for (int i = 0; i < counterNumber; i++)
+        GameObject firstElement = Instantiate(counterPrefabs[Random.Range(0, counterPrefabs.Length)]);
+        firstElement.transform.SetParent(transform);
+        // Пример генерации 5 случайных элементов
+        for (int i = 1; i <= amountOfElements; i++)
         {
-            xOffset += SpawnWithOffset(counterElements, xOffset);
+            Vector3 spawnPosition = new Vector3(i * -80, 0, 0);
+            
+            // Случайно выбираем тип элемента (0 - раковина, 1 - плита, 2 - стол)
+            int randomType = Random.Range(0, 3);
+            
+            GameObject prefabToSpawn = null;
+            
+            switch (randomType)
+            {
+                case 0:
+                    if (maxSinks > 0)
+                    {
+                        prefabToSpawn = sinkPrefab;
+                        maxSinks--;
+                        
+                    }
+                    else
+                    {
+                        prefabToSpawn = counterPrefabs[Random.Range(0, counterPrefabs.Length)];
+                    }
+                    break;
+                case 1:
+                    if (maxOvens > 0)
+                    {
+                        prefabToSpawn = ovenPrefab;
+                        maxOvens--;
+                    }
+                    else
+                    {
+                        prefabToSpawn = counterPrefabs[Random.Range(0, counterPrefabs.Length)];
+                    }
+                    break;
+                case 2:
+                    // Для стола выбираем случайный вариант из трёх
+                    prefabToSpawn = counterPrefabs[Random.Range(0, counterPrefabs.Length)];
+                    break;
+            }
+            
+            if (prefabToSpawn != null)
+            {
+                GameObject clone = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                clone.transform.SetParent(transform);
+            }
         }
-        for (int i = 0; i < sinkNumber; i++)
-        {
-            xOffset += SpawnWithOffset(sinkElements, xOffset);
-        }
-        for (int i = 0; i < counterNumber; i++)
-        {
-            xOffset += SpawnWithOffset(counterElements, xOffset);
-        }
-        for (int i = 0; i < stoveNumber; i++)
-        {
-            xOffset += SpawnWithOffset(stoveElements, xOffset);
-        }
-        for (int i = 0; i < counterNumber; i++)
-        {
-            xOffset += SpawnWithOffset(counterElements, xOffset);
-        }
-
-
     }
 
-    float SpawnWithOffset(GameObject[] pieceArray, float inputOffset)
-    {
-        Transform randomTransform = pieceArray[Random.Range(0, pieceArray.Length)].transform;
-        GameObject clone = Instantiate(randomTransform.gameObject, this.transform.position 
-            + new Vector3 (inputOffset, 0, 0), transform.rotation) as GameObject;
-        Mesh cloneMesh = clone.GetComponentInChildren<MeshFilter>().mesh;
-        Bounds bounds = cloneMesh.bounds;
-        float xOffset = bounds.size.x;
-
-        clone.transform.SetParent(this.transform);
-
-        return xOffset;
-    }
 }
