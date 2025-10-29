@@ -5,19 +5,19 @@ public class Knife : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
 
-    private Quaternion startRotation;
-    private Quaternion endRotation;
+    private float endRotation;
 
     private bool isComplete;
 
 
     void Start()
     {
-        startRotation = transform.rotation;
-        endRotation = new Quaternion(20, startRotation.y, startRotation.y, 21);
+        
+        endRotation = 88f;
 
-        StartCoroutine(Chop());
         isComplete = false;
+        StartCoroutine(Chop());
+        
     }
 
     // Update is called once per frame
@@ -33,16 +33,20 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
-        for (float i = 0; i < 1; i += Time.deltaTime * speed)
+        for (float i = 0; i < endRotation; i += Time.deltaTime * speed)
         {
-            transform.rotation = Quaternion.Lerp(startRotation, endRotation, i);
+            //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
+            transform.rotation = Quaternion.Euler(i, 0, 0);
             yield return null;
         }
-        for (float i = 0; i < 1; i += Time.deltaTime * speed)
+
+        yield return new WaitForSeconds(0.1f);
+        for (float i = 0; i < endRotation; i += Time.deltaTime * speed/15)
         {
-            transform.rotation = Quaternion.Lerp(endRotation, startRotation, i);
+            transform.rotation = Quaternion.Euler(endRotation - i, 0, 0);
             yield return null;
         }
+        
         isComplete = true;
     }
 
