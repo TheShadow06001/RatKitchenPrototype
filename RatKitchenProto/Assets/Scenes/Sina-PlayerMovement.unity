@@ -336,7 +336,7 @@ Rigidbody:
   m_GameObject: {fileID: 980618734}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 1
   m_AngularDamping: 0.03
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -461,7 +461,7 @@ MonoBehaviour:
   leftLaneX: -2
   middleLaneX: 0.01
   rightLaneX: 2
-  laneChangeSpeed: 80
+  laneChangeSpeed: 40
   isChangingLanes: 0
   laneChangeThreshold: 0.1
 --- !u!114 &980618741
@@ -478,7 +478,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   mainCamera: {fileID: 471721060}
   anchorPoint: {fileID: 1946156825}
-  jumpForce: 8.32
+  forwardAcceleration: 0.2
+  maxSpeedMultiplier: 2
+  jumpForce: 10
+  dashForce: 20
   laneChanger: {fileID: 980618740}
 --- !u!1 &1227496607
 GameObject:
