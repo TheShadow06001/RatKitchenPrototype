@@ -26,7 +26,7 @@ public class KillPlayer : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!canKill) return;
 

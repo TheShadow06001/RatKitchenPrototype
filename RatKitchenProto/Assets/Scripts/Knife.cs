@@ -4,6 +4,10 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
+    [SerializeField] private float minRate = 0;
+    [SerializeField] private float maxRate = 2;
+
+    [SerializeField] private MeshRenderer mesh;
 
     private float endRotation;
 
@@ -33,6 +37,10 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
+        mesh.enabled = true;
+
+        yield return new WaitForSeconds(0.3f);
+
         for (float i = 0; i < endRotation; i += Time.deltaTime * speed)
         {
             //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
@@ -46,9 +54,16 @@ public class Knife : MonoBehaviour
             transform.rotation = Quaternion.Euler(endRotation - i, 0, 0);
             yield return null;
         }
-        
+
+        mesh.enabled = false;
+
+        float value = Random.Range(minRate, maxRate);
+
+        yield return new WaitForSeconds(value);
         isComplete = true;
     }
+
+    
 
    
 
