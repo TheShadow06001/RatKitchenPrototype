@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlatformPooler : MonoBehaviour
 {
     public GameObject pooledObject;
-    public int pooledAmount;
+    public int pooledAmount; // amount of objects to put in pool
     List<GameObject> pooledObjects;
 
     private void Start()
