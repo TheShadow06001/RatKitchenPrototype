@@ -4,13 +4,12 @@ using UnityEngine;
 public class Sink : KitchenElements
 {
     public GameObject plate;
-    private float amountOfPlates = 10;
     private Vector3 sinkPosition;
     private float sinkHeigth = 0.9f;
 
     private void OnEnable()
     {
-        GameObject plateOnScene = Instantiate(plate, CountPosition(-0.5f, sinkHeigth * 0.05f, -0.5f), Quaternion.Euler(-90, 0, 0));
+        GameObject plateOnScene = Instantiate(plate, CountPosition(-0.5f, sinkHeigth, -0.5f), Quaternion.Euler(-90, 0, 0));
         plateOnScene.transform.SetParent(transform);
         
 
@@ -30,7 +29,7 @@ public class Sink : KitchenElements
 
         float finalX = randX * CELL_WIDTH + CENTER_OF_CELL_X;
         float finalZ = randY * CELL_HEIGHT + CENTER_OF_CELL_Z;
-        Vector3 spawnPosition = new Vector3(finalX, y, finalZ) + sinkPosition;
+        Vector3 spawnPosition = new Vector3(finalX, y, finalZ) + sinkPosition + new Vector3(0, 0, 1f);
 
         return spawnPosition;
     }
