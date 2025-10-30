@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlatformDestroyer : MonoBehaviour
 {
     public GameObject platformDestructionPoint;
+    //reference to obstacles
 
     private void Start()
     {
@@ -14,6 +15,7 @@ public class PlatformDestroyer : MonoBehaviour
         if (transform.position.x < platformDestructionPoint.transform.position.x)
         {
             gameObject.SetActive(false);
+            //obstacles SetActive(false) with platforms
         }
     }
 }
