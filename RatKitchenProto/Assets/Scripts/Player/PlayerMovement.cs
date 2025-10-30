@@ -32,9 +32,9 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         HandleDash();
         Vector3 currentPos = transform.position;
-        if (currentDashSpeed > 0)
+        if (currentDashSpeed > 0.1)
         {
-            currentDashSpeed = Mathf.Lerp(currentDashSpeed, 0f, Time.deltaTime / dashFadeTime);
+            currentDashSpeed = Mathf.Lerp(currentDashSpeed, 0.01f, Time.deltaTime / dashFadeTime);
         }
         if (!Input.GetKey(KeyCode.Space))
         {
@@ -48,13 +48,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (transform.position.z < anchorPoint.transform.position.z - 0.1f)
         {
-            float targetSpeed = cameraSpeed * maxSpeedMultiplier;
-            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * forwardAcceleration);
+            float targetSpeed1 = cameraSpeed * maxSpeedMultiplier;
+            moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed1, Time.deltaTime * forwardAcceleration);
         }
-        if (transform.position.z > anchorPoint.transform.position.z + 0.1f)
+        else if (transform.position.z > anchorPoint.transform.position.z + 0.1f)
         {
-            float targetSpeed = cameraSpeed * minSpeedMultiplier;
-            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime * backAcceleration);
+            float targetSpeed2 = cameraSpeed * minSpeedMultiplier;
+            moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed2, Time.deltaTime * backAcceleration);
         }
         else
         {
