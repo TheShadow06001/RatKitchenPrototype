@@ -119,6 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!1 &594195630
 GameObject:
@@ -334,6 +335,8 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 25d03af (its too late for a comit message)
 --- !u!1 &1050086246
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,10 +347,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1050086248}
   - component: {fileID: 1050086247}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - component: {fileID: 1050086249}
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 25d03af (its too late for a comit message)
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -435,6 +441,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!114 &1050086249
 MonoBehaviour:
@@ -976,6 +983,8 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 25d03af (its too late for a comit message)
 --- !u!1 &1924882424
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,10 +996,13 @@ GameObject:
   - component: {fileID: 1924882427}
   - component: {fileID: 1924882426}
   - component: {fileID: 1924882425}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - component: {fileID: 1924882428}
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 25d03af (its too late for a comit message)
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1072,6 +1084,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 --- !u!114 &1924882428
 MonoBehaviour:
@@ -1119,15 +1132,20 @@ MonoBehaviour:
   m_Version: 2
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 25d03af (its too late for a comit message)
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1924882427}
   - {fileID: 1050086248}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - {fileID: 1465368280}
   - {fileID: 1635118519}
   - {fileID: 594195633}
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of 25d03af (its too late for a comit message)
