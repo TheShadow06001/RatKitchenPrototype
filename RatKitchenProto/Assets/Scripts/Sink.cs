@@ -8,13 +8,13 @@ public class Sink : KitchenElements
     private Vector3 sinkPosition;
     private float sinkHeigth = 0.9f;
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         GameObject plateOnScene = Instantiate(plate, CountPosition(-0.5f, sinkHeigth + i * 0.05f, -0.5f), Quaternion.Euler(-90, 0, 0));
         plateOnScene.transform.SetParent(transform);
         
 
-    }
+    }*/
     private Vector3 CountPosition(float x, float y, float z)
     {
         sinkPosition = transform.position;
