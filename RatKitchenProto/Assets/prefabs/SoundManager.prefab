@@ -46,12 +46,12 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: e1caa943dc3a26249a1785f4d7560835, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 2.32
+  m_Pitch: 1.18
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 137
+  Priority: 86
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
