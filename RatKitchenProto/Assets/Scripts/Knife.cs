@@ -8,6 +8,7 @@ public class Knife : MonoBehaviour
     [SerializeField] private float maxRate = 2;
 
     [SerializeField] private MeshRenderer mesh;
+    [SerializeField] private MeshRenderer line;
 
     private float endRotation;
 
@@ -37,6 +38,7 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
+        line.enabled = true;
         mesh.enabled = true;
 
         yield return new WaitForSeconds(0.3f);
@@ -48,14 +50,21 @@ public class Knife : MonoBehaviour
             yield return null;
         }
 
+        
+
         yield return new WaitForSeconds(0.1f);
+
+        line.enabled = false;
+        mesh.enabled = false;
+
         for (float i = 0; i < endRotation; i += Time.deltaTime * speed/15)
         {
             transform.rotation = Quaternion.Euler(endRotation - i, 0, 0);
             yield return null;
         }
 
-        mesh.enabled = false;
+        
+        
 
         float value = Random.Range(minRate, maxRate);
 

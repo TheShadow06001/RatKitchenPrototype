@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Choppingboard
   maxScale: 10
-  knifePrefab: {fileID: 8257335422940882520, guid: 542c9bfe357a1ee43a6ef78f69dc7c19, type: 3}
+  knifePrefab: {fileID: 5190441673226054599, guid: 8c00e037f19640644b31aa00c489b157, type: 3}
   parentTransform: {fileID: 3154878722823248225}
