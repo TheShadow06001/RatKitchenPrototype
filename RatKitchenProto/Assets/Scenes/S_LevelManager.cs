@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class S_LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance;
+    public static S_LevelManager Instance;
     
     [Header("Level Manager")]
     [SerializeField] private GameObject LoadingScreenCanvas;
