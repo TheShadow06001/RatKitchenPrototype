@@ -418,6 +418,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WallPooler
   pooledWallObject: {fileID: 4890513794275172598, guid: ad2190a147f06ad409f38eac7329b2a0, type: 3}
   pooledAmount: 10
+--- !u!1 &347519309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347519310}
+  - component: {fileID: 347519311}
+  m_Layer: 0
+  m_Name: KitchenPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &347519310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347519309}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347519311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347519309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336a0ea0f6369c34f8b6d395e5688bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KitchenPool
+  poolSize: 50
+  kitchenPlatforms: []
 --- !u!4 &428896041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5162466967315993365, guid: ad2190a147f06ad409f38eac7329b2a0, type: 3}
@@ -433,6 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 564945731}
   - component: {fileID: 564945730}
+  - component: {fileID: 564945732}
   m_Layer: 0
   m_Name: PlatformGenerator
   m_TagString: Untagged
@@ -447,7 +494,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564945729}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a108f5e429775ef4f902caad8dc153ed, type: 3}
   m_Name: 
@@ -466,10 +513,12 @@ MonoBehaviour:
   - {fileID: 1861612579}
   obstacleSpawnPoints:
   - {fileID: 0}
-  maxAmountOfPlatforms: 5
+  maxAmountOfPlatforms: 20
   spawnedPlatforms: 0
   endPlatformPrefab: {fileID: 5039325004813896189, guid: e945c6713953c7247b338cf7aa20ccb1, type: 3}
   endWallPrefab: {fileID: 4603161467987493025, guid: 77f07a47c38614d498960710d47ade1e, type: 3}
+  maxSinks: 2
+  maxStoves: 2
 --- !u!4 &564945731
 Transform:
   m_ObjectHideFlags: 0
@@ -485,6 +534,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &564945732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564945729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57db7e83dfb94042a8bb8614d5030b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KitchenGenerator
+  platformTypes:
+  - {fileID: 11400000, guid: 996a2fb11c89cc846b84497dfb569021, type: 2}
+  - {fileID: 11400000, guid: 1e51524b5817a6f47a4dda8a9ce34ee2, type: 2}
+  - {fileID: 11400000, guid: 92c2f40e5f249d042b0bdea454417ebd, type: 2}
+  generationPoint: {fileID: 205191575}
+  distanceBetween: 10
+  maxPlatformsPerRun: 20
+  currentLevel: 1
+  endPlatformPrefab: {fileID: 5039325004813896189, guid: e945c6713953c7247b338cf7aa20ccb1, type: 3}
+  endWallPrefab: {fileID: 4603161467987493025, guid: 77f07a47c38614d498960710d47ade1e, type: 3}
+  spawnedPlatforms: 0
 --- !u!1 &767612263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,7 +1088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1274815838
 Transform:
   m_ObjectHideFlags: 0
@@ -1470,7 +1542,7 @@ Transform:
   m_GameObject: {fileID: 1995271936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.87, y: 0.75, z: 0}
+  m_LocalPosition: {x: -1.17, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1529,6 +1601,10 @@ PrefabInstance:
     - target: {fileID: 7570383000764194617, guid: 4db3360346d445b4a8c796c599b92674, type: 3}
       propertyPath: m_Name
       value: Obstacle_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570383000764194617, guid: 4db3360346d445b4a8c796c599b92674, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1648,6 +1724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7358012912537154554, guid: f3ca86c575294ec4d83739ccf5d41b5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1721,3 +1801,4 @@ SceneRoots:
   - {fileID: 564945731}
   - {fileID: 7669985454256257316}
   - {fileID: 135786732362914416}
+  - {fileID: 347519310}

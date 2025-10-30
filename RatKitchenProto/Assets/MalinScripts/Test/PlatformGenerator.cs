@@ -32,6 +32,14 @@ public class PlatformGenerator : MonoBehaviour
     public GameObject endPlatformPrefab;
     public GameObject endWallPrefab;
 
+    private string lastPlatformTag = "";
+    private string secondLastPlatformTag = "";
+
+    [SerializeField] private int maxSinks = 2;
+    [SerializeField] private int maxStoves = 2;
+    private int sinkCount = 0;
+    private int stoveCount = 0;
+
     private void Start()
     {
         platformWidths = new float[thePlatformPools.Length];
@@ -78,9 +86,21 @@ public class PlatformGenerator : MonoBehaviour
 
         if (transform.position.x < generationPoint.position.x) // generate/set active new platform
         {
-            platformSelector = Random.Range(0, thePlatformPools.Length);
-            wallSelector = Random.Range(0, theWallPools.Length);
-            obstacleSelector = Random.Range(0, theObstaclePools.Length); // test
+            //spawning constraints
+            GameObject spawnCandidate = null;
+            string spawnCandidateTag = "";
+            bool isValidToSpawn = false;
+
+            int safetyCounter = 0;
+            while (!isValidToSpawn && safetyCounter < 50)
+            {
+                platformSelector = Random.Range(0, thePlatformPools.Length);
+                spawnCandidate = thePlatformPools[platformSelector].pooledObject;
+                spawnCandidateTag = spawnCandidate.tag;
+
+                isValidToSpawn = IsValidNextPlatform(spawnCandidateTag);
+                safetyCounter++;
+            }
 
             //moves the PlatformGenerator point
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetween, transform.position.y, transform.position.z);
@@ -91,6 +111,19 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
+
+            if (newPlatform.CompareTag("Sink"))
+                sinkCount++;
+
+            if (newPlatform.CompareTag("Stove"))
+                stoveCount++;
+
+
+            secondLastPlatformTag = lastPlatformTag;
+            lastPlatformTag = newPlatform.tag;
+
+            wallSelector = Random.Range(0, theWallPools.Length);
+            obstacleSelector = Random.Range(0, theObstaclePools.Length); // test
 
             GameObject newObstacle = theObstaclePools[obstacleSelector].GetPooledObstacle();
             //fixa spawn points här med referens till active prefab?
@@ -108,6 +141,25 @@ public class PlatformGenerator : MonoBehaviour
         }
     }
 
+    private bool IsValidNextPlatform(string nextTag)
+    {
+        if (IsSinkOrStove(lastPlatformTag) && IsSinkOrStove(nextTag))
+            return false;
+
+        if (nextTag == "Sink" && sinkCount >= maxSinks)
+            return false;
+
+        if (nextTag == "Stove" && stoveCount >= maxStoves)
+            return false;
+
+        return true;
+    }
+
+    private bool IsSinkOrStove(string tag)
+    {
+        return tag == "Sink" || tag == "Stove";
+    }
+
     public void SpawnEndPlatform()
     {
         //float wallOffset = endPlatformPrefab.transform.localScale.z / 2f;
@@ -123,5 +175,8 @@ public class PlatformGenerator : MonoBehaviour
         spawnedPlatforms = 0;
         isLevelComplete = false;
         isEndPlatformSpawned = false;
+
+        sinkCount = 0;
+        stoveCount = 0;
     }
 }

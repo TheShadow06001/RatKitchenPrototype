@@ -8,72 +8,78 @@ public class KitchenPool : MonoBehaviour
     public static KitchenPool Instance;
 
     [SerializeField] private int poolSize = 10;
-    private Dictionary<KitchenElement, Queue<GameObject>> poolDictionary = new();
-    public KitchenElement[] kitchenElements;
-    private List<KitchenElement> loadedKitchenElements = new();
+    private Dictionary<PlatformType, Queue<GameObject>> poolDictionary = new();
+    private List<PlatformType> loadedKitchenPlatforms = new();
+    
+    public PlatformType[] kitchenPlatforms;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        kitchenElements = Resources.LoadAll<KitchenElement>("KitchenElements");
-        BuildPools(kitchenElements);    
+        kitchenPlatforms = Resources.LoadAll<PlatformType>("KitchenPlatforms");
+        BuildPools(kitchenPlatforms);    
     }
 
-    private void BuildPools(KitchenElement[] kitchenElementList)
+    private void BuildPools(PlatformType[] kitchenPlatformList)
     {
         poolDictionary.Clear();
-        loadedKitchenElements.Clear();
+        loadedKitchenPlatforms.Clear();
 
-        foreach (var element in kitchenElementList)
+        foreach (var type in kitchenPlatformList)
         {
 
-            if (element == null || element.Prefab == null)
+            if (type == null || type.prefab == null)
             {
-                Debug.LogWarning("Poolmanager: missing KitchenElement or prefab for pool");
+                Debug.LogWarning("Poolmanager: missing PlatformType or prefab for pool");
                 continue;
             }
 
-            if (poolDictionary.ContainsKey(element))
+            if (poolDictionary.ContainsKey(type))
             {
-                Debug.LogWarning($"Duplicate pool detected for {element.name}");
+                Debug.LogWarning($"Duplicate pool detected for {type.name}");
                 continue;
             }
 
-            loadedKitchenElements.Add(element);
+            loadedKitchenPlatforms.Add(type);
 
             Queue<GameObject> objectPool = new();
 
             for (int i = 0; i < poolSize; i++)
             {
-
-                GameObject obj = Instantiate(element.Prefab);
+                GameObject obj = Instantiate(type.GetRandomPrefab());
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
 
-            poolDictionary.Add(element, objectPool);
+            poolDictionary.Add(type, objectPool);
         }
     }
 
-    public List<KitchenElement> GetAllKitchenElements()
+    public List<PlatformType> GetAllPlatformTypes()
     {
-        return loadedKitchenElements;
+        return loadedKitchenPlatforms;
     }
 
     //double check
-    public GameObject GetPooledObject(KitchenElement element, Vector3 position, Quaternion rotation)
+    public GameObject GetPooledObject(PlatformType type, Vector3 position, Quaternion rotation)
     {
-        if (element == null || !poolDictionary.ContainsKey(element))
+        if (type == null || !poolDictionary.ContainsKey(type))
             return null;
 
-        var objectPool = poolDictionary[element];
+        Queue<GameObject> objectPool = poolDictionary[type];
+        GameObject obj; 
 
-        if (objectPool.Count == 0)
-            return null;
+        if (objectPool.Count > 0)
+        {
+            obj = objectPool.Dequeue();
+        }
+        else
+        {
+            obj = Instantiate(type.GetRandomPrefab()); // utökar poolen om det inte finns tillräckligt att hämta
+        }
 
-        GameObject obj = objectPool.Dequeue();
         obj.transform.position = position;
         obj.transform.rotation = rotation;
         obj.SetActive(true);
@@ -82,15 +88,15 @@ public class KitchenPool : MonoBehaviour
     }
 
     //double check
-    public void ReturnToPool(KitchenElement element, GameObject obj)
+    public void ReturnToPool(PlatformType type, GameObject obj)
     {
-        if (element == null || !poolDictionary.ContainsKey(element))
+        if (type == null || !poolDictionary.ContainsKey(type))
         {
-            Destroy(obj);
+            Destroy(obj); // utifall att pool saknas för objektet
             return;
         }
 
         obj.SetActive(false);
-        poolDictionary[element].Enqueue(obj);
+        poolDictionary[type].Enqueue(obj);
     }
 }
