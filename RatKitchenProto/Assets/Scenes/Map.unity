@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 213628231}
-  - component: {fileID: 213628230}
+  - component: {fileID: 213628232}
   m_Layer: 0
   m_Name: 'Spawning '
   m_TagString: Untagged
@@ -136,27 +136,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &213628230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213628229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dd43e3723318b04c8e74680b0fcc42d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GenerateKitchen
-  sinkPrefab: {fileID: 4865522045984054999, guid: 40cf4af67eeea8a428bd0d02930a6552, type: 3}
-  ovenPrefab: {fileID: 331472388353560714, guid: 9e96829494752554ca60248f698ad45b, type: 3}
-  counterPrefabs:
-  - {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
-  - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
-  - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
-  maxSinks: 5
-  maxOvens: 1
-  amountOfElements: 10
 --- !u!4 &213628231
 Transform:
   m_ObjectHideFlags: 0
@@ -172,6 +151,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &213628232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213628229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0094c2dae89df4d44a55cb7553c6234c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateKitchen
+  sinkPrefab: {fileID: 4865522045984054999, guid: 40cf4af67eeea8a428bd0d02930a6552, type: 3}
+  ovenPrefab: {fileID: 331472388353560714, guid: 9e96829494752554ca60248f698ad45b, type: 3}
+  counterPrefabs:
+  - {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
+  - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
+  - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
+  maxSinks: 5
+  maxOvens: 5
+  amountOfElements: 30
 --- !u!1 &380455434
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +297,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3e891e1beda1a3408b7bde3037c5a93, type: 3}
   m_PrefabInstance: {fileID: 465065359}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &538710104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 538710106}
+  - component: {fileID: 538710107}
+  m_Layer: 0
+  m_Name: WallSpawning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &538710106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538710104}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.96987, y: 0, z: -2.13471}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538710107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538710104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd43e3723318b04c8e74680b0fcc42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateWalls
+  wallPrefab: {fileID: 395421529307640111, guid: bdb2b07dfbdb65847b2f68ec54f256be, type: 3}
+  windowedWallPrefab: {fileID: 5624301702318244548, guid: 6da622ea9e99753419fe01cef262a98a, type: 3}
+  maxWindows: 1
+  amountOfElements: 10
 --- !u!1 &614645270 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3e891e1beda1a3408b7bde3037c5a93, type: 3}
@@ -763,3 +811,4 @@ SceneRoots:
   - {fileID: 1161564835}
   - {fileID: 1967753271}
   - {fileID: 213628231}
+  - {fileID: 538710106}

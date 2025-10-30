@@ -3,17 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class S_LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance;
+    //public static LevelManager Instance;
     
     [Header("Level Manager")]
     [SerializeField] private GameObject LoadingScreenCanvas;
-    [SerializeField] private Image LoadingScreenBar;
+    //[SerializeField] private Image LoadingScreenBar;
     
     
     
     void Awake()
     {
-        if (Instance == null)
+        /*if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(this);
@@ -21,7 +21,7 @@ public class S_LevelManager : MonoBehaviour
         else
         {
             Destroy(gameObject); //Singleton Setup for LevelManager
-        }
+        }*/
     }
 
     public async void LoadLevel(string LevelName)
@@ -29,10 +29,10 @@ public class S_LevelManager : MonoBehaviour
         var scene = SceneManager.LoadSceneAsync(LevelName);
         scene.allowSceneActivation = false; //Prevent Level from appearing on screen
         
-        LoadingSceenCanvas.SetActive(true);
+        //LoadingSceenCanvas.SetActive(true);
 
         do {
-            LoadingScreenBar.fillammount = scene.progress;
+            //LoadingScreenBar.fillammount = scene.progress;
         } while (scene.progress < 0.9f); //Update fill ammount of loading bar, Await perhaps to not overload?
         
         scene.allowSceneActivation = true; //Allow Loaded level to appear on screen
