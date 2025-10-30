@@ -21,12 +21,10 @@ public class GenerateKitchen : MonoBehaviour
     {
         GameObject firstElement = Instantiate(counterPrefabs[Random.Range(0, counterPrefabs.Length)]);
         firstElement.transform.SetParent(transform);
-        // Пример генерации 5 случайных элементов
         for (int i = 1; i <= amountOfElements; i++)
         {
             Vector3 spawnPosition = new Vector3(i * -80, 0, 0);
             
-            // Случайно выбираем тип элемента (0 - раковина, 1 - плита, 2 - стол)
             int randomType = Random.Range(0, 3);
             
             GameObject prefabToSpawn = null;
@@ -57,7 +55,6 @@ public class GenerateKitchen : MonoBehaviour
                     }
                     break;
                 case 2:
-                    // Для стола выбираем случайный вариант из трёх
                     prefabToSpawn = counterPrefabs[Random.Range(0, counterPrefabs.Length)];
                     break;
             }

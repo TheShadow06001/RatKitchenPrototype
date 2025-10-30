@@ -201,4 +201,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee229b2668329b04e8d81f827b556f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Oven
-  ovenPrefab: {fileID: 0}
+  fryingPan: {fileID: 0}
+  bigPan: {fileID: 0}
