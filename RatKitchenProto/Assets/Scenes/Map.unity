@@ -171,7 +171,7 @@ MonoBehaviour:
   - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
   maxSinks: 5
   maxOvens: 5
-  amountOfElements: 30
+  amountOfElements: 29
 --- !u!1 &380455434
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,9 +342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateWalls
   wallPrefab: {fileID: 395421529307640111, guid: bdb2b07dfbdb65847b2f68ec54f256be, type: 3}
-  windowedWallPrefab: {fileID: 5624301702318244548, guid: 6da622ea9e99753419fe01cef262a98a, type: 3}
-  maxWindows: 1
-  amountOfElements: 10
+  windowedWallPrefab: {fileID: 919132149155446097, guid: 835f18d5e419e9446972cf551c9be282, type: 3}
+  maxWindows: 2
+  amountOfElements: 5
 --- !u!1 &614645270 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3e891e1beda1a3408b7bde3037c5a93, type: 3}

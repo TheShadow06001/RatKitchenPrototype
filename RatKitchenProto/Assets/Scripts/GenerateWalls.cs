@@ -21,7 +21,7 @@ public class GenerateWalls : MonoBehaviour
     }
     private void GenerateRandomWalls()
     {
-        for (int i = 1; i <= amountOfElements; i++)
+        for (int i = 0; i <= amountOfElements; i++)
         {
             Vector3 spawnPosition = new Vector3(i * -4f, 0, -0.93f);
             
