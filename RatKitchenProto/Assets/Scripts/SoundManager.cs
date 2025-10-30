@@ -3,37 +3,39 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
+
+public struct SoundInstance
+{
+    [SerializeField] AudioSource source;
+    public SoundEffects effects;
+
+    public void PlaySoundEffect()
+    {
+        source.Play();
+    }
+}
+
+public enum SoundEffects
+{
+    RatRunning,
+    RatJumping,
+    RatDeath,
+    RatSwim,
+    RatDash,
+    KnifeTrapWhoosh,
+    KnifeTrapChop,
+    Frying,
+    BoilingWater,
+    GasStoveTick,
+    GasStoveFire,
+    
+
+}
 
 public class SoundManager : MonoBehaviour
 {
-    [Serializable]
-
-    public struct SoundInstance
-    {
-        [SerializeField] AudioSource source;
-        public SoundEffects effects;
-
-       public void PlaySoundEffect()
-      {
-        source.Play();
-      }
-
-    }
-
-    public enum SoundEffects
-    {
-        RatRunning,
-        RatJumping,
-        RatDeath,
-        RatSwim,
-        RatDash,
-        KnifeTrapWhoosh,
-        KnifeTrapChop,
-        Frying,
-        BoilingWater,
-
-        
-    }
+    
 
     #region Singleton
 

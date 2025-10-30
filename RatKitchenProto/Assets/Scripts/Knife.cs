@@ -18,7 +18,7 @@ public class Knife : MonoBehaviour
     void Start()
     {
         
-        endRotation = 88f;
+        endRotation = 89f;
 
         isComplete = false;
         StartCoroutine(Chop());
@@ -43,16 +43,20 @@ public class Knife : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
+
+        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
+
         for (float i = 0; i < endRotation; i += Time.deltaTime * speed)
         {
             //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
             transform.rotation = Quaternion.Euler(i, 0, 0);
             yield return null;
+
+            
         }
+        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
 
-        
-
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         line.enabled = false;
         mesh.enabled = false;
