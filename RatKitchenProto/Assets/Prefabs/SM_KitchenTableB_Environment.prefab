@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dab503b7285cbf645907f9c80b114b87, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dab503b7285cbf645907f9c80b114b87, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dab503b7285cbf645907f9c80b114b87, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dab503b7285cbf645907f9c80b114b87, type: 3}
       propertyPath: m_LocalPosition.x
@@ -109,6 +109,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7b7555c2d391444a03222a0ccc4b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Counter
-  counterPrefab1: {fileID: 0}
-  counterPrefab2: {fileID: 0}
-  counterPrefab3: {fileID: 0}

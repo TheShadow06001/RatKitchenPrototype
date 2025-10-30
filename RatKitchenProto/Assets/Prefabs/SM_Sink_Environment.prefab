@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7ffd307ecac5e0842b665307eb558ba8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ffd307ecac5e0842b665307eb558ba8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ffd307ecac5e0842b665307eb558ba8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ffd307ecac5e0842b665307eb558ba8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -113,4 +113,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7a71bb6407dc641923a1f9ee168e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sink
-  sinkPrefab: {fileID: 0}

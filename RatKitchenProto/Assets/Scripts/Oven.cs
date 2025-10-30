@@ -1,36 +1,45 @@
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Oven : KitchenElements
 {
     public GameObject fryingPan;
     public GameObject bigPan;
-    float ovenHeigth;
+    float ovenHeigth = 1.1f;
+    Vector3 parentVectorPosition;
+    
 
-    private void Awake()
+    private void OnEnable()
     {
         Generate();
     }
 
-    private Vector3 CoutPosition(int x, int z)
+    private Vector3 CountPosition(float x, float z)
     {
-        int CELL_WIDTH = x / 2;
-        int CELL_HEIGHT = z / 2;
+        parentVectorPosition = transform.position;
 
-        int CENTER_OF_CELL_X = CELL_WIDTH / 2;
-        int CENTER_OF_CELL_Z = CELL_WIDTH / 2;
+        float CELL_WIDTH = x / 2;
+        float CELL_HEIGHT = z / 2;
 
-        int randX = Random.Range(0, 2);
-        int randY = Random.Range(0, 2);
+        float CENTER_OF_CELL_X = CELL_WIDTH / 2;
+        float CENTER_OF_CELL_Z = CELL_WIDTH / 2;
 
-        int finalX = randX * CELL_WIDTH + CENTER_OF_CELL_X;
-        int finalZ = randY * CELL_HEIGHT + CENTER_OF_CELL_Z;
+        float randX = Random.Range(0, 2);
+        float randY = Random.Range(0, 2);
 
-        return new Vector3(finalX, 0, finalZ);
+        float finalX = randX * CELL_WIDTH + CENTER_OF_CELL_X;
+        float finalZ = randY * CELL_HEIGHT + CENTER_OF_CELL_Z;
+        Vector3 spawnPosition = new Vector3(finalX, ovenHeigth, finalZ) + parentVectorPosition;
+
+        return spawnPosition;
     }
     private void Generate()
     {
         GameObject prefabToSpawn = null;
         int randomType = Random.Range(0, 2);
+        Debug.Log("Random type - " + randomType);
+
         switch (randomType)
         {
             case 0:
@@ -41,9 +50,12 @@ public class Oven : KitchenElements
                 break;
         }
 
-        if (prefabToSpawn == null)
+        
+        if (prefabToSpawn != null)
         {
-            GameObject obstacle = Instantiate(prefabToSpawn, CoutPosition(8,7), Quaternion.identity);
+            Debug.Log("Prefab to spawn - " + prefabToSpawn);
+            GameObject obstacle = Instantiate(prefabToSpawn, CountPosition(-0.78f, -0.57f), Quaternion.Euler(-90, 0, 0));
+            obstacle.transform.SetParent(transform);
         }
     }
 }
