@@ -23,7 +23,7 @@ public class GenerateKitchen : MonoBehaviour
         firstElement.transform.SetParent(transform);
         for (int i = 1; i <= amountOfElements; i++)
         {
-            Vector3 spawnPosition = new Vector3(i * -0.8f, 0, 0);
+            Vector3 spawnPosition = new Vector3(i * -0.801f, 0, 0);
             
             int randomType = Random.Range(0, 3);
             GameObject prefabToSpawn = null;
