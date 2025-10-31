@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class S_LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance;
+    public static S_LevelManager Instance;
     
     [Header("Level Manager")]
     [SerializeField] private GameObject LoadingScreenCanvas;
@@ -29,10 +30,10 @@ public class S_LevelManager : MonoBehaviour
         var scene = SceneManager.LoadSceneAsync(LevelName);
         scene.allowSceneActivation = false; //Prevent Level from appearing on screen
         
-        LoadingSceenCanvas.SetActive(true);
+        LoadingScreenCanvas.SetActive(true);
 
         do {
-            LoadingScreenBar.fillammount = scene.progress;
+            LoadingScreenBar.fillAmount = scene.progress;
         } while (scene.progress < 0.9f); //Update fill ammount of loading bar, Await perhaps to not overload?
         
         scene.allowSceneActivation = true; //Allow Loaded level to appear on screen
