@@ -14,6 +14,7 @@ public class Knife : MonoBehaviour
 
     private bool isComplete;
 
+    
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class Knife : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
 
-        //SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
+        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
 
         for (float i = 0; i < endRotation; i += Time.deltaTime * speed)
         {
@@ -53,7 +54,7 @@ public class Knife : MonoBehaviour
 
             
         }
-        //SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
+        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
 
         yield return new WaitForSeconds(0.2f);
 

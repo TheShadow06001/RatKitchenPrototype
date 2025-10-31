@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
@@ -13,6 +15,12 @@ public class HealthDisplay : MonoBehaviour
     public Sprite fullHeart;
     public Image[] hearts;
 
+    [SerializeField] private Transform respawnPoint;
+    [SerializeField] private Transform cameraRespawn;
+    [SerializeField] private GameObject cameraMain;
+    public GameObject gameOverMenu;
+    public GameObject player;
+
     void Awake()
     {
         if (instance == null)
@@ -24,6 +32,13 @@ public class HealthDisplay : MonoBehaviour
         {
             Destroy(gameObject);
             return;
+        }
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (gameOverMenu != null)
+        {
+            gameOverMenu.SetActive(false);
         }
     }
 
@@ -48,6 +63,29 @@ public class HealthDisplay : MonoBehaviour
             else
             {
                 hearts[i].enabled = false;
+            }
+        }
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+
+        if (health > 0)
+        {
+            /*Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name); */
+            
+            player.transform.position = respawnPoint.transform.position;
+            cameraMain.transform.position = cameraRespawn.transform.position;
+        }
+        else
+        {
+            HealthDisplay.instance.health = 0;
+            Debug.Log("Game Over");
+            if (gameOverMenu != null)
+            {
+                gameOverMenu.SetActive(true);
             }
         }
     }
