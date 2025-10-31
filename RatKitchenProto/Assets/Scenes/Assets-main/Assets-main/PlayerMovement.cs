@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -30,8 +31,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(rb.linearVelocity.x, jump));
         }
-    }
 
+        if (isJumping == false)
+        {
+            SoundManager.Instance.PlaySoundEffect(SoundEffects.RatRunning);
+        }
+    }
 
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -48,5 +53,5 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
         }
-    }
+    } 
 }
