@@ -44,7 +44,7 @@ public class Blender : MonoBehaviour
     {
         for (float i = 0; i < endRotation; i += Time.deltaTime * fallSpeed)
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.z, transform.rotation.y,  - i);
+            transform.rotation = Quaternion.Euler(transform.rotation.z, transform.rotation.y, -i);
             yield return null;
         }
         hasFallen = true;
@@ -52,7 +52,7 @@ public class Blender : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(transform.position, Vector2.right * range, Color.red);   
+        Debug.DrawRay(transform.position, transform.right * range, Color.red);   
     }
 
 }
