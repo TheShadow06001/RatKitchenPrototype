@@ -43,7 +43,8 @@ public class PlayerChangeLane : MonoBehaviour
     {
         if (Input.GetKeyDown(_PlayerRight))
         {
-            if (lane < 2)
+            //changed from 2 to 1 for two lane system
+            if (lane < 1)
             {
                 lane++;
             }
@@ -64,9 +65,9 @@ public class PlayerChangeLane : MonoBehaviour
         {
             targetHorizontalZ = middleLaneX;
         }
-        else if (lane == 2)
-        {
-            targetHorizontalZ = rightLaneX;
-        }
+        //else if (lane == 2)
+        //{
+        //    targetHorizontalZ = rightLaneX;
+        //}
     }
 }
