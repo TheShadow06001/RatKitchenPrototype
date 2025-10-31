@@ -231,7 +231,7 @@ MonoBehaviour:
   - {fileID: 2190983164013116307, guid: ad5055bdc684e004689797b2d45adc0c, type: 3}
   maxSinks: 5
   maxOvens: 5
-  amountOfElements: 29
+  amountOfElements: 100
 --- !u!1 &380455434
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 380455434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32000017, y: 1.09, z: -0.42683983}
+  m_LocalPosition: {x: 0, y: 1.09, z: -0.42683983}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -338,7 +338,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &380455439
 BoxCollider:
@@ -355,7 +355,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c89e2993f08c74f82cc85947f214b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraScript
-  moveSpeed: 2
+  moveSpeed: 1
 --- !u!4 &484844946
 Transform:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 395421529307640111, guid: bdb2b07dfbdb65847b2f68ec54f256be, type: 3}
   windowedWallPrefab: {fileID: 919132149155446097, guid: 835f18d5e419e9446972cf551c9be282, type: 3}
   maxWindows: 2
-  amountOfElements: 5
+  amountOfElements: 100
 --- !u!1 &724184112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,7 +1530,7 @@ Camera:
   far clip plane: 1000
   field of view: 12
   orthographic: 1
-  orthographic size: 0.37
+  orthographic size: 0.6
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

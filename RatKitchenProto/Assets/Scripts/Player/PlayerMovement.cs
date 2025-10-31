@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -22,17 +24,26 @@ public class PlayerMovement : MonoBehaviour
 
     float moveSpeed;
     float cameraSpeed;
+    Rigidbody rigidbody;
+    
 
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
+
         cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
         moveSpeed = cameraSpeed;
 
         laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
+
+        
+
+        StartCoroutine(Wait());
     }
 
     void Update()
     {
+
         HandleForwardSpeed();
         Jump();
         HandleDash();
@@ -48,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
             currentPos.x -= totalSpeed * Time.deltaTime;
             transform.position = new Vector3(currentPos.x, currentPos.y, currentPos.z);
         }
+
+
     }
     void HandleForwardSpeed()
     {
@@ -75,10 +88,16 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null && Input.GetKeyDown(_PlayerJump) && transform.position.y < 1.1 && !laneChanger.isChangingLanes)
+
+        if (rigidbody != null && Input.GetKeyDown(_PlayerJump) && transform.position.y < 1.1 && !laneChanger.isChangingLanes)
         {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
+
     }
 }

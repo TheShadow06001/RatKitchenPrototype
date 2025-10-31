@@ -17,7 +17,6 @@ public class Knife : MonoBehaviour
 
     void Start()
     {
-        
         endRotation = 89f;
 
         isComplete = false;

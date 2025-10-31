@@ -62,6 +62,7 @@ public class GenerateKitchen : MonoBehaviour
             {
                 GameObject clone = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
                 clone.transform.SetParent(transform);
+                
             }
         }
     }
