@@ -11,6 +11,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce = 5f;
     [SerializeField] PlayerChangeLane laneChanger;
 
+    [Header("Keybinds")]
+    public KeyCode _PlayerStop;
+    public KeyCode _PlayerJump;
+    public KeyCode _PlayerRight;
+    public KeyCode _PlayerDash;
+
     [SerializeField] float dashSpeed = 10f;
     [SerializeField] float dashFadeTime = 0.5f;
     private float currentDashSpeed = 0f;
@@ -63,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void HandleDash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !laneChanger.isChangingLanes && currentDashSpeed <= 0.1f)
+        if (Input.GetKeyDown(_PlayerDash) && !laneChanger.isChangingLanes && currentDashSpeed <= 0.1f)
         {
             currentDashSpeed = dashSpeed;
         }
@@ -71,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null && Input.GetKeyDown(KeyCode.F) && transform.position.y < 1.05 && !laneChanger.isChangingLanes)
+        if (rb != null && Input.GetKeyDown(_PlayerJump) && transform.position.y < 1.05 && !laneChanger.isChangingLanes)
         {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
