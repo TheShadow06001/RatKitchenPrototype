@@ -10,26 +10,28 @@ public class Knife : MonoBehaviour
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer line;
 
+    private BoxCollider collider;
     private float endRotation;
 
     private bool isComplete;
 
-    
+
 
     void Start()
     {
+        collider = GetComponent<BoxCollider>();
         endRotation = 89f;
 
         isComplete = false;
         StartCoroutine(Chop());
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (isComplete) 
+
+        if (isComplete)
         {
             isComplete = false;
             StartCoroutine(Chop());
@@ -38,6 +40,7 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
+        collider.enabled = true;
         line.enabled = true;
         mesh.enabled = true;
 
@@ -52,23 +55,24 @@ public class Knife : MonoBehaviour
             transform.rotation = Quaternion.Euler(i, 0, 0);
             yield return null;
 
-            
+
         }
         SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
 
         yield return new WaitForSeconds(0.2f);
 
+        collider.enabled = false;
         line.enabled = false;
         mesh.enabled = false;
 
-        for (float i = 0; i < endRotation; i += Time.deltaTime * speed/15)
+        for (float i = 0; i < endRotation; i += Time.deltaTime * speed / 15)
         {
             transform.rotation = Quaternion.Euler(endRotation - i, 0, 0);
             yield return null;
         }
 
-        
-        
+
+
 
         float value = Random.Range(minRate, maxRate);
 
@@ -76,12 +80,12 @@ public class Knife : MonoBehaviour
         isComplete = true;
     }
 
-    
 
-   
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 }

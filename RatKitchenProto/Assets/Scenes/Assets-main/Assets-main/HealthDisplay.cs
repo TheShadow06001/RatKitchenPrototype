@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
@@ -18,36 +14,30 @@ public class HealthDisplay : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private Transform cameraRespawn;
     [SerializeField] private GameObject cameraMain;
-    public GameObject gameOverMenu;
+
     public GameObject player;
 
     void Awake()
     {
         if (instance == null)
         {
-            instance = this;    
-            DontDestroyOnLoad(gameObject);
+            instance = this;
+            
         }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if (gameOverMenu != null)
-        {
-            gameOverMenu.SetActive(false);
-        }
+
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
         for (int i = 0; i < hearts.Length; i++)
         {
+           
             if (i < health)
             {
                 hearts[i].sprite = fullHeart;
@@ -58,6 +48,7 @@ public class HealthDisplay : MonoBehaviour
             }
             if (i < maxHealth)
             {
+
                 hearts[i].enabled = true;
             }
             else
@@ -75,18 +66,15 @@ public class HealthDisplay : MonoBehaviour
         {
             /*Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name); */
-            
+
             player.transform.position = respawnPoint.transform.position;
             cameraMain.transform.position = cameraRespawn.transform.position;
         }
         else
         {
-            HealthDisplay.instance.health = 0;
-            Debug.Log("Game Over");
-            if (gameOverMenu != null)
-            {
-                gameOverMenu.SetActive(true);
-            }
+
+            S_LevelManager.Instance.LoadLevel("Main Menu");
+
         }
     }
 }

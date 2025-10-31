@@ -5,7 +5,7 @@ public class CameraScript : MonoBehaviour
     public float moveSpeed = 5f;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

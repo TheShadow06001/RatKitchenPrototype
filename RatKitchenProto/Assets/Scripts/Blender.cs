@@ -54,7 +54,7 @@ public class Blender : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(transform.position, transform.right * range, Color.red);   
+        Debug.DrawRay(transform.position, transform.right * range, Color.red);
     }
 
 }

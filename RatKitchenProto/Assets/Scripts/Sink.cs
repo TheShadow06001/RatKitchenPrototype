@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Sink : KitchenElements
@@ -11,7 +10,7 @@ public class Sink : KitchenElements
     {
         GameObject plateOnScene = Instantiate(plate, CountPosition(-0.4f, sinkHeigth, -0.5f), Quaternion.Euler(-90, 0, 0));
         plateOnScene.transform.SetParent(transform);
-        
+
 
     }
     private Vector3 CountPosition(float x, float y, float z)

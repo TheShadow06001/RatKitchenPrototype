@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -36,7 +35,7 @@ public enum SoundEffects
 
 public class SoundManager : MonoBehaviour
 {
-    
+
 
     #region Singleton
 
@@ -50,22 +49,22 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Instance = this;      
+        Instance = this;
     }
     #endregion
 
     [SerializeField] List<SoundInstance> soundInstances = new();
-    
+
     public void PlaySoundEffect(SoundEffects anEffect)
     {
         for (int i = 0; i < soundInstances.Count; i++)
         {
-           if (soundInstances[i].effects == anEffect)
+            if (soundInstances[i].effects == anEffect)
             {
                 soundInstances[i].PlaySoundEffect();
-             return;
+                return;
 
-            } 
+            }
         }
     }
 

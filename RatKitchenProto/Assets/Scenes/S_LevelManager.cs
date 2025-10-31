@@ -7,7 +7,8 @@ public class S_LevelManager : MonoBehaviour
 {
     public static S_LevelManager Instance;
 
-    [Header("Level Manager")] [SerializeField]
+    [Header("Level Manager")]
+    [SerializeField]
     private GameObject LoadingScreenCanvas;
 
     [SerializeField] private Image LoadingScreenBar;
@@ -33,6 +34,8 @@ public class S_LevelManager : MonoBehaviour
     {
         StartCoroutine(LoadLevelRoutine(levelName));
     }
+
+
 
     private IEnumerator LoadLevelRoutine(string levelName)
     {

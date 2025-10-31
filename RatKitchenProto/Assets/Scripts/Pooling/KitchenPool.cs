@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class KitchenPool : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class KitchenPool : MonoBehaviour
         else Destroy(gameObject);
 
         kitchenElements = Resources.LoadAll<KitchenElement>("KitchenElements");
-        BuildPools(kitchenElements);    
+        BuildPools(kitchenElements);
     }
 
     private void BuildPools(KitchenElement[] kitchenElementList)

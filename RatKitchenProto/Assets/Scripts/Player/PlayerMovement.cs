@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeed;
     float cameraSpeed;
     Rigidbody rigidbody;
-    
+
 
     void Start()
     {
@@ -36,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
         laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
 
-        
+
 
         StartCoroutine(Wait());
     }
