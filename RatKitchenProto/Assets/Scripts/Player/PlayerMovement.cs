@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode _PlayerStop;
     public KeyCode _PlayerJump;
-    public KeyCode _PlayerRight;
     public KeyCode _PlayerDash;
 
     [SerializeField] float dashSpeed = 10f;

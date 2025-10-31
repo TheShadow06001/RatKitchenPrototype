@@ -12,6 +12,12 @@ public class PlayerChangeLane : MonoBehaviour
 
     public bool isChangingLanes;
     [SerializeField] private float laneChangeThreshold = 0.1f;
+
+    [Header("KeyBinds")]
+    public KeyCode _PlayerLeft;
+    public KeyCode _PlayerRight;
+
+
     void Start()
     {
         targetHorizontalX = middleLaneX;
@@ -35,7 +41,7 @@ public class PlayerChangeLane : MonoBehaviour
     }
     void PlayerChangeLine()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(_PlayerRight))
         {
             if (lane < 2)
             {
@@ -43,7 +49,7 @@ public class PlayerChangeLane : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(_PlayerLeft))
         {
             if (lane > 0)
             {
