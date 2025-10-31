@@ -613,6 +613,8 @@ MonoBehaviour:
     effects: 6
   - source: {fileID: 1529940796917765621}
     effects: 11
+  - source: {fileID: 2529802965763946953}
+    effects: 12
 --- !u!1 &3496260100797002063
 GameObject:
   m_ObjectHideFlags: 0
