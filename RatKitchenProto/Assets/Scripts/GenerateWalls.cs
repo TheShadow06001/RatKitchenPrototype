@@ -13,10 +13,6 @@ public class GenerateWalls : MonoBehaviour
 
     private void Awake()
     {
-        Vector3 newPositionWindowed = windowedWallPrefab.transform.position;
-        newPositionWindowed = new Vector3(0.008f, 0, 0);
-        windowedWallPrefab.transform.position = newPositionWindowed; // how to assign new position to game object
-
         GenerateRandomWalls();
     }
     private void GenerateRandomWalls()
