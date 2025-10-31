@@ -29,7 +29,7 @@ public enum SoundEffects
     BoilingWater,
     GasStoveTick,
     GasStoveFire,
-    
+    BlenderBlending,
 
 }
 

@@ -15,6 +15,8 @@ public class Blender : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        SoundManager.Instance.PlaySoundEffect(SoundEffects.BlenderBlending);
     }
 
     // Update is called once per frame
