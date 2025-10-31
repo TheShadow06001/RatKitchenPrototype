@@ -30,6 +30,7 @@ public enum SoundEffects
     GasStoveTick,
     GasStoveFire,
     BlenderBlending,
+    GameplayMusic,
 
 }
 
