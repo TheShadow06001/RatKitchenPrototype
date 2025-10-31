@@ -7,7 +7,7 @@ public class PlayerChangeLane : MonoBehaviour
     public float leftLaneX = -0.5f;
     public float middleLaneX = 0f;
     public float rightLaneX = 0.5f;
-    private float targetHorizontalX;
+    private float targetHorizontalZ;
     [SerializeField] private float laneChangeSpeed = 10f;
 
     public bool isChangingLanes;
@@ -20,7 +20,7 @@ public class PlayerChangeLane : MonoBehaviour
 
     void Start()
     {
-        targetHorizontalX = middleLaneX;
+        targetHorizontalZ = middleLaneX;
         isChangingLanes = false;
     }
 
@@ -30,14 +30,14 @@ public class PlayerChangeLane : MonoBehaviour
 
         Vector3 currentPos = transform.position;
 
-        if (Mathf.Abs(currentPos.x - targetHorizontalX) > laneChangeThreshold)
+        if (Mathf.Abs(currentPos.z - targetHorizontalZ) > laneChangeThreshold)
         {
             isChangingLanes = true;
         }
         else { isChangingLanes = false; } 
 
-        float newX = Mathf.Lerp(currentPos.x, targetHorizontalX, Time.deltaTime * laneChangeSpeed);
-        transform.position = new Vector3(newX, currentPos.y, currentPos.z);
+        float newZ = Mathf.Lerp(currentPos.z, targetHorizontalZ, Time.deltaTime * laneChangeSpeed);
+        transform.position = new Vector3(currentPos.x, currentPos.y, newZ);
     }
     void PlayerChangeLine()
     {
@@ -58,15 +58,15 @@ public class PlayerChangeLane : MonoBehaviour
         }
         if (lane == 0)
         {
-            targetHorizontalX = leftLaneX;
+            targetHorizontalZ = leftLaneX;
         }
         else if (lane == 1)
         {
-            targetHorizontalX = middleLaneX;
+            targetHorizontalZ = middleLaneX;
         }
         else if (lane == 2)
         {
-            targetHorizontalX = rightLaneX;
+            targetHorizontalZ = rightLaneX;
         }
     }
 }

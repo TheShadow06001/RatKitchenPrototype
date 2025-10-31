@@ -45,18 +45,18 @@ public class PlayerMovement : MonoBehaviour
         {
             float totalSpeed = moveSpeed + currentDashSpeed;
 
-            currentPos.z += totalSpeed * Time.deltaTime;
+            currentPos.x -= totalSpeed * Time.deltaTime;
             transform.position = new Vector3(currentPos.x, currentPos.y, currentPos.z);
         }
     }
     void HandleForwardSpeed()
     {
-        if (transform.position.z < anchorPoint.transform.position.z - 0.1f)
+        if (transform.position.x > anchorPoint.transform.position.x + 0.1f)
         {
             float targetSpeed1 = cameraSpeed * maxSpeedMultiplier;
             moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed1, Time.deltaTime * forwardAcceleration);
         }
-        else if (transform.position.z > anchorPoint.transform.position.z + 0.1f)
+        else if (transform.position.x < anchorPoint.transform.position.x - 0.1f)
         {
             float targetSpeed2 = cameraSpeed * minSpeedMultiplier;
             moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed2, Time.deltaTime * backAcceleration);
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null && Input.GetKeyDown(_PlayerJump) && transform.position.y < 1.05 && !laneChanger.isChangingLanes)
+        if (rb != null && Input.GetKeyDown(_PlayerJump) && transform.position.y < 1.1 && !laneChanger.isChangingLanes)
         {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
