@@ -1,14 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlatformType", menuName = "Scriptable Objects/Platform Type")]
-public class PlatformType : ScriptableObject
+[CreateAssetMenu(fileName = "WallType", menuName = "Scriptable Objects/Wall Type")]
+public class WallType : ScriptableObject
 {
-    //public string ElementName;
-    //public int MaxCount;
-    //public GameObject Prefab;
-
     [Header("General")]
-    public string typeOfPlatform;
+    public string typeOfWall;
     public string tag;
     public GameObject prefab;
 
@@ -20,6 +16,7 @@ public class PlatformType : ScriptableObject
     [Header("Variants, if applicable")]
     public GameObject[] variantPrefabs;
 
+    //behövs kanske inte
     [Header("Difficulty Scaling")]
     public int minLevelToAppear = 1;
     public int maxLevelToAppear = 999;

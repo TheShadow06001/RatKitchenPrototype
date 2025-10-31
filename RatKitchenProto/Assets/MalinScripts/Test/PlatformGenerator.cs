@@ -55,14 +55,6 @@ public class PlatformGenerator : MonoBehaviour
         {
             wallWidths[i] = theWallPools[i].pooledWallObject.transform.localScale.x;
         }
-
-        //for (int i = 0; i < obstacleGenerationPoints.Length;  i++)
-        //{
-
-        //}
-
-        // fill list with prefab positions
-        // first reference prefab positions per lane
     }
 
     private void Update()
@@ -129,6 +121,7 @@ public class PlatformGenerator : MonoBehaviour
             //fixa spawn points här med referens till active prefab?
             //Transform lanePositions = newPlatform.transform.Find("SpawnPoints");
          
+            // wall-spawner
             GameObject newWall = theWallPools[wallSelector].GetPooledWallObject();
             newWall.transform.position = transform.position + wallposition;
             newWall.transform.rotation = transform.rotation;

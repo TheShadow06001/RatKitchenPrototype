@@ -5,13 +5,20 @@ using UnityEngine.UIElements;
 
 public class KitchenPool : MonoBehaviour
 {
+    /* KITCHENPOOL WILL POOL BOTH PLATFORM TYPES AND WALL TYPES */
+
     public static KitchenPool Instance;
 
-    [SerializeField] private int poolSize = 10;
-    private Dictionary<PlatformType, Queue<GameObject>> poolDictionary = new();
+    [SerializeField] private int poolSize;
+    private Dictionary<PlatformType, Queue<GameObject>> platformDictionary = new();
     private List<PlatformType> loadedKitchenPlatforms = new();
-    
     public PlatformType[] kitchenPlatforms;
+
+    //test
+    private Dictionary<WallType, Queue<GameObject>> wallDictionary = new();
+    private List<WallType> loadedWallTypes = new();
+    public WallType[] wallTypes;
+
 
     private void Awake()
     {
@@ -19,13 +26,18 @@ public class KitchenPool : MonoBehaviour
         else Destroy(gameObject);
 
         kitchenPlatforms = Resources.LoadAll<PlatformType>("KitchenPlatforms");
-        BuildPools(kitchenPlatforms);    
+
+        wallTypes = Resources.LoadAll<WallType>("KitchenWalls");
+
+        BuildPools(kitchenPlatforms, wallTypes);
     }
 
-    private void BuildPools(PlatformType[] kitchenPlatformList)
+    private void BuildPools(PlatformType[] kitchenPlatformList, WallType[] wallTypeList)
     {
-        poolDictionary.Clear();
+        platformDictionary.Clear();
         loadedKitchenPlatforms.Clear();
+        loadedWallTypes.Clear();
+
 
         foreach (var type in kitchenPlatformList)
         {
@@ -36,7 +48,7 @@ public class KitchenPool : MonoBehaviour
                 continue;
             }
 
-            if (poolDictionary.ContainsKey(type))
+            if (platformDictionary.ContainsKey(type))
             {
                 Debug.LogWarning($"Duplicate pool detected for {type.name}");
                 continue;
@@ -53,7 +65,36 @@ public class KitchenPool : MonoBehaviour
                 objectPool.Enqueue(obj);
             }
 
-            poolDictionary.Add(type, objectPool);
+            platformDictionary.Add(type, objectPool);
+        }
+
+        foreach (var type in wallTypeList)
+        {
+
+            if (type == null || type.prefab == null)
+            {
+                Debug.LogWarning("Poolmanager: missing WallType or prefab for pool");
+                continue;
+            }
+
+            if (wallDictionary.ContainsKey(type))
+            {
+                Debug.LogWarning($"Duplicate pool detected for {type.name}");
+                continue;
+            }
+
+            loadedWallTypes.Add(type);
+
+            Queue<GameObject> wallPool = new();
+
+            for (int i = 0; i < poolSize; i++)
+            {
+                GameObject obj = Instantiate(type.GetRandomPrefab());
+                obj.SetActive(false);
+                wallPool.Enqueue(obj);
+            }
+
+            wallDictionary.Add(type, wallPool);
         }
     }
 
@@ -62,13 +103,19 @@ public class KitchenPool : MonoBehaviour
         return loadedKitchenPlatforms;
     }
 
+    public List<WallType> GetAllWallTypes()
+    {
+        return loadedWallTypes;
+    }
+
+    /* PLATFORM POOL*/
     //double check
     public GameObject GetPooledObject(PlatformType type, Vector3 position, Quaternion rotation)
     {
-        if (type == null || !poolDictionary.ContainsKey(type))
+        if (type == null || !platformDictionary.ContainsKey(type))
             return null;
 
-        Queue<GameObject> objectPool = poolDictionary[type];
+        Queue<GameObject> objectPool = platformDictionary[type];
         GameObject obj; 
 
         if (objectPool.Count > 0)
@@ -90,13 +137,50 @@ public class KitchenPool : MonoBehaviour
     //double check
     public void ReturnToPool(PlatformType type, GameObject obj)
     {
-        if (type == null || !poolDictionary.ContainsKey(type))
+        if (type == null || !platformDictionary.ContainsKey(type))
         {
             Destroy(obj); // utifall att pool saknas för objektet
             return;
         }
 
         obj.SetActive(false);
-        poolDictionary[type].Enqueue(obj);
+        platformDictionary[type].Enqueue(obj);
+    }
+
+    /* WALL POOL*/
+    public GameObject GetPooledWall(WallType type, Vector3 position, Quaternion rotation)
+    {
+        if (type == null || !wallDictionary.ContainsKey(type))
+            return null;
+
+        Queue<GameObject> wallPool = wallDictionary[type];
+        GameObject obj;
+
+        if (wallPool.Count > 0)
+        {
+            obj = wallPool.Dequeue();
+        }
+        else
+        {
+            obj = Instantiate(type.GetRandomPrefab());
+        }
+
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        obj.SetActive(true);
+
+        return obj;
+    }
+
+    public void ReturnWallToPool(WallType type, GameObject obj)
+    {
+        if (type == null || !wallDictionary.ContainsKey(type))
+        {
+            Destroy(obj);
+            return;
+        }
+
+        obj.SetActive(false);
+        wallDictionary[type].Enqueue(obj);
     }
 }
