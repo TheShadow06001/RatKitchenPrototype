@@ -169,7 +169,7 @@ MonoBehaviour:
   - {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
   - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
   - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
-  maxSinks: 5
+  maxSinks: 0
   maxOvens: 5
   amountOfElements: 29
 --- !u!1 &380455434
@@ -344,7 +344,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 395421529307640111, guid: bdb2b07dfbdb65847b2f68ec54f256be, type: 3}
   windowedWallPrefab: {fileID: 919132149155446097, guid: 835f18d5e419e9446972cf551c9be282, type: 3}
   maxWindows: 2
-  amountOfElements: 5
+  amountOfElements: 7
 --- !u!1 &614645270 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3e891e1beda1a3408b7bde3037c5a93, type: 3}
