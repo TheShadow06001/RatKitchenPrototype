@@ -16,7 +16,7 @@ public class Sink : KitchenElements
         
 
     }*/
-    }
+
     private Vector3 CountPosition(float x, float y, float z)
     {
         sinkPosition = transform.position;
@@ -37,3 +37,4 @@ public class Sink : KitchenElements
         return spawnPosition;
     }
 }
+
