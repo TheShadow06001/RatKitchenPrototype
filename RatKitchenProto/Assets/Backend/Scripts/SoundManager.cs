@@ -63,12 +63,11 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < soundInstances.Count; i++)
         {
            if (soundInstances[i].effects == anEffect)
-            {
+           {
                 soundInstances[i].PlaySoundEffect();
              return;
 
-            } 
+           } 
         }
     }
-
 }
