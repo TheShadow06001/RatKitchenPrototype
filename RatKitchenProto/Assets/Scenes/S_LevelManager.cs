@@ -1,42 +1,61 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class S_LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance;
-    
-    [Header("Level Manager")]
-    [SerializeField] private GameObject LoadingScreenCanvas;
+    public static S_LevelManager Instance;
+
+    [Header("Level Manager")] [SerializeField]
+    private GameObject LoadingScreenCanvas;
+
     [SerializeField] private Image LoadingScreenBar;
-    
-    
-    
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); //Singleton Setup for LevelManager
+            Destroy(gameObject); // Singleton
         }
     }
 
-    public async void LoadLevel(string LevelName)
+    public void QuitGame()
     {
-        var scene = SceneManager.LoadSceneAsync(LevelName);
-        scene.allowSceneActivation = false; //Prevent Level from appearing on screen
-        
-        LoadingSceenCanvas.SetActive(true);
+        Application.Quit();
+    }
+    public void LoadLevel(string levelName)
+    {
+        StartCoroutine(LoadLevelRoutine(levelName));
+    }
 
-        do {
-            LoadingScreenBar.fillammount = scene.progress;
-        } while (scene.progress < 0.9f); //Update fill ammount of loading bar, Await perhaps to not overload?
-        
-        scene.allowSceneActivation = true; //Allow Loaded level to appear on screen
-        LoadingScreenCanvas.SetActive(false); //Remove Loading Canvas
-        
+    private IEnumerator LoadLevelRoutine(string levelName)
+    {
+        var scene = SceneManager.LoadSceneAsync(levelName);
+        scene.allowSceneActivation = false;
+
+        if (LoadingScreenCanvas != null)
+            LoadingScreenCanvas.SetActive(true);
+
+        // Show progress until Unity reports 0.9 (that's when it has loaded but not activated)
+        while (scene.progress < 0.9f)
+        {
+            if (LoadingScreenBar != null)
+            {
+                // scene.progress goes 0..0.9, map it to 0..1 for the UI
+                LoadingScreenBar.fillAmount = scene.progress;
+            }
+
+            yield return null; // wait one frame
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        scene.allowSceneActivation = true;
     }
 }
