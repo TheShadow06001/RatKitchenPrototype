@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class S_TabManager : MonoBehaviour
 {
-    [Header("Tabs")]
+    [Header("Tabs")] 
     public GameObject[] Tabs;
     public Image[] TabButtons;
-    [Header("Tab Sprites and Sizes")]
+    [Header("Tab Sprites and Sizes")] 
     public Sprite InactiveTabBG, ActiveTabBG;
     public Vector2 InactiveTabSize, ActiveTabSize;
     [Header("Return Button")] 
@@ -14,19 +14,17 @@ public class S_TabManager : MonoBehaviour
 
     public void SwitchToTab(int TabID)
     {
-        foreach (GameObject go in Tabs)
-        {
-            go.SetActive(false);
-        }
+        foreach (var go in Tabs) go.SetActive(false);
         Tabs[TabID].SetActive(true);
 
-        foreach (Image Img in TabButtons)
+        foreach (var Img in TabButtons)
         {
             Img.sprite = InactiveTabBG;
             Img.rectTransform.sizeDelta = InactiveTabSize;
         }
+
         TabButtons[TabID].sprite = ActiveTabBG;
-        TabButtons[TabID].rectTransform.sizeDelta = ActiveTabSize; 
+        TabButtons[TabID].rectTransform.sizeDelta = ActiveTabSize;
     }
 
     public void Return()
@@ -34,11 +32,3 @@ public class S_TabManager : MonoBehaviour
         OptionsMenu.SetActive(false);
     }
 }
-
-
-
-
-
-
-
-

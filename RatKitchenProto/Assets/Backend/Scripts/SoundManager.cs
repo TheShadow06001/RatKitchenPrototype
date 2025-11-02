@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-
 public struct SoundInstance
 {
-    [SerializeField] AudioSource source;
+    [SerializeField] private AudioSource source;
     public SoundEffects effects;
 
     public void PlaySoundEffect()
@@ -31,18 +30,40 @@ public enum SoundEffects
     GasStoveFire,
     BlenderBlending,
     GameplayMusic,
-    
+
     // Music
-    
-    
+
+
     // UI Sounds
     ButtonPress,
-    ButtonHover,
+    ButtonHover
 }
 
 public class SoundManager : MonoBehaviour
 {
-    
+    [SerializeField] private List<SoundInstance> soundInstances = new();
+
+    public void PlaySoundEffect(SoundEffects anEffect)
+    {
+        for (var i = 0; i < soundInstances.Count; i++)
+            if (soundInstances[i].effects == anEffect)
+            {
+                soundInstances[i].PlaySoundEffect();
+                return;
+            }
+    }
+
+    // UI Wrappers
+    public void PlayUIButtonClick()
+    {
+        PlaySoundEffect(SoundEffects.ButtonPress);
+    }
+
+    public void PlayUIButtonHover()
+    {
+        PlaySoundEffect(SoundEffects.ButtonHover);
+    }
+
 
     #region Singleton
 
@@ -50,32 +71,15 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (SoundManager.Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Debug.LogError("[SoundManager] Mutiple soundmanagers!");
             Destroy(gameObject);
             return;
         }
-        Instance = this;      
+
+        Instance = this;
     }
+
     #endregion
-
-    [SerializeField] List<SoundInstance> soundInstances = new();
-    
-    public void PlaySoundEffect(SoundEffects anEffect)
-    {
-        for (int i = 0; i < soundInstances.Count; i++)
-        {
-           if (soundInstances[i].effects == anEffect)
-           {
-                soundInstances[i].PlaySoundEffect();
-             return;
-
-           } 
-        }
-    }
-    
-    // UI Wrappers
-    public void PlayUIButtonClick() => PlaySoundEffect(SoundEffects.ButtonPress);
-    public void PlayUIButtonHover() => PlaySoundEffect(SoundEffects.ButtonHover);
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,13 +8,19 @@ public class S_LevelManager : MonoBehaviour
 {
     public static S_LevelManager Instance;
 
-    [Header("Level Manager")] [SerializeField]
-    private GameObject LoadingScreenCanvas;
+    [Header("Canvas Refs")] 
+    [SerializeField] private GameObject MainMenuCanvas;
+    [SerializeField] private GameObject LoadingScreenCanvas;
+    [Header("Loading Screen Refs")] 
+    [SerializeField] private Slider LoadingScreenBarR;
+    [SerializeField] private Slider LoadingScreenBarL;
+    [SerializeField] private Image FadeImage;
+    [SerializeField] private TMP_Text LoadingText;
 
-    [SerializeField] private Image LoadingScreenBar;
-
-    void Awake()
+    private void Awake()
     {
+        #region Singleton
+
         if (Instance == null)
         {
             Instance = this;
@@ -23,39 +30,47 @@ public class S_LevelManager : MonoBehaviour
         {
             Destroy(gameObject); // Singleton
         }
+
+        #endregion
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
-    public void LoadLevel(string levelName)
+
+    public void LoadLevel(string LevelName)
     {
-        StartCoroutine(LoadLevelRoutine(levelName));
+        MainMenuCanvas.SetActive(false);
+        LoadingScreenCanvas.SetActive(true);
+        StartCoroutine(LoadLevelAsync(LevelName));
     }
 
-    private IEnumerator LoadLevelRoutine(string levelName)
+    private IEnumerator LoadLevelAsync(string LevelName)
     {
-        var scene = SceneManager.LoadSceneAsync(levelName);
-        scene.allowSceneActivation = false;
+        var LoadOperation = SceneManager.LoadSceneAsync(LevelName);
+        LoadOperation.allowSceneActivation = false;
 
-        if (LoadingScreenCanvas != null)
-            LoadingScreenCanvas.SetActive(true);
+        float StartTime = Time.realtimeSinceStartup;
 
-        // Show progress until Unity reports 0.9 (that's when it has loaded but not activated)
-        while (scene.progress < 0.9f)
+        if (LoadingText != null && LoadingScreenBarL != null && LoadingScreenBarR != null)
         {
-            if (LoadingScreenBar != null)
-            {
-                // scene.progress goes 0..0.9, map it to 0..1 for the UI
-                LoadingScreenBar.fillAmount = scene.progress;
-            }
-
-            yield return null; // wait one frame
+            LoadingText.text = "Loading... 0%";
+            LoadingScreenBarL.value = 0f;
+            LoadingScreenBarR.value = 0f;
+        }
+        else
+        {
+            Debug.LogError("Loading screen references are not set in LevelManager.");
         }
 
-        yield return new WaitForSeconds(0.2f);
-
-        scene.allowSceneActivation = true;
+        while (!LoadOperation.isDone)
+        {
+            float Progress = Mathf.Clamp01(LoadOperation.progress / 0.9f);
+            LoadingScreenBarR.value = Progress;
+            LoadingScreenBarL.value = Progress;
+            LoadingText.text = "Loading... " + (int)(Progress * 100f) + "%";
+            yield return null;
+        }
     }
 }

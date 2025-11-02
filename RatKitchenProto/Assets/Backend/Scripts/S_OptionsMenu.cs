@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class S_OptionsMenu : MonoBehaviour
@@ -9,8 +9,8 @@ public class S_OptionsMenu : MonoBehaviour
     public TMP_Dropdown QualityDropdown;
     public Toggle VSyncToggle;
     public GameObject OptionsMenu;
-    
-    void Start()
+
+    private void Start()
     {
         SyncOptions();
         DisplayModeDropdown.onValueChanged.AddListener(SetDisplayMode);
@@ -27,20 +27,20 @@ public class S_OptionsMenu : MonoBehaviour
     public void SyncOptions()
     {
         //Display Mode
-        FullScreenMode FSM = Screen.fullScreenMode;
-        int DropMenu = (FSM == FullScreenMode.ExclusiveFullScreen) ? 0 :
-                       (FSM == FullScreenMode.FullScreenWindow)    ? 1 :
-                       (FSM == FullScreenMode.Windowed)            ? 2 : 0;
+        var FSM = Screen.fullScreenMode;
+        var DropMenu = FSM == FullScreenMode.ExclusiveFullScreen ? 0 :
+            FSM == FullScreenMode.FullScreenWindow ? 1 :
+            FSM == FullScreenMode.Windowed ? 2 : 0;
         DisplayModeDropdown.SetValueWithoutNotify(DropMenu);
 
         //Resolution
-        int resIndex = 0;
+        var resIndex = 0;
         if (Screen.width == 1920 && Screen.height == 1080)
             resIndex = 1;
         else if (Screen.width == 1280 && Screen.height == 720)
             resIndex = 2;
         ResolutionDropdown.SetValueWithoutNotify(resIndex);
-        
+
         //Quality
         QualityDropdown.SetValueWithoutNotify(QualitySettings.GetQualityLevel());
         //VSync
@@ -49,25 +49,25 @@ public class S_OptionsMenu : MonoBehaviour
 
     public void SetDisplayMode(int i)
     {
-        FullScreenMode mode = (i == 0) ? FullScreenMode.ExclusiveFullScreen :
-                              (i == 1) ? FullScreenMode.FullScreenWindow :
-                              (i == 2) ? FullScreenMode.Windowed : FullScreenMode.ExclusiveFullScreen;
+        var mode = i == 0 ? FullScreenMode.ExclusiveFullScreen :
+            i == 1 ? FullScreenMode.FullScreenWindow :
+            i == 2 ? FullScreenMode.Windowed : FullScreenMode.ExclusiveFullScreen;
         Screen.fullScreenMode = mode;
         PlayerPrefs.SetInt("DisplayMode", i);
     }
-    
+
     public void SetResolution(int i)
     {
-        int width  = (i == 0) ? 2560 :
-                     (i == 1) ? 1920 :
-                     (i == 2) ? 1280 : 1920;
-        int height = (i == 0) ? 1440 :
-                     (i == 1) ? 1080 :
-                     (i == 2) ? 720 : 1080;
+        var width = i == 0 ? 2560 :
+            i == 1 ? 1920 :
+            i == 2 ? 1280 : 1920;
+        var height = i == 0 ? 1440 :
+            i == 1 ? 1080 :
+            i == 2 ? 720 : 1080;
         Screen.SetResolution(width, height, Screen.fullScreenMode);
         PlayerPrefs.SetInt("Resolution", i);
     }
-    
+
     public void SetQuality(int i)
     {
         QualitySettings.SetQualityLevel(i);
