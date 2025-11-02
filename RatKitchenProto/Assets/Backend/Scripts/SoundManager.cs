@@ -31,13 +31,13 @@ public enum SoundEffects
     GasStoveFire,
     BlenderBlending,
     GameplayMusic,
-    ButtonPress,
-    ButtonHover,
     
     // Music
     
+    
     // UI Sounds
-
+    ButtonPress,
+    ButtonHover,
 }
 
 public class SoundManager : MonoBehaviour
