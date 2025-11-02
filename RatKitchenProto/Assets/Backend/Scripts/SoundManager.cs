@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -18,6 +17,7 @@ public struct SoundInstance
 
 public enum SoundEffects
 {
+    // SFX
     RatRunning,
     RatJumping,
     RatDeath,
@@ -32,7 +32,11 @@ public enum SoundEffects
     BlenderBlending,
     GameplayMusic,
     ButtonPress,
-
+    ButtonHover,
+    
+    // Music
+    
+    // UI Sounds
 
 }
 
@@ -70,4 +74,8 @@ public class SoundManager : MonoBehaviour
            } 
         }
     }
+    
+    // UI Wrappers
+    public void PlayUIButtonClick() => PlaySoundEffect(SoundEffects.ButtonPress);
+    public void PlayUIButtonHover() => PlaySoundEffect(SoundEffects.ButtonHover);
 }
