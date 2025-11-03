@@ -14,7 +14,6 @@ public class S_LevelManager : MonoBehaviour
     [Header("Loading Screen Refs")] 
     [SerializeField] private Slider LoadingScreenBarR;
     [SerializeField] private Slider LoadingScreenBarL;
-    [SerializeField] private Image FadeImage;
     [SerializeField] private TMP_Text LoadingText;
 
     private void Awake()
@@ -48,22 +47,8 @@ public class S_LevelManager : MonoBehaviour
 
     private IEnumerator LoadLevelAsync(string LevelName)
     {
-        var LoadOperation = SceneManager.LoadSceneAsync(LevelName);
+        AsyncOperation LoadOperation = SceneManager.LoadSceneAsync(LevelName);
         LoadOperation.allowSceneActivation = false;
-
-        float StartTime = Time.realtimeSinceStartup; // For minimum loading screen time
-        const float MinLoadingTime = 3f;             // to make sure Scene doesn't load too fast or unload too slow
-
-        if (LoadingText != null && LoadingScreenBarL != null && LoadingScreenBarR != null)
-        {
-            LoadingText.text = "Loading... 0%";
-            LoadingScreenBarL.value = 0f;
-            LoadingScreenBarR.value = 0f;
-        }
-        else
-        {
-            Debug.LogError("Loading Screen References are not set in LevelManager.", this);
-        }
 
         while (!LoadOperation.isDone)
         {
@@ -71,6 +56,18 @@ public class S_LevelManager : MonoBehaviour
             LoadingScreenBarR.value = Progress;
             LoadingScreenBarL.value = Progress;
             LoadingText.text = "Loading... " + (int)(Progress * 100f) + "%";
+            
+            if (LoadOperation.progress >= 0.9f)
+            {
+                LoadingText.text = "Finishing...";
+                LoadingScreenBarR.value = 1f;
+                LoadingScreenBarL.value = 1f;
+                
+                yield return new WaitForSeconds(0.25f);
+
+                LoadOperation.allowSceneActivation = true;
+            }
+
             yield return null;
         }
     }
