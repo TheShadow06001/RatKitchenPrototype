@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class Knife : MonoBehaviour
@@ -10,26 +11,31 @@ public class Knife : MonoBehaviour
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer line;
 
-    private float endRotation;
+    private BoxCollider collider;
+    private Vector3 startPosition;
+    private Vector3 endPosition;
 
     private bool isComplete;
 
 
+
     void Start()
     {
-        
-        endRotation = 89f;
+        collider = GetComponent<BoxCollider>();
+
+        startPosition = transform.position;
+        endPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z );
 
         isComplete = false;
         StartCoroutine(Chop());
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (isComplete) 
+
+        if (isComplete)
         {
             isComplete = false;
             StartCoroutine(Chop());
@@ -38,50 +44,51 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
-        line.enabled = true;
-        mesh.enabled = true;
-
-        yield return new WaitForSeconds(0.3f);
-
+        //collider.enabled = true;
+        //line.enabled = true;
+        //mesh.enabled = true;
 
         SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
 
-        for (float i = 0; i < endRotation; i += Time.deltaTime * speed)
+        //yield return new WaitForSeconds(0.7f);
+
+        int value1 = 0;
+
+
+        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
             //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
-            transform.rotation = Quaternion.Euler(i, 0, 0);
+            transform.position = Vector3.Lerp(startPosition, endPosition, i);
             yield return null;
 
-            
+            if (transform.position == endPosition && value1 == 0)
+            {
+                SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
+                value1++;
+            }
         }
-        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
 
-        yield return new WaitForSeconds(0.2f);
+        
 
-        line.enabled = false;
-        mesh.enabled = false;
+        //line.enabled = false;
 
-        for (float i = 0; i < endRotation; i += Time.deltaTime * speed/15)
+        //yield return new WaitForSeconds(1.5f);
+
+
+        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
-            transform.rotation = Quaternion.Euler(endRotation - i, 0, 0);
+            //transform.rotation = Quaternion.Euler(i, 0, 0);
+            transform.position = Vector3.Lerp(endPosition, startPosition, i);
             yield return null;
         }
 
-        
-        
+        //collider.enabled = false;
+        //mesh.enabled = false;
 
-        float value = Random.Range(minRate, maxRate);
 
-        yield return new WaitForSeconds(value);
+        //float value = Random.Range(minRate, maxRate);
+
+        //yield return new WaitForSeconds(value);
         isComplete = true;
-    }
-
-    
-
-   
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
     }
 }
