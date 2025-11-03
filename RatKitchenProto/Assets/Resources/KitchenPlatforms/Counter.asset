@@ -14,16 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlatformType
   typeOfPlatform: Counter
   tag: Counter
-  prefab: {fileID: 7073797311473084916, guid: 419f07442abf85a469c12f9334f5e9e1, type: 3}
+  prefab: {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
   MaxCountPerRun: 50
+  baseMaxCount: 2
   spawnWeight: 1
+  cannotHaveNeighbour: []
+  mustHaveCounterBetween: 0
   isBaseCase: 1
-  variantPrefabs: []
+  variantPrefabs:
+  - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
+  - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
   minLevelToAppear: 1
   maxLevelToAppear: 999
-  spawnChanceProgression:
+  spawnChanceCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maxCountMultiplierPerLevel: 1

@@ -5425,7 +5425,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: play
+  m_text: Resume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d2464f65d6bd124b8d753486610d822, type: 2}
   m_sharedMaterial: {fileID: -8576501336813185864, guid: 3d2464f65d6bd124b8d753486610d822, type: 2}
@@ -5786,9 +5786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GOUDA GETAWAY
-
-'
+  m_text: '   Game paused...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d2464f65d6bd124b8d753486610d822, type: 2}
   m_sharedMaterial: {fileID: -8576501336813185864, guid: 3d2464f65d6bd124b8d753486610d822, type: 2}
@@ -6035,8 +6033,9 @@ GameObject:
   - component: {fileID: 1147320024}
   - component: {fileID: 1147320023}
   - component: {fileID: 1147320022}
+  - component: {fileID: 1147320026}
   m_Layer: 4
-  m_Name: Credits
+  m_Name: Main Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6078,7 +6077,19 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1856476850}
+          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+          m_MethodName: PlayUIButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1147320023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6125,7 +6136,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1856476850}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlayUIButtonHover
+        m_MethodName: PlayUIButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6135,9 +6146,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1856476850}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: PlayUIButtonClick
+      - m_Target: {fileID: 1147320026}
+        m_TargetAssemblyTypeName: S_PauseMenuReturn, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6185,6 +6196,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147320020}
   m_CullTransparentMesh: 1
+--- !u!114 &1147320026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147320020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99736753220239449036db50fedf34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::S_PauseMenuReturn
 --- !u!1 &1147598499
 GameObject:
   m_ObjectHideFlags: 0
@@ -7552,7 +7575,7 @@ GameObject:
   - component: {fileID: 1421046347}
   - component: {fileID: 1421046346}
   m_Layer: 5
-  m_Name: Tab Manager
+  m_Name: Menu Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9731,7 +9754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: credits
+  m_text: Main menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d2464f65d6bd124b8d753486610d822, type: 2}
   m_sharedMaterial: {fileID: -8576501336813185864, guid: 3d2464f65d6bd124b8d753486610d822, type: 2}
@@ -10254,18 +10277,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: S_LevelManager, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10894,7 +10905,7 @@ GameObject:
   - component: {fileID: 2118802322}
   - component: {fileID: 2118802321}
   m_Layer: 5
-  m_Name: Fade
+  m_Name: Pause Menu - Parent / Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10933,7 +10944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.22352941}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

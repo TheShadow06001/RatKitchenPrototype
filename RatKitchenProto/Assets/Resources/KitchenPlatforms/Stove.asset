@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlatformType
   typeOfPlatform: Stove
   tag: Stove
-  prefab: {fileID: 1648528277750680841, guid: aa5bcda85bcc15246a9391131e42b524, type: 3}
+  prefab: {fileID: 331472388353560714, guid: 9e96829494752554ca60248f698ad45b, type: 3}
   MaxCountPerRun: 1
   baseMaxCount: 2
   spawnWeight: 1

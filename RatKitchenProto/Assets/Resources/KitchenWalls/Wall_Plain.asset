@@ -14,10 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WallType
   typeOfWall: Plain
   tag: Plain
-  prefab: {fileID: 4890513794275172598, guid: ad2190a147f06ad409f38eac7329b2a0, type: 3}
+  prefab: {fileID: 1941298153209524382, guid: 2db6b5bfcabdee445ae0233ad8bd73f0, type: 3}
   MaxCountPerRun: 50
+  baseMaxCount: 2
   spawnWeight: 1
+  cannotHaveNeighbour: []
   isBaseCase: 1
   variantPrefabs: []
   minLevelToAppear: 1
   maxLevelToAppear: 999
+  spawnChanceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxCountMultiplierPerLevel: 1

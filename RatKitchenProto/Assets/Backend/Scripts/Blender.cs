@@ -7,9 +7,11 @@ public class Blender : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float fallPercentage;
     [SerializeField] private float fallSpeed;
+    [SerializeField] private float checkCooldown;
 
+    private bool canFall = true;
     private bool hasFallen = false;
-    private float endRotation = 90;
+    private float endRotation = -90;
     private GameObject player;
 
     private void Start()
@@ -28,9 +30,18 @@ public class Blender : MonoBehaviour
     private void FallOver()
     {
         float value = Random.Range(0, 100);
-        if (value >= (100 - fallPercentage) && !hasFallen)
+        if (value >= (100 - fallPercentage) && canFall)
         {
-            StartCoroutine(Fall());
+            if (!hasFallen) 
+            {
+                StartCoroutine(Fall());
+            }
+            
+        }
+        else
+        {
+            canFall = false;
+            StartCoroutine(Timer());
         }
     }
 
@@ -42,19 +53,39 @@ public class Blender : MonoBehaviour
         else return false;
     }
 
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(checkCooldown);
+        canFall = true;
+
+    }
+
     IEnumerator Fall()
     {
-        for (float i = 0; i < endRotation; i += Time.deltaTime * fallSpeed)
+        
+
+        for (float i = 0; i > endRotation; i -= Time.deltaTime * fallSpeed)
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.z, transform.rotation.y,  - i);
+
+            if (transform.rotation.z > endRotation)
+            {
+                transform.Rotate(transform.forward, i);
+            }
+
+            
+
+            //transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, -i, 0);
             yield return null;
         }
+
+        
+
         hasFallen = true;
     }
 
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(transform.position, Vector2.right * range, Color.red);   
+        Debug.DrawRay(transform.position, Vector2.right * range, Color.red);
     }
 
 }

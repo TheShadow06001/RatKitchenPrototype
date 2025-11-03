@@ -5,13 +5,11 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
-    [SerializeField] private float minRate = 0;
-    [SerializeField] private float maxRate = 2;
 
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer line;
 
-    private BoxCollider collider;
+    
     private Vector3 startPosition;
     private Vector3 endPosition;
 
@@ -21,7 +19,7 @@ public class Knife : MonoBehaviour
 
     void Start()
     {
-        collider = GetComponent<BoxCollider>();
+        
 
         startPosition = transform.position;
         endPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z );
@@ -48,7 +46,7 @@ public class Knife : MonoBehaviour
         //line.enabled = true;
         //mesh.enabled = true;
 
-        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
+        //SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
 
         //yield return new WaitForSeconds(0.7f);
 

@@ -1097,7 +1097,7 @@ MonoBehaviour:
   LoadingScreenCanvas: {fileID: 1114130704}
   LoadingScreenBarR: {fileID: 10567999}
   LoadingScreenBarL: {fileID: 321237759}
-  LoadingText: {fileID: 581651883}
+  LoadingText: {fileID: 663993525}
 --- !u!4 &150682309
 Transform:
   m_ObjectHideFlags: 0
@@ -1110,7 +1110,8 @@ Transform:
   m_LocalPosition: {x: 44.898438, y: 0, z: -30.84344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1114130708}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &164394579
@@ -3430,6 +3431,7 @@ GameObject:
   - component: {fileID: 519383485}
   - component: {fileID: 519383484}
   - component: {fileID: 519383487}
+  - component: {fileID: 519383488}
   m_Layer: 4
   m_Name: Play Game
   m_TagString: Untagged
@@ -3501,10 +3503,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 150682308}
-        m_TargetAssemblyTypeName: S_LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 5
+      - m_Target: {fileID: 519383488}
+        m_TargetAssemblyTypeName: S_PauseMenuReturn, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3592,6 +3594,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &519383488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519383482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99736753220239449036db50fedf34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::S_PauseMenuReturn
 --- !u!1 &534892274
 GameObject:
   m_ObjectHideFlags: 0
@@ -4474,7 +4488,7 @@ GameObject:
   - component: {fileID: 663993525}
   m_Layer: 5
   m_Name: Loading...
-  m_TagString: Untagged
+  m_TagString: LoadingText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6239,7 +6253,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1114130708
 RectTransform:
@@ -6254,7 +6268,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2102368083}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 150682309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11970,7 +11984,6 @@ SceneRoots:
   - {fileID: 725892940}
   - {fileID: 1701229520}
   - {fileID: 211391408}
-  - {fileID: 1114130708}
   - {fileID: 557525289}
-  - {fileID: 150682309}
   - {fileID: 1126028160}
+  - {fileID: 150682309}
