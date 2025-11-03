@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlatformType
   typeOfPlatform: Sink
   tag: Sink
-  prefab: {fileID: 745720126288627261, guid: 674becebf891c5444b85bd102b8ad8e2, type: 3}
+  prefab: {fileID: 4865522045984054999, guid: 40cf4af67eeea8a428bd0d02930a6552, type: 3}
   MaxCountPerRun: 1
   baseMaxCount: 2
   spawnWeight: 1
