@@ -38,7 +38,6 @@ public class Oven : KitchenElements
     {
         GameObject prefabToSpawn = null;
         int randomType = Random.Range(0, 2);
-        Debug.Log("Random type - " + randomType);
 
         switch (randomType)
         {
@@ -53,7 +52,6 @@ public class Oven : KitchenElements
         
         if (prefabToSpawn != null)
         {
-            Debug.Log("Prefab to spawn - " + prefabToSpawn);
             GameObject obstacle = Instantiate(prefabToSpawn, CountPosition(-0.78f, -0.57f), Quaternion.Euler(-90, 0, 0));
             obstacle.transform.SetParent(transform);
         }
