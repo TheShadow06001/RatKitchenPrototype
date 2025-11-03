@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class Knife : MonoBehaviour
@@ -51,18 +52,23 @@ public class Knife : MonoBehaviour
 
         //yield return new WaitForSeconds(0.7f);
 
+        int value1 = 0;
 
 
-
-        for (float i = 0; i < endPosition.y; i += Time.deltaTime * speed)
+        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
             //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
             transform.position = Vector3.Lerp(startPosition, endPosition, i);
             yield return null;
 
-
+            if (transform.position == endPosition && value1 == 0)
+            {
+                SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
+                value1++;
+            }
         }
-        SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
+
+        
 
         //line.enabled = false;
 
@@ -84,14 +90,5 @@ public class Knife : MonoBehaviour
 
         //yield return new WaitForSeconds(value);
         isComplete = true;
-    }
-
-
-
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-
     }
 }
