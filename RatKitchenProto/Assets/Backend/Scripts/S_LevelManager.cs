@@ -16,6 +16,8 @@ public class S_LevelManager : MonoBehaviour
     [SerializeField] private Slider LoadingScreenBarL;
     [SerializeField] private TMP_Text LoadingText;
 
+    private bool DoQuickLoad = false;
+    
     private void Awake()
     {
         #region Singleton
@@ -37,38 +39,63 @@ public class S_LevelManager : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    
 
     public void LoadLevel(string LevelName)
     {
-        MainMenuCanvas.SetActive(false);
-        LoadingScreenCanvas.SetActive(true);
+        if (LoadingScreenCanvas != null)
+        {
+            DoQuickLoad = false;
+            LoadingScreenCanvas.SetActive(true);
+            
+            if (MainMenuCanvas != null)
+            {
+                MainMenuCanvas.SetActive(false);
+            }
+            
+        } else {
+            DoQuickLoad = true;
+        }
         StartCoroutine(LoadLevelAsync(LevelName));
     }
 
     private IEnumerator LoadLevelAsync(string LevelName)
     {
-        AsyncOperation LoadOperation = SceneManager.LoadSceneAsync(LevelName);
-        LoadOperation.allowSceneActivation = false;
-
-        while (!LoadOperation.isDone)
+        if (DoQuickLoad == false)
         {
-            float Progress = Mathf.Clamp01(LoadOperation.progress / 0.9f);
-            LoadingScreenBarR.value = Progress;
-            LoadingScreenBarL.value = Progress;
-            LoadingText.text = "Loading... " + (int)(Progress * 100f) + "%";
-            
-            if (LoadOperation.progress >= 0.9f)
+            AsyncOperation LoadOperation = SceneManager.LoadSceneAsync(LevelName);
+            LoadOperation.allowSceneActivation = false;
+
+            while (!LoadOperation.isDone)
             {
-                LoadingText.text = "Finishing...";
-                LoadingScreenBarR.value = 1f;
-                LoadingScreenBarL.value = 1f;
-                
-                yield return new WaitForSeconds(0.25f);
+                float Progress = Mathf.Clamp01(LoadOperation.progress / 0.9f);
+                LoadingScreenBarR.value = Progress;
+                LoadingScreenBarL.value = Progress;
+                LoadingText.text = "Loading... " + (int)(Progress * 100f) + "%";
 
-                LoadOperation.allowSceneActivation = true;
+                if (LoadOperation.progress >= 0.9f)
+                {
+                    LoadingText.text = "Finishing...";
+                    LoadingScreenBarR.value = 1f;
+                    LoadingScreenBarL.value = 1f;
+
+                    yield return new WaitForSeconds(0.25f);
+                    LoadOperation.allowSceneActivation = true;
+                    yield return new WaitForSeconds(0.5f);
+                    LoadingScreenCanvas.SetActive(false);
+                }
+
+                yield return null;
             }
-
-            yield return null;
+        }
+        else
+        {
+            SceneManager.LoadScene(LevelName);
         }
     }
 }
+
+
+// Path: Assets/Backend/Scripts/S_GameManager.cs
+// Sort Layer for LoadingScreen to always be above the Scenes its loading, seems obvious but whatever.
