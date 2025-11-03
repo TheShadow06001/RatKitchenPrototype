@@ -51,7 +51,8 @@ public class S_LevelManager : MonoBehaviour
         var LoadOperation = SceneManager.LoadSceneAsync(LevelName);
         LoadOperation.allowSceneActivation = false;
 
-        float StartTime = Time.realtimeSinceStartup;
+        float StartTime = Time.realtimeSinceStartup; // For minimum loading screen time
+        const float MinLoadingTime = 3f;             // to make sure Scene doesn't load too fast or unload too slow
 
         if (LoadingText != null && LoadingScreenBarL != null && LoadingScreenBarR != null)
         {
@@ -61,7 +62,7 @@ public class S_LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Loading screen references are not set in LevelManager.");
+            Debug.LogError("Loading Screen References are not set in LevelManager.", this);
         }
 
         while (!LoadOperation.isDone)
