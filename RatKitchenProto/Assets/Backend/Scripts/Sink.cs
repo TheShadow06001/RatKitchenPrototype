@@ -3,8 +3,9 @@ using UnityEngine;
 public class Sink : KitchenElements
 {
     public GameObject plate;
-    private float amountOfPlates = 10;
-    private float sinkHeigth = 0.9f;
+    //commented out the unused variables
+    //private float amountOfPlates = 10;
+    //private float sinkHeigth = 0.9f;
     private Vector3 sinkPosition;
 
     /*private void OnEnable()
