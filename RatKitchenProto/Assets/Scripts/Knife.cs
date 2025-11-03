@@ -11,7 +11,8 @@ public class Knife : MonoBehaviour
     [SerializeField] private MeshRenderer line;
 
     private BoxCollider collider;
-    private float endRotation;
+    private Vector3 startPosition;
+    private Vector3 endPosition;
 
     private bool isComplete;
 
@@ -20,7 +21,9 @@ public class Knife : MonoBehaviour
     void Start()
     {
         collider = GetComponent<BoxCollider>();
-        endRotation = 89f;
+
+        startPosition = transform.position;
+        endPosition = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z );
 
         isComplete = false;
         StartCoroutine(Chop());
@@ -40,43 +43,46 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
-        collider.enabled = true;
-        line.enabled = true;
-        mesh.enabled = true;
-
-        yield return new WaitForSeconds(0.3f);
-
+        //collider.enabled = true;
+        //line.enabled = true;
+        //mesh.enabled = true;
 
         SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
 
-        for (float i = 0; i < endRotation; i += Time.deltaTime * speed)
+        //yield return new WaitForSeconds(0.7f);
+
+
+
+
+        for (float i = 0; i < endPosition.y; i += Time.deltaTime * speed)
         {
             //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
-            transform.rotation = Quaternion.Euler(i, 0, 0);
+            transform.position = Vector3.Lerp(startPosition, endPosition, i);
             yield return null;
 
 
         }
         SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
 
-        yield return new WaitForSeconds(0.2f);
+        //line.enabled = false;
 
-        collider.enabled = false;
-        line.enabled = false;
-        mesh.enabled = false;
+        //yield return new WaitForSeconds(1.5f);
 
-        for (float i = 0; i < endRotation; i += Time.deltaTime * speed / 15)
+
+        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
-            transform.rotation = Quaternion.Euler(endRotation - i, 0, 0);
+            //transform.rotation = Quaternion.Euler(i, 0, 0);
+            transform.position = Vector3.Lerp(endPosition, startPosition, i);
             yield return null;
         }
 
+        //collider.enabled = false;
+        //mesh.enabled = false;
 
 
+        //float value = Random.Range(minRate, maxRate);
 
-        float value = Random.Range(minRate, maxRate);
-
-        yield return new WaitForSeconds(value);
+        //yield return new WaitForSeconds(value);
         isComplete = true;
     }
 
