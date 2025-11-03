@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 0.1f;
     void Start()
     {
 
