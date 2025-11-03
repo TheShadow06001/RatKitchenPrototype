@@ -154,9 +154,9 @@ MonoBehaviour:
   - {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
   - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
   - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
-  maxSinks: 5
-  maxOvens: 1
-  amountOfElements: 10
+  maxSinks: 10
+  maxOvens: 0
+  amountOfElements: 20
 --- !u!4 &213628231
 Transform:
   m_ObjectHideFlags: 0
