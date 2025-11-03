@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WallType", menuName = "Scriptable Objects/Wall Type")]
@@ -10,16 +11,19 @@ public class WallType : ScriptableObject
 
     [Header("Spawn Settings")]
     public int MaxCountPerRun = 2;
+    public int baseMaxCount = 2;
     public float spawnWeight = 1f;
+    public List<string> cannotHaveNeighbour = new();
     public bool isBaseCase;
 
     [Header("Variants, if applicable")]
     public GameObject[] variantPrefabs;
 
-    //behövs kanske inte
     [Header("Difficulty Scaling")]
     public int minLevelToAppear = 1;
     public int maxLevelToAppear = 999;
+    public AnimationCurve spawnChanceCurve;
+    public float maxCountMultiplierPerLevel = 1.0f;
 
     public bool CanSpawnAtLevel(int level)
     {

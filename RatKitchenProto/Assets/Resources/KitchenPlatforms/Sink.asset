@@ -16,7 +16,19 @@ MonoBehaviour:
   tag: Sink
   prefab: {fileID: 745720126288627261, guid: 674becebf891c5444b85bd102b8ad8e2, type: 3}
   MaxCountPerRun: 1
+  baseMaxCount: 2
   spawnWeight: 1
+  cannotHaveNeighbour:
+  - Stove
+  mustHaveCounterBetween: 0
+  isBaseCase: 0
   variantPrefabs: []
   minLevelToAppear: 1
   maxLevelToAppear: 999
+  spawnChanceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxCountMultiplierPerLevel: 1

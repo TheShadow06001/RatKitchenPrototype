@@ -18,7 +18,7 @@ public class PlatformGenerator : MonoBehaviour
 
     public ObstaclePooler[] theObstaclePools;   // test
     private int obstacleSelector;               // test
-    public Transform[] obstacleSpawnPoints;
+    public Transform[] obstacleSpawnPoints;     // test
 
     private float[] platformWidths;
     private float[] wallWidths;
@@ -40,6 +40,12 @@ public class PlatformGenerator : MonoBehaviour
     private int sinkCount = 0;
     private int stoveCount = 0;
 
+    //nytt
+    private Dictionary<PlatformType, int> activeCounts = new();
+    private PlatformType lastPlatformType;
+    private PlatformType secondLastPlatformType;
+    private List<PlatformType> availablePlatforms;
+
     private void Start()
     {
         platformWidths = new float[thePlatformPools.Length];
@@ -54,6 +60,12 @@ public class PlatformGenerator : MonoBehaviour
         for (int i = 0; i < theWallPools.Length; i++)
         {
             wallWidths[i] = theWallPools[i].pooledWallObject.transform.localScale.x;
+        }
+
+        availablePlatforms = KitchenPool.Instance.GetAllPlatformTypes();
+        foreach (var type in availablePlatforms)
+        {
+            activeCounts[type] = 0;
         }
     }
 
@@ -83,16 +95,20 @@ public class PlatformGenerator : MonoBehaviour
             string spawnCandidateTag = "";
             bool isValidToSpawn = false;
 
-            int safetyCounter = 0;
-            while (!isValidToSpawn && safetyCounter < 50)
-            {
-                platformSelector = Random.Range(0, thePlatformPools.Length);
-                spawnCandidate = thePlatformPools[platformSelector].pooledObject;
-                spawnCandidateTag = spawnCandidate.tag;
+            PlatformType nextType = GetValidNextPlatform();
 
-                isValidToSpawn = IsValidNextPlatform(spawnCandidateTag);
-                safetyCounter++;
-            }
+
+            /* LIGGER UNDER SEPARAT FUNKTION */
+            //int safetyCounter = 0;
+            //while (!isValidToSpawn && safetyCounter < 50)
+            //{
+            //    platformSelector = Random.Range(0, thePlatformPools.Length);
+            //    spawnCandidate = thePlatformPools[platformSelector].pooledObject;
+            //    spawnCandidateTag = spawnCandidate.tag;
+
+            //    isValidToSpawn = IsValidNextPlatform(spawnCandidateTag);
+            //    safetyCounter++;
+            //}
 
             //moves the PlatformGenerator point
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetween, transform.position.y, transform.position.z);
@@ -134,19 +150,59 @@ public class PlatformGenerator : MonoBehaviour
         }
     }
 
-    private bool IsValidNextPlatform(string nextTag)
+    private PlatformType GetValidNextPlatform()
     {
-        if (IsSinkOrStove(lastPlatformTag) && IsSinkOrStove(nextTag))
+        int safetyCounter = 0;
+        PlatformType candidate = null;
+        bool isValid = false;
+
+        while (!isValid && safetyCounter < 50)
+        {
+            candidate = availablePlatforms[Random.Range(0, availablePlatforms.Count)];
+            isValid = IsValidNextPlatform(candidate);
+            safetyCounter++;
+        }
+
+        return isValid ? candidate : null;
+    }
+
+    private bool IsValidNextPlatform(/*string nextTag*/ PlatformType next)
+    {
+        //if (IsSinkOrStove(lastPlatformTag) && IsSinkOrStove(nextTag))
+        //    return false;
+
+        //if (nextTag == "Sink" && sinkCount >= maxSinks)
+        //    return false;
+
+        //if (nextTag == "Stove" && stoveCount >= maxStoves)
+        //    return false;
+
+        //return true;
+
+        /* NEEDS GAMEMANAGER */
+        //if (!next.CanSpawnAtLevel(GameManager.Instance.currentLevel))
+        //    return false;
+
+        if (lastPlatformType != null && next.cannotHaveNeighbour.Contains(lastPlatformType.typeOfPlatform))
             return false;
 
-        if (nextTag == "Sink" && sinkCount >= maxSinks)
+        if (next.mustHaveCounterBetween && (lastPlatformType?.typeOfPlatform == next.typeOfPlatform || secondLastPlatformType?.typeOfPlatform == next.typeOfPlatform))
             return false;
 
-        if (nextTag == "Stove" && stoveCount >= maxStoves)
-            return false;
+        //if (activeCounts[next] >= GetScaledMaxCount(next))
+        //    return false;
 
         return true;
+
     }
+
+    /* NEEDS GAMEMANAGER */
+    //private int GetScaledMaxCount(PlatformType type)
+    //{
+    //    int baseCount = type.baseMaxCount;
+    //    float scale = Mathf.Pow(type.maxCountMultiplierPerLevel, GameManager.Instance.currentLevel);
+    //    return Mathf.RoundToInt(baseCount * scale);
+    //}
 
     private bool IsSinkOrStove(string tag)
     {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlatformType", menuName = "Scriptable Objects/Platform Type")]
@@ -14,7 +15,10 @@ public class PlatformType : ScriptableObject
 
     [Header("Spawn Settings")]
     public int MaxCountPerRun = 2;
+    public int baseMaxCount = 2;
     public float spawnWeight = 1f;
+    public List<string> cannotHaveNeighbour = new();
+    public bool mustHaveCounterBetween = false;
     public bool isBaseCase;
 
     [Header("Variants, if applicable")]
@@ -23,6 +27,9 @@ public class PlatformType : ScriptableObject
     [Header("Difficulty Scaling")]
     public int minLevelToAppear = 1;
     public int maxLevelToAppear = 999;
+    public AnimationCurve spawnChanceCurve;
+    public float maxCountMultiplierPerLevel = 1.0f;
+
 
     public bool CanSpawnAtLevel(int level)
     {

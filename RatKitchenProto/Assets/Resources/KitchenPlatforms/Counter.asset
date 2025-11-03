@@ -17,6 +17,13 @@ MonoBehaviour:
   prefab: {fileID: 7073797311473084916, guid: 419f07442abf85a469c12f9334f5e9e1, type: 3}
   MaxCountPerRun: 50
   spawnWeight: 1
+  isBaseCase: 1
   variantPrefabs: []
   minLevelToAppear: 1
   maxLevelToAppear: 999
+  spawnChanceProgression:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
