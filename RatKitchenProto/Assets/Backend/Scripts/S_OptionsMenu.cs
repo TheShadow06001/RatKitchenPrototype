@@ -26,25 +26,40 @@ public class S_OptionsMenu : MonoBehaviour
 
     public void SyncOptions()
     {
-        //Display Mode
-        var FSM = Screen.fullScreenMode;
-        var DropMenu = FSM == FullScreenMode.ExclusiveFullScreen ? 0 :
-            FSM == FullScreenMode.FullScreenWindow ? 1 :
-            FSM == FullScreenMode.Windowed ? 2 : 0;
-        DisplayModeDropdown.SetValueWithoutNotify(DropMenu);
+        // Display Mode
+        int savedDisplay = PlayerPrefs.GetInt("DisplayMode", -1);
+        
+        if (savedDisplay >= 0)
+        {
+            DisplayModeDropdown.SetValueWithoutNotify(savedDisplay);
+        }
+        else
+        {
+            FullScreenMode fsm = Screen.fullScreenMode;
+            int drop = fsm == FullScreenMode.ExclusiveFullScreen ? 0 :
+                fsm == FullScreenMode.FullScreenWindow ? 1 : 2;
+            DisplayModeDropdown.SetValueWithoutNotify(drop);
+        }
 
-        //Resolution
-        var resIndex = 0;
-        if (Screen.width == 1920 && Screen.height == 1080)
-            resIndex = 1;
-        else if (Screen.width == 1280 && Screen.height == 720)
-            resIndex = 2;
-        ResolutionDropdown.SetValueWithoutNotify(resIndex);
+        // Resolution
+        int savedRes = PlayerPrefs.GetInt("Resolution", -1);
+        if (savedRes >= 0)
+        {
+            ResolutionDropdown.SetValueWithoutNotify(savedRes);
+        }
+        else
+        {
+            int resIndex = (Screen.width == 1920 && Screen.height == 1080) ? 1 :
+                (Screen.width == 1280 && Screen.height == 720) ? 2 : 0;
+            ResolutionDropdown.SetValueWithoutNotify(resIndex);
+        }
 
-        //Quality
-        QualityDropdown.SetValueWithoutNotify(QualitySettings.GetQualityLevel());
-        //VSync
-        VSyncToggle.SetIsOnWithoutNotify(QualitySettings.vSyncCount > 0);
+        // Quality
+        int savedQuality = PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel());
+        QualityDropdown.SetValueWithoutNotify(savedQuality);
+        //  VSync  
+        int savedVSync = PlayerPrefs.GetInt("VSync", QualitySettings.vSyncCount > 0 ? 1 : 0);
+        VSyncToggle.SetIsOnWithoutNotify(savedVSync == 1);
     }
 
     public void SetDisplayMode(int i)
@@ -54,29 +69,33 @@ public class S_OptionsMenu : MonoBehaviour
             i == 2 ? FullScreenMode.Windowed : FullScreenMode.ExclusiveFullScreen;
         Screen.fullScreenMode = mode;
         PlayerPrefs.SetInt("DisplayMode", i);
+        PlayerPrefs.Save();
     }
 
     public void SetResolution(int i)
     {
-        var width = i == 0 ? 2560 :
+        int width = i == 0 ? 2560 :
             i == 1 ? 1920 :
             i == 2 ? 1280 : 1920;
-        var height = i == 0 ? 1440 :
+        int height = i == 0 ? 1440 :
             i == 1 ? 1080 :
             i == 2 ? 720 : 1080;
         Screen.SetResolution(width, height, Screen.fullScreenMode);
         PlayerPrefs.SetInt("Resolution", i);
+        PlayerPrefs.Save();
     }
 
     public void SetQuality(int i)
     {
         QualitySettings.SetQualityLevel(i);
         PlayerPrefs.SetInt("Quality", i);
+        PlayerPrefs.Save();
     }
 
     public void SetVSync(bool on)
     {
         QualitySettings.vSyncCount = on ? 1 : 0;
         PlayerPrefs.SetInt("VSync", on ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }

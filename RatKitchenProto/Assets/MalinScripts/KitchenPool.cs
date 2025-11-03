@@ -61,6 +61,7 @@ public class KitchenPool : MonoBehaviour
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject obj = Instantiate(type.GetRandomPrefab());
+                obj.transform.SetParent(transform);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -90,6 +91,7 @@ public class KitchenPool : MonoBehaviour
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject obj = Instantiate(type.GetRandomPrefab());
+                obj.transform.SetParent(transform);
                 obj.SetActive(false);
                 wallPool.Enqueue(obj);
             }
@@ -109,7 +111,6 @@ public class KitchenPool : MonoBehaviour
     }
 
     /* PLATFORM POOL*/
-    //double check
     public GameObject GetPooledObject(PlatformType type, Vector3 position, Quaternion rotation)
     {
         if (type == null || !platformDictionary.ContainsKey(type))
@@ -125,6 +126,7 @@ public class KitchenPool : MonoBehaviour
         else
         {
             obj = Instantiate(type.GetRandomPrefab()); // utökar poolen om det inte finns tillräckligt att hämta
+            obj.transform.SetParent(transform);
         }
 
         obj.transform.position = position;
@@ -134,7 +136,6 @@ public class KitchenPool : MonoBehaviour
         return obj;
     }
 
-    //double check
     public void ReturnToPool(PlatformType type, GameObject obj)
     {
         if (type == null || !platformDictionary.ContainsKey(type))
@@ -163,6 +164,7 @@ public class KitchenPool : MonoBehaviour
         else
         {
             obj = Instantiate(type.GetRandomPrefab());
+            obj.transform.SetParent(transform);
         }
 
         obj.transform.position = position;
