@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 61cbaedd86fbe4643991fe9545273d76, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 61cbaedd86fbe4643991fe9545273d76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -155,5 +159,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61cbaedd86fbe4643991fe9545273d76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -953215510651058202}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61cbaedd86fbe4643991fe9545273d76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3267805371463923319}
   m_SourcePrefab: {fileID: 100100000, guid: 61cbaedd86fbe4643991fe9545273d76, type: 3}
+--- !u!1 &5796795623448307517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 61cbaedd86fbe4643991fe9545273d76, type: 3}
+  m_PrefabInstance: {fileID: 6679738995567614572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-953215510651058202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796795623448307517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8461ac3fc6275042a0e6373b3878b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlatformDestroyer
+  platformDestructionPoint: {fileID: 0}
+--- !u!114 &-3267805371463923319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796795623448307517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee229b2668329b04e8d81f827b556f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Oven
+  fryingPan: {fileID: 3479590279645862948, guid: 9b9738e8a4ee5da4c89660d866c9122b, type: 3}
+  bigPan: {fileID: 4868850252277391835, guid: ac7837f7c9a22d140832d331497f338c, type: 3}

@@ -20,6 +20,7 @@ public class PlatformType : ScriptableObject
     public List<string> cannotHaveNeighbour = new();
     public bool mustHaveCounterBetween = false;
     public bool isBaseCase;
+    public float xPositionSpawnOffset = 0f;
 
     [Header("Variants, if applicable")]
     public GameObject[] variantPrefabs;
