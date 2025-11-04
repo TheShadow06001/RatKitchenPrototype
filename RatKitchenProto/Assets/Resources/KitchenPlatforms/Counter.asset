@@ -9,21 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b6473107f499349a021cc4407c598a, type: 3}
+  m_Script: {fileID: 11500000, guid: f473efd5f6a756449bbfbc9f01139f76, type: 3}
   m_Name: Counter
   m_EditorClassIdentifier: Assembly-CSharp::PlatformType
   typeOfPlatform: Counter
   tag: Counter
-  prefab: {fileID: 2239992162403170458, guid: 7ea0489355d8ef24e9c78ead852470c4, type: 3}
-  MaxCountPerRun: 50
+  prefab: {fileID: 6137602603870842397, guid: 47e3e42d928df4747904ea28b7011c50, type: 3}
+  MaxCountPerRun: 2
   baseMaxCount: 2
   spawnWeight: 1
   cannotHaveNeighbour: []
   mustHaveCounterBetween: 0
   isBaseCase: 1
-  variantPrefabs:
-  - {fileID: 72596897954193834, guid: c3ff060bee819d7439f180cc7170c238, type: 3}
-  - {fileID: 9164999261714113897, guid: d8c785ef1dae8d147bb4c8c24b84154e, type: 3}
+  variantPrefabs: []
   minLevelToAppear: 1
   maxLevelToAppear: 999
   spawnChanceCurve:

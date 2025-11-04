@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     float cameraSpeed;
     Rigidbody rigidBody;
 
+    [Header("Camera Script")]
+    CameraScript cameraScript;
+    Vector3 cameraMoveDirection;
 
     void Start()
     {
@@ -25,7 +28,9 @@ public class PlayerMovement : MonoBehaviour
         cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
         moveSpeed = cameraSpeed;
 
-        laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
+        cameraScript = mainCamera.GetComponent<CameraScript>();
+        cameraSpeed = cameraScript.moveSpeed;
+        cameraMoveDirection = cameraScript.moveDirection;
     }
 
     void Update()
@@ -37,15 +42,20 @@ public class PlayerMovement : MonoBehaviour
 
         float totalSpeed = moveSpeed;
 
-        currentPos.x -= totalSpeed * Time.deltaTime;
-        transform.position = new Vector3(currentPos.x, currentPos.y, currentPos.z);
+        transform.position += cameraMoveDirection * totalSpeed * Time.deltaTime;
 
 
 
     }
     void HandleForwardSpeed()
     {
-        if (transform.position.x > anchorPoint.transform.position.x + 0.1f)
+        Vector3 behindDirection = -cameraMoveDirection;
+
+        Vector3 vecToPlayer = transform.position - anchorPoint.transform.position;
+
+        float distanceBehind = Vector3.Dot(vecToPlayer, behindDirection);
+
+        if (distanceBehind > 0.1f)
         {
             float targetSpeed1 = cameraSpeed * maxSpeedMultiplier;
             moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed1, Time.deltaTime * forwardAcceleration);

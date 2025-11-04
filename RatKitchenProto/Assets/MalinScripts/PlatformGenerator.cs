@@ -5,227 +5,101 @@ using Unity.VisualScripting;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    //public GameObject thePlatform;      // the platforms to be generated ahead of the player
-    //public GameObject theWall;          // => set 2-3 platforms in scene to always start with?
-                                        // for example always have 2-3 counters present at the beginning of the rat game to let the generation point build from
-    public Transform generationPoint;   // the point ahead of player, attached to camera
-    public float distanceBetween;
+    [SerializeField] private List<PlatformType> platformTypes = new();
+    [SerializeField] public int platformsPerWall = 5;
+    [SerializeField] private float distanceBetweenPlatforms;
+    [SerializeField] private int currentLevel = 1;
 
-    private int platformSelector;
-    private int wallSelector;
-    public PlatformPooler[] thePlatformPools;
-    public WallPooler[] theWallPools;
-
-    public ObstaclePooler[] theObstaclePools;   // test
-    private int obstacleSelector;               // test
-    public Transform[] obstacleSpawnPoints;     // test
-
-    private float[] platformWidths;
-    private float[] wallWidths;
-    private float wallOffset;
-
-    [SerializeField] private int maxAmountOfPlatforms = 20;
-    [SerializeField] private int spawnedPlatforms = 0;
-
-    private bool isLevelComplete = false;
-    private bool isEndPlatformSpawned = false;
-    public GameObject endPlatformPrefab;
-    public GameObject endWallPrefab;
-
-    private string lastPlatformTag = "";
-    private string secondLastPlatformTag = "";
-
-    [SerializeField] private int maxSinks = 2;
-    [SerializeField] private int maxStoves = 2;
-    private int sinkCount = 0;
-    private int stoveCount = 0;
-
-    //nytt
-    private Dictionary<PlatformType, int> activeCounts = new();
     private PlatformType lastPlatformType;
     private PlatformType secondLastPlatformType;
-    private List<PlatformType> availablePlatforms;
+
+    private Dictionary<PlatformType, int> platformSpawnCounts = new();
 
     private void Start()
     {
-        platformWidths = new float[thePlatformPools.Length];
-        wallWidths = new float[theWallPools.Length];
-        wallOffset = endPlatformPrefab.transform.localScale.z / 2f;
-
-        for (int i = 0; i < thePlatformPools.Length; i++)
+        foreach (var type in platformTypes)
         {
-            platformWidths[i] = thePlatformPools[i].pooledObject.transform.localScale.x;
-        }
-
-        for (int i = 0; i < theWallPools.Length; i++)
-        {
-            wallWidths[i] = theWallPools[i].pooledWallObject.transform.localScale.x;
-        }
-
-        availablePlatforms = KitchenPool.Instance.GetAllPlatformTypes();
-        foreach (var type in availablePlatforms)
-        {
-            activeCounts[type] = 0;
+            platformSpawnCounts[type] = 0;
         }
     }
 
-    private void Update()
+    public void SpawnPlatformsAlongWall(Vector3 wallPosition, WallType wall)
     {
-        if (spawnedPlatforms >= maxAmountOfPlatforms)
+        Vector3 spawnPos = wallPosition;
+
+        for (int i = 0; i < platformsPerWall; i++)
         {
-            if (!isEndPlatformSpawned)
-            {
-                SpawnEndPlatform(); // rat hole section
-                isEndPlatformSpawned = true;
-            }
+            PlatformType chosenPlatform = PlatformTypeToSpawn();
+            if (chosenPlatform == null)
+                continue; // ändrat från return
 
-            else if (!isLevelComplete)
-            {
-                isLevelComplete = true;
-                Debug.LogWarning("end of level reached, no more platforms will be generated");
-                // call function to teleport back to start or other next-level-logic
-            }
-            return;
-        }
-
-        if (transform.position.x < generationPoint.position.x) // generate/set active new platform
-        {
-            //spawning constraints
-            GameObject spawnCandidate = null;
-            string spawnCandidateTag = "";
-            bool isValidToSpawn = false;
-
-            PlatformType nextType = GetValidNextPlatform();
-
-
-            /* LIGGER UNDER SEPARAT FUNKTION */
-            //int safetyCounter = 0;
-            //while (!isValidToSpawn && safetyCounter < 50)
-            //{
-            //    platformSelector = Random.Range(0, thePlatformPools.Length);
-            //    spawnCandidate = thePlatformPools[platformSelector].pooledObject;
-            //    spawnCandidateTag = spawnCandidate.tag;
-
-            //    isValidToSpawn = IsValidNextPlatform(spawnCandidateTag);
-            //    safetyCounter++;
-            //}
-
-            //moves the PlatformGenerator point
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2) + distanceBetween, transform.position.y, transform.position.z);
-            Vector3 wallposition = new Vector3(0, transform.position.y + 2f, transform.position.z + 3f);    // to be adjusted
-
-            // spawn platforms
-            GameObject newPlatform = thePlatformPools[platformSelector].GetPooledObject();
-            newPlatform.transform.position = transform.position;
-            newPlatform.transform.rotation = transform.rotation;
+            GameObject prefabToSpawn = chosenPlatform.GetRandomPrefab();
+            GameObject newPlatform = KitchenPool.Instance.GetPooledObject(chosenPlatform, spawnPos, Quaternion.identity);
             newPlatform.SetActive(true);
 
-            if (newPlatform.CompareTag("Sink"))
-                sinkCount++;
+            platformSpawnCounts[chosenPlatform]++;
+            secondLastPlatformType = lastPlatformType;
+            lastPlatformType = chosenPlatform;
 
-            if (newPlatform.CompareTag("Stove"))
-                stoveCount++;
-
-
-            secondLastPlatformTag = lastPlatformTag;
-            lastPlatformTag = newPlatform.tag;
-
-            wallSelector = Random.Range(0, theWallPools.Length);
-            obstacleSelector = Random.Range(0, theObstaclePools.Length); // test
-
-            GameObject newObstacle = theObstaclePools[obstacleSelector].GetPooledObstacle();
-            //fixa spawn points här med referens till active prefab?
-            //Transform lanePositions = newPlatform.transform.Find("SpawnPoints");
-         
-            // wall-spawner
-            GameObject newWall = theWallPools[wallSelector].GetPooledWallObject();
-            newWall.transform.position = transform.position + wallposition;
-            newWall.transform.rotation = transform.rotation;
-            newWall.SetActive(true);
-
-            transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z);
-            spawnedPlatforms++;   
-            
-            // behöver återkomma till spawn pos för scriptable objects
+            spawnPos += new Vector3(chosenPlatform.prefab.transform.localScale.x + distanceBetweenPlatforms, 0, 0);
         }
     }
 
-    private PlatformType GetValidNextPlatform()
+    private PlatformType PlatformTypeToSpawn()
     {
-        int safetyCounter = 0;
-        PlatformType candidate = null;
-        bool isValid = false;
+        List<PlatformType> validType = new();
 
-        while (!isValid && safetyCounter < 50)
+        foreach (var type in platformTypes)
         {
-            candidate = availablePlatforms[Random.Range(0, availablePlatforms.Count)];
-            isValid = IsValidNextPlatform(candidate);
-            safetyCounter++;
+            if (!type.CanSpawnAtLevel(currentLevel))
+                continue;
+
+            if (platformSpawnCounts[type] >= GetScaledMaxCount(type))
+                continue;
+
+            if (IsInvalidPlatformNeighbour(type))
+                continue;
+
+            validType.Add(type);
+        }
+        if (validType.Count == 0)
+            return platformTypes.Find(p => p.isBaseCase) ?? platformTypes[0];
+
+        //weighted random algorithm
+        float totalSpawnWeight = 0f;
+        foreach (var type in validType)
+        {
+            totalSpawnWeight += type.spawnWeight;
         }
 
-        return isValid ? candidate : null;
+        float randomPick = Random.value * totalSpawnWeight;
+        float cumulative = 0;
+
+        foreach (var type in validType)
+        {
+            cumulative += type.spawnWeight;
+            if (randomPick <= cumulative)
+                return type;
+        }
+
+        return validType[0];
     }
 
-    private bool IsValidNextPlatform(/*string nextTag*/ PlatformType next)
+    private bool IsInvalidPlatformNeighbour(PlatformType next)
     {
-        //if (IsSinkOrStove(lastPlatformTag) && IsSinkOrStove(nextTag))
-        //    return false;
+        if (lastPlatformType != null && next.cannotHaveNeighbour.Contains(lastPlatformType.tag))
+            return true;
 
-        //if (nextTag == "Sink" && sinkCount >= maxSinks)
-        //    return false;
+        if (next.mustHaveCounterBetween && (lastPlatformType?.tag == next.tag || secondLastPlatformType?.tag == next.tag))
+            return true;
 
-        //if (nextTag == "Stove" && stoveCount >= maxStoves)
-        //    return false;
-
-        //return true;
-
-        /* NEEDS GAMEMANAGER */
-        //if (!next.CanSpawnAtLevel(GameManager.Instance.currentLevel))
-        //    return false;
-
-        if (lastPlatformType != null && next.cannotHaveNeighbour.Contains(lastPlatformType.typeOfPlatform))
-            return false;
-
-        if (next.mustHaveCounterBetween && (lastPlatformType?.typeOfPlatform == next.typeOfPlatform || secondLastPlatformType?.typeOfPlatform == next.typeOfPlatform))
-            return false;
-
-        //if (activeCounts[next] >= GetScaledMaxCount(next))
-        //    return false;
-
-        return true;
-
+        return false;
     }
 
-    /* NEEDS GAMEMANAGER */
-    //private int GetScaledMaxCount(PlatformType type)
-    //{
-    //    int baseCount = type.baseMaxCount;
-    //    float scale = Mathf.Pow(type.maxCountMultiplierPerLevel, GameManager.Instance.currentLevel);
-    //    return Mathf.RoundToInt(baseCount * scale);
-    //}
-
-    private bool IsSinkOrStove(string tag)
+    private int GetScaledMaxCount(PlatformType type)
     {
-        return tag == "Sink" || tag == "Stove";
-    }
-
-    public void SpawnEndPlatform()
-    {
-        //float wallOffset = endPlatformPrefab.transform.localScale.z / 2f;
-
-        Vector3 platformSpawnPos = new Vector3(transform.position.x + 5f, transform.position.y, transform.position.z);                  // to be adjusted
-        Vector3 wallSpawnPos = new Vector3(transform.position.x + 5f, transform.position.y + 2f, transform.position.z + wallOffset);    // to be adjusted
-
-        Instantiate(endPlatformPrefab, platformSpawnPos, Quaternion.identity);
-        Instantiate(endWallPrefab, wallSpawnPos, Quaternion.identity);  
-    }
-    public void ResetPlatformGenerator()
-    {
-        spawnedPlatforms = 0;
-        isLevelComplete = false;
-        isEndPlatformSpawned = false;
-
-        sinkCount = 0;
-        stoveCount = 0;
+        int baseCount = type.baseMaxCount;
+        float scale = Mathf.Pow(type.maxCountMultiplierPerLevel, currentLevel);
+        return Mathf.RoundToInt(baseCount * scale);
     }
 }

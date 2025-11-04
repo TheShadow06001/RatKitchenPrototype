@@ -15,8 +15,6 @@ public class S_LevelManager : MonoBehaviour
     [SerializeField] private Slider LoadingScreenBarR;
     [SerializeField] private Slider LoadingScreenBarL;
     [SerializeField] private TMP_Text LoadingText;
-
-    private bool DoQuickLoad = false;
     
     private void Awake()
     {
@@ -34,64 +32,44 @@ public class S_LevelManager : MonoBehaviour
 
         #endregion
     }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
     
-    
-
     public void LoadLevel(string LevelName)
     {
         if (LoadingScreenCanvas != null)
         {
-            DoQuickLoad = false;
             LoadingScreenCanvas.SetActive(true);
             
             if (MainMenuCanvas != null)
             {
                 MainMenuCanvas.SetActive(false);
             }
-            
-        } else {
-            DoQuickLoad = true;
         }
         StartCoroutine(LoadLevelAsync(LevelName));
     }
 
     private IEnumerator LoadLevelAsync(string LevelName)
     {
-        if (DoQuickLoad == false)
-        {
-            AsyncOperation LoadOperation = SceneManager.LoadSceneAsync(LevelName);
-            LoadOperation.allowSceneActivation = false;
+        AsyncOperation LoadOperation = SceneManager.LoadSceneAsync(LevelName);
+        LoadOperation.allowSceneActivation = false;
 
-            while (!LoadOperation.isDone)
+        while (!LoadOperation.isDone)
+        {
+            float Progress = Mathf.Clamp01(LoadOperation.progress / 0.9f);
+            LoadingScreenBarR.value = Progress;
+            LoadingScreenBarL.value = Progress;
+            LoadingText.text = "Loading... " + (int)(Progress * 100f) + "%";
+            if (LoadOperation.progress >= 0.9f) 
             {
-                float Progress = Mathf.Clamp01(LoadOperation.progress / 0.9f);
-                LoadingScreenBarR.value = Progress;
-                LoadingScreenBarL.value = Progress;
-                LoadingText.text = "Loading... " + (int)(Progress * 100f) + "%";
-
-                if (LoadOperation.progress >= 0.9f)
-                {
-                    LoadingText.text = "Finishing...";
-                    LoadingScreenBarR.value = 1f;
-                    LoadingScreenBarL.value = 1f;
-
-                    yield return new WaitForSeconds(0.25f);
-                    LoadOperation.allowSceneActivation = true;
-                    yield return new WaitForSeconds(0.5f);
-                    LoadingScreenCanvas.SetActive(false);
-                }
-
-                yield return null;
+                LoadingText.text = "Finishing..."; 
+                LoadingScreenBarR.value = 1f; 
+                LoadingScreenBarL.value = 1f;
+                
+                yield return new WaitForSeconds(0.25f);
+                LoadOperation.allowSceneActivation = true;
+                yield return new WaitForSeconds(0.5f);
+                LoadingScreenCanvas.SetActive(false);
             }
-        }
-        else
-        {
-            SceneManager.LoadScene(LevelName);
+            yield return null;
         }
     }
 }
