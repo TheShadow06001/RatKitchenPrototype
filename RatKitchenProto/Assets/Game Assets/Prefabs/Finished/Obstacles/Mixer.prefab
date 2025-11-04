@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6081843056944750674}
+  - {fileID: 6887149650596948794}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &640840672347185144
@@ -48,9 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Blender
   range: 10
-  fallPercentage: 10
-  fallSpeed: 300
+  dieRange: 1.62
+  fallPercentage: 20
+  fallSpeed: 180
   checkCooldown: 1
+  deathPoint: {fileID: 6887149650596948794}
 --- !u!65 &5043929782659147187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -93,6 +96,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7659657, y: 2.9698277, z: 1.7041165}
   m_Center: {x: -0.9984678, y: 3.3030667, z: -0.19890422}
+--- !u!1 &5219659917236673561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6887149650596948794}
+  m_Layer: 0
+  m_Name: DeathPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6887149650596948794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219659917236673561}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.41, y: 4.23, z: -0.122}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3218447642301412015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6047689388515870649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +184,10 @@ PrefabInstance:
       value: 2.622
       objectReference: {fileID: 0}
     - target: {fileID: -3739073220949677422, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2121960247331594403, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}

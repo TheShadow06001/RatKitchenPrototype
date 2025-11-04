@@ -42,20 +42,14 @@ public class Knife : MonoBehaviour
 
     IEnumerator Chop()
     {
-        //collider.enabled = true;
-        //line.enabled = true;
-        //mesh.enabled = true;
-
-        //SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapWhoosh);
-
-        //yield return new WaitForSeconds(0.7f);
+        
 
         int value1 = 0;
 
 
         for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
-            //transform.rotation = Quaternion.Slerp(startRotation, endRotation, i);
+            
             transform.position = Vector3.Lerp(startPosition, endPosition, i);
             yield return null;
 
@@ -66,27 +60,22 @@ public class Knife : MonoBehaviour
             }
         }
 
-        
-
-        //line.enabled = false;
-
-        //yield return new WaitForSeconds(1.5f);
-
-
         for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
-            //transform.rotation = Quaternion.Euler(i, 0, 0);
+           
             transform.position = Vector3.Lerp(endPosition, startPosition, i);
             yield return null;
         }
 
-        //collider.enabled = false;
-        //mesh.enabled = false;
-
-
-        //float value = Random.Range(minRate, maxRate);
-
-        //yield return new WaitForSeconds(value);
+        
         isComplete = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            HealthDisplay.instance.TakeDamage();
+        }
     }
 }
