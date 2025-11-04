@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
+    [SerializeField] private Transform respawnPoint;
+    [SerializeField] private GameObject player;
+    [SerializeField] private  GameObject gameOverMenu;
+
     public static HealthDisplay instance;
     public int health;
     public int maxHealth;
@@ -24,6 +28,11 @@ public class HealthDisplay : MonoBehaviour
         {
             Destroy(gameObject);
             return;
+        }
+
+        if (gameOverMenu != null)
+        {
+            gameOverMenu.SetActive(false);
         }
     }
 
@@ -48,6 +57,27 @@ public class HealthDisplay : MonoBehaviour
             else
             {
                 hearts[i].enabled = false;
+            }
+        }
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+
+        if (health > 0)
+        {
+            /*Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name); */
+            player.transform.position = respawnPoint.position;
+        }
+        else
+        {
+            health = 0;
+            Debug.Log("Game Over");
+            if (gameOverMenu != null)
+            {
+                gameOverMenu.SetActive(true);
             }
         }
     }
