@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Fading/SceneA.unity
+    guid: 41b2005d366cbad4cb4d5dcf5af5ec9a
+  - enabled: 1
+    path: Assets/Scenes/Fading/SceneB.unity
+    guid: 9c6397726ed09cb4daaf03b1ab954ce2
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
