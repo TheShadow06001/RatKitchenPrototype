@@ -24,6 +24,7 @@ public class SphereMovement : MonoBehaviour
     void Update()
     {
 
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
        
