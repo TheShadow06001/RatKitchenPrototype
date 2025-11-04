@@ -7,10 +7,28 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!isPaused) GameManager.Instance.SwitchState<PauseState>(); isPaused = true;
-            if (isPaused) GameManager.Instance.SwitchState<PlayingState>(); isPaused = false;
+            
+            if (!isPaused)
+            {
+                SoundManager.Instance.PlaySoundEffect(SoundEffects.OpenPause);
+                GameManager.Instance.SwitchState<PauseState>(); 
+                isPaused = true;
+            }
+            else if (isPaused) 
+            {
+                SoundManager.Instance.PlaySoundEffect(SoundEffects.ClosePause);
+                GameManager.Instance.SwitchState<PlayingState>();
+                isPaused = false;
+            }
         }
+    }
+
+    public void Resume()
+    {
+        SoundManager.Instance.PlaySoundEffect(SoundEffects.ClosePause);
+        GameManager.Instance.SwitchState<PlayingState>();
+        isPaused = false;
     }
 }
