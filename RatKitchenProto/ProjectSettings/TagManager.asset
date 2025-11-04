@@ -8,11 +8,13 @@ TagManager:
   - Sink
   - Stove
   - LoadingText
+  - Floor
+  - Destination
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - UI+
@@ -44,6 +46,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 363812941
     locked: 0
   m_RenderingLayers:
   - Default

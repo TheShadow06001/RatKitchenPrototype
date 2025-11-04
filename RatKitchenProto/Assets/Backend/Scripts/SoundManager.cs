@@ -36,7 +36,9 @@ public enum SoundEffects
 
     // UI Sounds
     ButtonPress,
-    ButtonHover
+    ButtonHover,
+    OpenPause, 
+    ClosePause
 }
 
 public class SoundManager : MonoBehaviour

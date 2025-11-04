@@ -11,7 +11,7 @@ public class S_TimerAndScore : MonoBehaviour
     public int CurrentScore = 0;
     void Start()
     {
-        if (TimerText || ScoreText == null)
+        if (TimerText && ScoreText == null)
         {
             Debug.LogError("S_TimerAndScore: TimerText or ScoreText is not assigned in the inspector.", this);
         }
