@@ -12,6 +12,8 @@ public class KitchenGenerator : MonoBehaviour
     [SerializeField] private Transform generationPoint;
     [SerializeField] private float distanceBetween = 0f;
     [SerializeField] private int maxPlatformsPerRun = 20;
+    [SerializeField] private int basePackagesPerRun = 3; // 1 wall fits 5 counters = 1 package
+
     [SerializeField] private int currentLevel = 1;
 
     [SerializeField] private GameObject endPlatformPrefab;
@@ -29,9 +31,17 @@ public class KitchenGenerator : MonoBehaviour
     private WallType lastWallType;
     private WallType secondLastWallType;
 
+    public GameObject cameraMover;
 
     private void Start()
     {
+        //var settings = DifficultyManager.Instance.CurrentSettings;
+        //if (settings != null)
+        //{
+        //    currentLevel = settings.levelNumber;
+        //    maxPlatformsPerRun = settings.maxPlatforms;
+        //}   
+        
         foreach (var type in platformTypes)
         {
             platformSpawnCounts[type] = 0;
@@ -41,6 +51,8 @@ public class KitchenGenerator : MonoBehaviour
         {
             wallSpawnCounts[type] = 0;
         }
+
+
     }
 
     // When game manager is used, rename to UpdateKitchenGenerator and call on ResetKitchenGenerator?
@@ -56,41 +68,69 @@ public class KitchenGenerator : MonoBehaviour
             return;
         }
 
-        if (transform.position.x < generationPoint.position.x)
+        if (transform.position.x > generationPoint.position.x)
         {
-            //1 vägg + 5 plattformar ska genereras när transform.position.x < generationPoint.position.x
+            //1 vägg + 5 plattformar ska genereras när transform.position.x > generationPoint.position.x
             
-            PlatformType chosenPlatform = PlatformTypeToSpawn();
+            /*PlatformType chosenPlatform = PlatformTypeToSpawn();
             if (chosenPlatform == null)
-                return;
+                return;*/
 
             WallType chosenWall = WallTypeToSpawn();
             if (chosenWall == null)
                 return;
 
-            GameObject prefabToSpawn = chosenPlatform.GetRandomPrefab(); // currently only counters
-            
-            Vector3 spawnPos = new Vector3(transform.position.x + distanceBetween, transform.position.y, transform.position.z);
-            //Vector3 wallposition = new Vector3(0, transform.position.y + 2f, transform.position.z + 3f); // magic numbers, justera denna (används den ens??)
-            wallOffset = new Vector3(0, chosenPlatform.prefab.transform.localScale.y / 2, (chosenPlatform.prefab.transform.localScale.z / 2) + (chosenWall.prefab.transform.localScale.z / 2));
-
-            GameObject newPlatform = KitchenPool.Instance.GetPooledObject(chosenPlatform, spawnPos, Quaternion.identity);
-            newPlatform.SetActive(true);
-
-            GameObject newWall = KitchenPool.Instance.GetPooledWall(chosenWall, spawnPos + wallOffset, Quaternion.identity);
+            Vector3 wallSpawnPosition = transform.position;
+            Quaternion wallRotation = Quaternion.Euler(0f, 90f, 0f);
+            GameObject newWall = KitchenPool.Instance.GetPooledWall(chosenWall, wallSpawnPosition /*+ wallOffset*/, /*Quaternion.identity*/ wallRotation);
             newWall.SetActive(true);
-
-            platformSpawnCounts[chosenPlatform]++;
             wallSpawnCounts[chosenWall]++;
 
-            secondLastPlatformType = lastPlatformType;
-            lastPlatformType = chosenPlatform;
+            /* NYTT */
+            //float platformSpacing = chosenPlatform.prefab.transform.localScale.x - distanceBetween;
+            float platformSpacing = platformTypes[0].prefab.transform.localScale.x - distanceBetween;
+            for (int i = 0; i < chosenWall.platformsPerWall; i++)
+            {
+                PlatformType chosenPlatform = PlatformTypeToSpawn();
+                if (chosenPlatform == null)
+                    return; 
+
+                Vector3 platformPos = wallSpawnPosition + new Vector3( (i * platformSpacing) - (chosenPlatform.prefab.transform.localScale.z / 2 ), 0, 0.62f); // DENNA BEHÖVER SES ÖVER FÖR ATT SPAWNA RÄTT
+                GameObject newPlatform = KitchenPool.Instance.GetPooledObject(chosenPlatform, platformPos, Quaternion.identity);
+                newPlatform.SetActive(true);
+           
+                platformSpawnCounts[chosenPlatform]++;
+                secondLastPlatformType = lastPlatformType;
+                lastPlatformType = chosenPlatform;
+
+                spawnedPlatforms++;
+            }
+            /* SLUT NYTT */
+
+            //GameObject prefabToSpawn = chosenPlatform.GetRandomPrefab(); // currently only counters
+            
+            Vector3 spawnPos = new Vector3(transform.position.x - distanceBetween, transform.position.y, transform.position.z);
+            //Vector3 wallposition = new Vector3(0, transform.position.y + 2f, transform.position.z + 3f); // magic numbers, justera denna (används den ens??)
+            //wallOffset = new Vector3(0, chosenPlatform.prefab.transform.localScale.y / 2, (chosenPlatform.prefab.transform.localScale.z / 2) + (chosenWall.prefab.transform.localScale.z / 2));
+
+            //GameObject newPlatform = KitchenPool.Instance.GetPooledObject(chosenPlatform, spawnPos, Quaternion.identity);
+            //newPlatform.SetActive(true);
+
+
+
+            //platformSpawnCounts[chosenPlatform]++;
+            //wallSpawnCounts[chosenWall]++;
+
+            //secondLastPlatformType = lastPlatformType;
+            //lastPlatformType = chosenPlatform;
 
             secondLastWallType = lastWallType;
             lastWallType = chosenWall;
 
-            transform.position = spawnPos; // uppdate platform generator position
-            spawnedPlatforms++;
+            //transform.position = spawnPos; // uppdate platform generator position
+            //spawnedPlatforms++;
+
+            transform.position = wallSpawnPosition + new Vector3(chosenWall.platformsPerWall * platformSpacing, 0, 0);
         }
     }
 
@@ -116,20 +156,40 @@ public class KitchenGenerator : MonoBehaviour
             return platformTypes.Find(p => p.isBaseCase) ?? platformTypes[0];
 
         //weighted random algorithm
+        float normalizedLevel = DifficultyManager.Instance.GetNormalizedLevel();
         float totalSpawnWeight = 0f;
+        Dictionary<PlatformType,float> weightedChances = new();
+
         foreach (var type in validType)
         {
-            totalSpawnWeight += type.spawnWeight;
+            float curveMultiplier = 1f;
+            if (type.spawnChanceCurve != null && type.spawnChanceCurve.length > 0)
+            {
+                curveMultiplier = Mathf.Clamp01(type.spawnChanceCurve.Evaluate(normalizedLevel));
+            }
+
+            float weightedChance = type.spawnWeight * curveMultiplier;
+            weightedChances[type] = weightedChance;
+            totalSpawnWeight += weightedChance;
+
+            //totalSpawnWeight += type.spawnWeight;
         }
 
         float randomPick = Random.value * totalSpawnWeight;
         float cumulative = 0;
 
-        foreach (var type in validType)
+        /*foreach (var type in validType)
         {
             cumulative += type.spawnWeight;
             if (randomPick <= cumulative)
                 return type;
+        }*/
+
+        foreach (var pair in weightedChances)
+        {
+            cumulative += pair.Value;
+            if (randomPick <= cumulative)
+                return pair.Key;
         }
 
         return validType[0];
@@ -157,20 +217,39 @@ public class KitchenGenerator : MonoBehaviour
             return wallTypes.Find(w => w.isBaseCase) ?? wallTypes[0]; // standard-pick
 
         //weighted random algorithm
+        float normalizedLevel = DifficultyManager.Instance.GetNormalizedLevel();
         float totalSpawnWeight = 0f;
+        Dictionary<WallType, float> weightedChances = new();
+
         foreach (var type in validType)
         {
-            totalSpawnWeight += type.spawnWeight;
+            float curveMultiplier = 1f;
+            if (type.spawnChanceCurve != null && type.spawnChanceCurve.length > 0)
+            {
+                curveMultiplier = Mathf.Clamp01(type.spawnChanceCurve.Evaluate(normalizedLevel));
+            }
+
+            float weightedChance = type.spawnWeight * curveMultiplier;
+            weightedChances[type] = weightedChance;
+            totalSpawnWeight += weightedChance;
+
+            //totalSpawnWeight += type.spawnWeight;
         }
 
         float pickRandomWall = Random.value * totalSpawnWeight;
         float cumulative = 0;
 
-        foreach (var type in validType)
+       /* foreach (var type in validType)
         {
             cumulative += type.spawnWeight;
             if (pickRandomWall <= cumulative)
                 return type;
+        }*/
+        foreach (var pair in weightedChances)
+        {
+            cumulative += pair.Value;
+            if (pickRandomWall <= cumulative)
+                return pair.Key;
         }
 
         return validType[0];
@@ -209,19 +288,20 @@ public class KitchenGenerator : MonoBehaviour
         return Mathf.RoundToInt(baseCount * scale);    
     }
 
+    // spawns complete end-prefab - change to only end-wall?
     private void SpawnEndPlatform()
     {
         if (!endPlatformPrefab)
             return;
 
-        Vector3 platformSpawnPos = transform.position + new Vector3(distanceBetween, 0, 0);
+        Vector3 platformSpawnPos = transform.position + new Vector3(0.298f, 0.539f, 0.325f); // magic numbers - to change
         Instantiate(endPlatformPrefab, platformSpawnPos, Quaternion.identity);
 
-        if(endWallPrefab)
+       /* if(endWallPrefab)
         {
             Vector3 wallSpawnPos = platformSpawnPos + wallOffset;
             Instantiate(endWallPrefab, wallSpawnPos, Quaternion.identity);
-        }
+        }*/
     }
 
     /* FOR RATHOLE */
@@ -230,7 +310,9 @@ public class KitchenGenerator : MonoBehaviour
         if(other.tag == "Player")
         {
             //GameManager.Instance.NextLevel();
+            //ResetKitchenGenerator();
             //Fade? call other function for respawn
+
         }
     }
 

@@ -15,6 +15,7 @@ public class WallType : ScriptableObject
     public float spawnWeight = 1f;
     public List<string> cannotHaveNeighbour = new();
     public bool isBaseCase;
+    public int platformsPerWall = 5;
 
     [Header("Variants, if applicable")]
     public GameObject[] variantPrefabs;
