@@ -29,6 +29,5 @@ public class GameManager : StateMachine
     private void Update()
     {
         UpdateStateMachine();
-
     }
 }
