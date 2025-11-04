@@ -7,12 +7,12 @@ public class PlatformDestroyer : MonoBehaviour
 
     private void Start()
     {
-        platformDestructionPoint = GameObject.Find("PlatformDestructionPoint");
+        platformDestructionPoint = GameObject.Find("DestructionPoint");
     }
 
     private void Update()
     {
-        if (transform.position.x > platformDestructionPoint.transform.position.x)
+        if (transform.position.z < platformDestructionPoint.transform.position.z)
         {
             gameObject.SetActive(false);
             //obstacles SetActive(false) with platforms
