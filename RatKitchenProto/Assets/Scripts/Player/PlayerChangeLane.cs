@@ -5,8 +5,8 @@ public class PlayerChangeLane : MonoBehaviour
     private int lane = 1;
 
     public float leftLaneX = -0.5f;
-    public float middleLaneX = 0f;
-    public float rightLaneX = 0.5f;
+    public float middleLaneX = 0.5f;
+    //public float rightLaneX = 0.5f;
     private float targetHorizontalX;
     [SerializeField] private float laneChangeSpeed = 10f;
 
@@ -37,7 +37,7 @@ public class PlayerChangeLane : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (lane < 2)
+            if (lane < 1)
             {
                 lane++;
             }
@@ -58,9 +58,9 @@ public class PlayerChangeLane : MonoBehaviour
         {
             targetHorizontalX = middleLaneX;
         }
-        else if (lane == 2)
+        /*else if (lane == 2)
         {
             targetHorizontalX = rightLaneX;
-        }
+        }*/
     }
 }

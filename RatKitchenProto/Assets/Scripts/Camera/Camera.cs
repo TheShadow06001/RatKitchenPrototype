@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public Vector3 direction = Vector3.forward;
     void Start()
     {
         
@@ -11,6 +12,6 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        transform.position += direction * moveSpeed * Time.deltaTime;
     }
 }
