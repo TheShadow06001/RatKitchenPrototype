@@ -18,11 +18,9 @@ public class ObstaclesPlacement : MonoBehaviour
 
     private void Generate()
     {
-        if (spawnPoints == null || spawnPoints.Length == 0)
-            return;
+        if (spawnPoints == null || spawnPoints.Length == 0) return;
 
-        if (possibleObstacles == null || possibleObstacles.Count == 0)
-            return;
+        if (possibleObstacles == null || possibleObstacles.Count == 0) return;
 
         List<Transform> availablePoints = new(spawnPoints);
 
@@ -31,27 +29,39 @@ public class ObstaclesPlacement : MonoBehaviour
         if (needsObstacleAtStart && availablePoints.Count > 0)
         {
             int frontIndex = Random.Range(0, Mathf.Min(2, availablePoints.Count));
+
             Transform frontPoint = availablePoints[frontIndex];
+
             SpawnAtPoint(frontPoint);
+
             availablePoints.Remove(frontPoint);
+
             obstaclesToSpawn--;
         }
 
         if (needsObstacleAtEnd && availablePoints.Count > 0)
         {
             int backStart = Mathf.Max(0, availablePoints.Count - 2);
+
             int backIndex = Random.Range(backStart, availablePoints.Count);
+
             Transform backPoint = availablePoints[backIndex];
+
             SpawnAtPoint(backPoint);
+
             availablePoints.Remove(backPoint);
+
             obstaclesToSpawn--;
         }
 
         for (int i = 0; i < obstaclesToSpawn && availablePoints.Count > 0; i++)
         {
             int index = Random.Range(0, availablePoints.Count);
+
             Transform point = availablePoints[index];
+
             availablePoints.RemoveAt(index);
+
             SpawnAtPoint(point);
         }
     }
@@ -59,12 +69,16 @@ public class ObstaclesPlacement : MonoBehaviour
     private void SpawnAtPoint(Transform point)
     {
         GameObject prefabToSpawn = possibleObstacles[Random.Range(0, possibleObstacles.Count)];
+
         if (prefabToSpawn == null)
             return;
 
         Quaternion obstacleRotation = Quaternion.Euler(-90f, 0f, 0f);
+
         GameObject obstacle = Instantiate(prefabToSpawn, point.position, obstacleRotation, transform);
+
         float parentScale = transform.lossyScale.x;
+
         obstacle.transform.localScale = Vector3.one / parentScale;
 
     }
