@@ -57,4 +57,30 @@ public class SceneFader : MonoBehaviour
             FadeAndLoad("SceneB", 1);
         }
     }
+
+    public IEnumerator FadeOutRoutine(float duration)
+    {
+        float t = 0;
+        Color c = image.color;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            c.a = t / duration;
+            image.color = c;
+            yield return null;
+        }
+    }
+
+    public IEnumerator FadeInRoutine(float duration)
+    {
+        float t = 0;
+        Color c = image.color;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            c.a = 1f - (t / duration);
+            image.color = c;
+            yield return null;
+        }
+    }
 }
