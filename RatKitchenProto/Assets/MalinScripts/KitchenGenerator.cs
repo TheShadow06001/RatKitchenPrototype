@@ -71,7 +71,7 @@ public class KitchenGenerator : MonoBehaviour
 
         if (spawnedPlatforms >= maxPlatformsPerRun)
         {
-            //SpawnEndPlatform();
+            SpawnEndPlatform();
             isLevelComplete = true;
             return;
         }
@@ -85,7 +85,7 @@ public class KitchenGenerator : MonoBehaviour
 
             Vector3 wallSpawnPosition = transform.position;
             
-            wallOffset = new Vector3(-0.94f, 0, 0);
+            wallOffset = new Vector3(-0.87f, -0.09f, 0);     // magic numbers (x = -0,94f)
             Quaternion wallRotation = Quaternion.Euler(0f, 180f, 0f);
             GameObject newWall = KitchenPool.Instance.GetPooledWall(chosenWall, wallSpawnPosition + wallOffset, wallRotation);
             
@@ -103,7 +103,7 @@ public class KitchenGenerator : MonoBehaviour
                     return;
 
                 //Vector3 platformPos = wallSpawnPosition + new Vector3( (i * platformSpacing) - (chosenPlatform.prefab.transform.localScale.z / 2 ), 0, 0.62f); // DENNA BEHÖVER SES ÖVER FÖR ATT SPAWNA RÄTT
-                Vector3 platformPos = wallSpawnPosition + new Vector3(0, 0, (i * platformSpacing));
+                Vector3 platformPos = wallSpawnPosition + new Vector3(chosenPlatform.xPositionSpawnOffset, 0, (i * platformSpacing));
                 Quaternion platformRotation = Quaternion.Euler(0f, 90f, 0f);
                 
                 GameObject newPlatform = KitchenPool.Instance.GetPooledObject(chosenPlatform, platformPos, platformRotation);
@@ -306,32 +306,20 @@ public class KitchenGenerator : MonoBehaviour
         return prefab.transform.localScale.z; 
     }
 
-    // spawns complete end-prefab - change to only end-wall?
-    //private void SpawnEndPlatform()
-    //{
-    //    if (!endPlatformPrefab)
-    //        return;
-
-    //    Vector3 platformSpawnPos = transform.position + new Vector3(0.298f, 0.539f, 0.325f); // magic numbers - to change
-    //    Instantiate(endPlatformPrefab, platformSpawnPos, Quaternion.identity);
-
-    //   /* if(endWallPrefab)
-    //    {
-    //        Vector3 wallSpawnPos = platformSpawnPos + wallOffset;
-    //        Instantiate(endWallPrefab, wallSpawnPos, Quaternion.identity);
-    //    }*/
-    //}
-
-    /* FOR RATHOLE */
-    private void OnTriggerEnter(Collider other)
+    private void SpawnEndPlatform()
     {
-        if(other.tag == "Player")
-        {
-            //GameManager.Instance.NextLevel();
-            //ResetKitchenGenerator();
-            //Fade? call other function for respawn
+        //if (!endPlatformPrefab)
+        //    return;
 
-        }
+        //Vector3 platformSpawnPos = transform.position + new Vector3(0.298f, 0.539f, 0.325f); // magic numbers - to change
+        //Instantiate(endPlatformPrefab, platformSpawnPos, Quaternion.identity);
+
+         if(endWallPrefab)
+         {
+            Quaternion ratWall = Quaternion.Euler(0f, 270f, 0f); 
+            Vector3 wallSpawnPos = transform.position + new Vector3(-0.8f, -0.09f, 0.2f);    // magic numbers
+            Instantiate(endWallPrefab, wallSpawnPos, ratWall);
+         }
     }
 
     public void SetDifficulty(LevelSettings settings)
