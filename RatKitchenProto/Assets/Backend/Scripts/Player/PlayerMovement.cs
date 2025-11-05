@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             animator.SetTrigger("Hurt");
-            count++;
+            animator.SetInteger("HurtCount", count + 1);
         }
     }
     void HandleForwardSpeed()

@@ -4395,7 +4395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7770526659498589602, guid: 1d06f899a8d49af43a96444159654bbb, type: 3}
       propertyPath: moveSpeed
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8097679836609680701, guid: 1d06f899a8d49af43a96444159654bbb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10672,7 +10672,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
       propertyPath: jumpForce
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
       propertyPath: mainCamera
