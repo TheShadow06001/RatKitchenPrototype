@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    public float moveSpeed = 0.1f;
-    public Vector3 moveDirection = Vector3.left;
+    public float moveSpeed = 5f;
+    public Vector3 direction = Vector3.forward;
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += moveDirection.normalized * moveSpeed * Time.deltaTime;
+        transform.position += direction * moveSpeed * Time.deltaTime;
     }
 }
