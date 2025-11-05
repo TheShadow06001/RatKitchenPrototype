@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 4348721956783824946}
   - component: {fileID: 2978078021220204080}
   - component: {fileID: 714826117780325262}
+  - component: {fileID: 333151711105854501}
   m_Layer: 0
   m_Name: Stove_New
   m_TagString: Untagged
@@ -808,8 +809,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8142999, y: 1.0889931, z: 1}
-  m_Center: {x: -0.41781387, y: 0.5541203, z: -1.3542651e-15}
+  m_Size: {x: 0.7745084, y: 0.019969106, z: 0.6451475}
+  m_Center: {x: -0.42040366, y: 1.0873632, z: -0.23925954}
 --- !u!114 &714826117780325262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +825,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Oven
   fryingPan: {fileID: 3479590279645862948, guid: 9b9738e8a4ee5da4c89660d866c9122b, type: 3}
   bigPan: {fileID: 4868850252277391835, guid: ac7837f7c9a22d140832d331497f338c, type: 3}
+--- !u!64 &333151711105854501
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968255356659497608}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6286196245231114531, guid: c0a4cdef2a5c95a42b8376ebd88106cb, type: 3}
 --- !u!1 &5079192121225015536
 GameObject:
   m_ObjectHideFlags: 0
