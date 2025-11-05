@@ -10,6 +10,7 @@ TagManager:
   - LoadingText
   - Floor
   - Destination
+  - Pots&Pans
   layers:
   - Default
   - TransparentFX
