@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4f10d4287b03f044fa67e4e10d9307dc, type: 2}
+    - target: {fileID: -6973039140292087129, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -6967787587791597853, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -67,6 +71,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
       propertyPath: m_Name
       value: Sink_New
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714458535024757942, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813025541751855568, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4846979710148789199, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
       propertyPath: m_LocalPosition.x
@@ -105,7 +121,7 @@ PrefabInstance:
       addedObject: {fileID: 7272429813407220013}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6372433363410359910}
+      addedObject: {fileID: -355935803733944567}
   m_SourcePrefab: {fileID: 100100000, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
 --- !u!1 &7764032571360740238 stripped
 GameObject:
@@ -134,7 +150,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2372005749956907389, guid: d5a2abca6dffbc94bbd5d056e404d698, type: 3}
---- !u!114 &6372433363410359910
+--- !u!114 &-355935803733944567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7764032571360740238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7a71bb6407dc641923a1f9ee168e1c, type: 3}
+  m_Script: {fileID: 11500000, guid: c8461ac3fc6275042a0e6373b3878b6c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Sink
-  plate: {fileID: 1407993080805519185, guid: d5431e9522e6f5b4a97ca1c1c1b8c42c, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::PlatformDestroyer
+  platformDestructionPoint: {fileID: 0}

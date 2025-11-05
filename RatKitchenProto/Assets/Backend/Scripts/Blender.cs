@@ -110,7 +110,7 @@ public class Blender : MonoBehaviour
     {
         Gizmos.color = Color.red - new Color(0, 0, 0, 0.5f);
         Gizmos.DrawSphere(deathPoint.position, dieRange);
-        Debug.DrawRay(transform.position, Vector2.right * range, Color.green);
+        Debug.DrawRay(transform.position, transform.right * range, Color.green);
     }
 
 }

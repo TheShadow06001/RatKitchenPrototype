@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7274942376828724747}
   - component: {fileID: 4899542952931673809}
   - component: {fileID: 3471357540162925809}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: oven_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 1889507968005103416}
   - component: {fileID: 1740461652741119525}
   - component: {fileID: 1116543726302796194}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: knob5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 3807160734717699173}
   - component: {fileID: 8219264430663693051}
   - component: {fileID: 2413060720828049901}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: glass_plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2219885626063135498}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: knobs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 2583877615557875891}
   - component: {fileID: 6868409275467437565}
   - component: {fileID: 8353612562526541349}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: plat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 1039602617718052785}
   - component: {fileID: 1742161425186808522}
   - component: {fileID: 7694348645073456210}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: oven_base.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 6217267432259733099}
   - component: {fileID: 1720027977210014172}
   - component: {fileID: 7863412268819843504}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: oven_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 1485189003505045606}
   - component: {fileID: 7025121724553413955}
   - component: {fileID: 2178150383661318823}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: knob4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 4077630249691112402}
   - component: {fileID: 5159312118232549334}
   - component: {fileID: 4221558113767083977}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: knob2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,9 +758,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4348721956783824946}
   - component: {fileID: 2978078021220204080}
-  - component: {fileID: 714826117780325262}
   - component: {fileID: 333151711105854501}
-  m_Layer: 0
+  - component: {fileID: 1729244159847825970}
+  m_Layer: 3
   m_Name: Stove_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,20 +811,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7745084, y: 0.019969106, z: 0.6451475}
   m_Center: {x: -0.42040366, y: 1.0873632, z: -0.23925954}
---- !u!114 &714826117780325262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3968255356659497608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee229b2668329b04e8d81f827b556f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Oven
-  fryingPan: {fileID: 3479590279645862948, guid: 9b9738e8a4ee5da4c89660d866c9122b, type: 3}
-  bigPan: {fileID: 4868850252277391835, guid: ac7837f7c9a22d140832d331497f338c, type: 3}
 --- !u!64 &333151711105854501
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -847,6 +833,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6286196245231114531, guid: c0a4cdef2a5c95a42b8376ebd88106cb, type: 3}
+--- !u!114 &1729244159847825970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968255356659497608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8461ac3fc6275042a0e6373b3878b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlatformDestroyer
+  platformDestructionPoint: {fileID: 0}
 --- !u!1 &5079192121225015536
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +857,7 @@ GameObject:
   - component: {fileID: 6731839752721170814}
   - component: {fileID: 586303860579238461}
   - component: {fileID: 1961184084361079937}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: galler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -947,7 +946,7 @@ GameObject:
   - component: {fileID: 4810896238915527523}
   - component: {fileID: 2007137044930289018}
   - component: {fileID: 3610228015382442990}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: oven_base.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1036,7 +1035,7 @@ GameObject:
   - component: {fileID: 807588360822872124}
   - component: {fileID: 3474564015860057022}
   - component: {fileID: 8995510039158443711}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: knob3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1125,7 +1124,7 @@ GameObject:
   - component: {fileID: 4237038414294218907}
   - component: {fileID: 5549176308598507841}
   - component: {fileID: 9003994044703119747}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: knob1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
