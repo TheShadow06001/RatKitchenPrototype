@@ -1,77 +1,67 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject anchorPoint;
-    [SerializeField] float forwardAcceleration = 1.05f;
-    [SerializeField] float maxSpeedMultiplier = 1.05f;
+
+    [SerializeField] float forwardAcceleration = 1f;
+    [SerializeField] float maxSpeedMultiplier = 2f;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] PlayerChangeLane laneChanger;
 
-    [Header("Keybinds")]
-    public KeyCode _PlayerJump;
+    [SerializeField] float rayLength = 1f;
+    [SerializeField] LayerMask groundLayer;
 
     float moveSpeed;
     float cameraSpeed;
+
+    bool isGrounded;
     Rigidbody rigidBody;
-
-    [Header("Camera Script")]
-    CameraScript cameraScript;
-    Vector3 cameraMoveDirection;
-
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
-
         cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
         moveSpeed = cameraSpeed;
 
-        cameraScript = mainCamera.GetComponent<CameraScript>();
-        cameraSpeed = cameraScript.moveSpeed;
-        cameraMoveDirection = cameraScript.moveDirection;
+        laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-
         HandleForwardSpeed();
         Jump();
         Vector3 currentPos = transform.position;
 
         float totalSpeed = moveSpeed;
 
-        transform.position += cameraMoveDirection * totalSpeed * Time.deltaTime;
-
-
-
+        currentPos.z += totalSpeed * Time.deltaTime;
+        transform.position = new Vector3(currentPos.x, currentPos.y, currentPos.z);
     }
     void HandleForwardSpeed()
     {
-        Vector3 behindDirection = -cameraMoveDirection;
-
-        Vector3 vecToPlayer = transform.position - anchorPoint.transform.position;
-
-        float distanceBehind = Vector3.Dot(vecToPlayer, behindDirection);
-
-        if (distanceBehind > 0.1f)
+        if (transform.position.z < anchorPoint.transform.position.z - 0.1f)
         {
             float targetSpeed1 = cameraSpeed * maxSpeedMultiplier;
             moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed1, Time.deltaTime * forwardAcceleration);
         }
-        else
-        {
-            moveSpeed = cameraSpeed;
-        }
+        else { moveSpeed = cameraSpeed; }
     }
-
     void Jump()
     {
-
-        if (rigidBody != null && Input.GetKeyDown(_PlayerJump) && transform.position.y < 1.1 && !laneChanger.isChangingLanes)
+        RaycastHit hit;
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, rayLength, groundLayer);
+        if (isGrounded)
         {
-            rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (rigidBody != null && Input.GetKeyDown(KeyCode.Space) && !laneChanger.isChangingLanes)
+            {
+                Debug.Log("Jumped");
+                rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
     }
 }

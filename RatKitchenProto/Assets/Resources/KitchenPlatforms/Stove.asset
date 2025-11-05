@@ -14,20 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlatformType
   typeOfPlatform: Stove
   tag: Stove
-  prefab: {fileID: 6137602603870842397, guid: 39aa5be0b192f4c40a81de69e76533c0, type: 3}
+  prefab: {fileID: 5796795623448307517, guid: e2225a63528c3e1408b18d7afb17f664, type: 3}
   MaxCountPerRun: 2
   baseMaxCount: 2
-  spawnWeight: 1
+  spawnWeight: 0.5
   cannotHaveNeighbour:
   - Sink
+  - Stove
   mustHaveCounterBetween: 0
   isBaseCase: 0
+  xPositionSpawnOffset: 0.1
   variantPrefabs: []
   minLevelToAppear: 1
   maxLevelToAppear: 999
   spawnChanceCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

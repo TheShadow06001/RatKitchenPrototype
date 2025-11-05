@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.43981
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03248
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.77833
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
       propertyPath: m_LocalRotation.w
@@ -55,5 +55,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5528358332937419910}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1102656613585694435}
   m_SourcePrefab: {fileID: 100100000, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
+--- !u!1 &4143890455393420322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 585c8fc3a5162fb498ee3247bb569879, type: 3}
+  m_PrefabInstance: {fileID: 3838025347720706419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5528358332937419910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143890455393420322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8461ac3fc6275042a0e6373b3878b6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlatformDestroyer
+  platformDestructionPoint: {fileID: 0}
+--- !u!114 &-1102656613585694435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143890455393420322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7a71bb6407dc641923a1f9ee168e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sink
+  plate: {fileID: 1407993080805519185, guid: d5431e9522e6f5b4a97ca1c1c1b8c42c, type: 3}

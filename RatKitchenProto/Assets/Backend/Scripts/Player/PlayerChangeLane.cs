@@ -5,22 +5,16 @@ public class PlayerChangeLane : MonoBehaviour
     private int lane = 1;
 
     public float leftLaneX = -0.5f;
-    public float middleLaneX = 0f;
-    public float rightLaneX = 0.5f;
-    private float targetHorizontalZ;
+    public float middleLaneX = 0.5f;
+    //public float rightLaneX = 0.5f;
+    private float targetHorizontalX;
     [SerializeField] private float laneChangeSpeed = 10f;
 
     public bool isChangingLanes;
     [SerializeField] private float laneChangeThreshold = 0.1f;
-
-    [Header("KeyBinds")]
-    public KeyCode _PlayerLeft;
-    public KeyCode _PlayerRight;
-
-
     void Start()
     {
-        targetHorizontalZ = middleLaneX;
+        targetHorizontalX = middleLaneX;
         isChangingLanes = false;
     }
 
@@ -30,27 +24,26 @@ public class PlayerChangeLane : MonoBehaviour
 
         Vector3 currentPos = transform.position;
 
-        if (Mathf.Abs(currentPos.z - targetHorizontalZ) > laneChangeThreshold)
+        if (Mathf.Abs(currentPos.x - targetHorizontalX) > laneChangeThreshold)
         {
             isChangingLanes = true;
         }
-        else { isChangingLanes = false; }
+        else { isChangingLanes = false; } 
 
-        float newZ = Mathf.Lerp(currentPos.z, targetHorizontalZ, Time.deltaTime * laneChangeSpeed);
-        transform.position = new Vector3(currentPos.x, currentPos.y, newZ);
+        float newX = Mathf.Lerp(currentPos.x, targetHorizontalX, Time.deltaTime * laneChangeSpeed);
+        transform.position = new Vector3(newX, currentPos.y, currentPos.z);
     }
     void PlayerChangeLine()
     {
-        if (Input.GetKeyDown(_PlayerRight))
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            //changed from 2 to 1 for two lane system
             if (lane < 1)
             {
                 lane++;
             }
 
         }
-        if (Input.GetKeyDown(_PlayerLeft))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (lane > 0)
             {
@@ -59,15 +52,15 @@ public class PlayerChangeLane : MonoBehaviour
         }
         if (lane == 0)
         {
-            targetHorizontalZ = leftLaneX;
+            targetHorizontalX = leftLaneX;
         }
         else if (lane == 1)
         {
-            targetHorizontalZ = middleLaneX;
+            targetHorizontalX = middleLaneX;
         }
-        //else if (lane == 2)
-        //{
-        //    targetHorizontalZ = rightLaneX;
-        //}
+        /*else if (lane == 2)
+        {
+            targetHorizontalX = rightLaneX;
+        }*/
     }
 }
