@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
     Rigidbody rigidBody;
+    Animator animator;
     void Start()
     {
         cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
         rigidBody = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -37,6 +39,14 @@ public class PlayerMovement : MonoBehaviour
 
         currentPos.z += totalSpeed * Time.deltaTime;
         transform.position = new Vector3(currentPos.x, currentPos.y, currentPos.z);
+
+        int count = animator.GetInteger("HurtCount");
+        animator.SetInteger("HurtCount", count);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            animator.SetTrigger("Hurt");
+            count++;
+        }
     }
     void HandleForwardSpeed()
     {
@@ -44,8 +54,13 @@ public class PlayerMovement : MonoBehaviour
         {
             float targetSpeed1 = cameraSpeed * maxSpeedMultiplier;
             moveSpeed = Mathf.MoveTowards(moveSpeed, targetSpeed1, Time.deltaTime * forwardAcceleration);
+            animator.SetFloat("RunSpeed", moveSpeed / cameraSpeed);
         }
-        else { moveSpeed = cameraSpeed; }
+        else
+        {
+            moveSpeed = cameraSpeed;
+            animator.SetFloat("RunSpeed", moveSpeed / cameraSpeed);
+        }
     }
     void Jump()
     {
@@ -55,8 +70,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (rigidBody != null && Input.GetKeyDown(KeyCode.Space) && !laneChanger.isChangingLanes)
             {
-                Debug.Log("Jumped");
                 rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                animator.SetTrigger("Jump");
+
             }
         }
     }
