@@ -851,7 +851,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4348721956783824946}
   - component: {fileID: 2978078021220204080}
-  - component: {fileID: 714826117780325262}
   - component: {fileID: 635549977258506129}
   m_Layer: 0
   m_Name: Stove_New
@@ -906,22 +905,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8142999, y: 1.0889931, z: 1}
-  m_Center: {x: -0.41781387, y: 0.5541203, z: -1.3542651e-15}
---- !u!114 &714826117780325262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3968255356659497608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee229b2668329b04e8d81f827b556f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Oven
-  fryingPan: {fileID: 3479590279645862948, guid: 9b9738e8a4ee5da4c89660d866c9122b, type: 3}
-  bigPan: {fileID: 4868850252277391835, guid: ac7837f7c9a22d140832d331497f338c, type: 3}
+  m_Size: {x: 0.8142994, y: 1.0889931, z: 0.72548455}
+  m_Center: {x: -0.4178141, y: 0.5541203, z: -0.217822}
 --- !u!114 &635549977258506129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,9 +921,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObstaclesPlacement
   spawnPoints:
   - {fileID: 7948040301397100096}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7533687310778642909}
+  - {fileID: 3364366811063645778}
+  - {fileID: 4587783072740056266}
   possibleObstacles:
   - {fileID: 3479590279645862948, guid: 9b9738e8a4ee5da4c89660d866c9122b, type: 3}
   - {fileID: 4868850252277391835, guid: ac7837f7c9a22d140832d331497f338c, type: 3}
