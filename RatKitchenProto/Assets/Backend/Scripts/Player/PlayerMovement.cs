@@ -10,15 +10,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce = 5f;
     [SerializeField] PlayerChangeLane laneChanger;
 
+    [SerializeField] float rayLength = 1f;
+    [SerializeField] LayerMask groundLayer;
+
     float moveSpeed;
     float cameraSpeed;
 
+    bool isGrounded;
+    Rigidbody rigidBody;
     void Start()
     {
         cameraSpeed = mainCamera.GetComponent<CameraScript>().moveSpeed;
         moveSpeed = cameraSpeed;
 
         laneChanger = laneChanger.GetComponent<PlayerChangeLane>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -43,10 +49,19 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null && Input.GetKeyDown(KeyCode.F) && transform.position.y < 0.7 && !laneChanger.isChangingLanes)
+        RaycastHit hit;
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, rayLength, groundLayer);
+        if (isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (rigidBody != null && Input.GetKeyDown(KeyCode.Space) && !laneChanger.isChangingLanes)
+            {
+                Debug.Log("Jumped");
+                rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
     }
 }
