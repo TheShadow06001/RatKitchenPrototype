@@ -73,13 +73,28 @@ public class ObstaclesPlacement : MonoBehaviour
         if (prefabToSpawn == null)
             return;
 
-        Quaternion obstacleRotation = Quaternion.Euler(-90f, 0f, 0f);
+        //GameObject obstacle;
 
-        GameObject obstacle = Instantiate(prefabToSpawn, point.position, obstacleRotation, transform);
+        //if (prefabToSpawn.CompareTag("pots&pans"))
+        //{
+        //    Quaternion obstacleRotation;
+        //    obstacleRotation = Quaternion.Euler(-90f, 0f, 0f);
+        //    obstacle = Instantiate(prefabToSpawn, point.position, obstacleRotation, transform);
+        //}
+        //else
+        //{
+            
+        //}
 
-        float parentScale = transform.lossyScale.x;
+        GameObject obstacle = Instantiate(prefabToSpawn, point.position, prefabToSpawn.transform.rotation, transform);
 
-        obstacle.transform.localScale = Vector3.one / parentScale;
+        if (prefabToSpawn.CompareTag("pots&pans"))
+        {
+            float parentScale = transform.lossyScale.x;
+
+            obstacle.transform.localScale = Vector3.one / parentScale;
+        }
+        
 
     }
 }
