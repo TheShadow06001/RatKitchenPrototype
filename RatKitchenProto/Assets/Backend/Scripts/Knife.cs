@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    [SerializeField] private int damage = 1;
     [SerializeField] private float speed = 1;
 
     [SerializeField] private MeshRenderer mesh;
@@ -79,7 +80,7 @@ public class Knife : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            HealthDisplay.instance.TakeDamage();
+            other.gameObject.GetComponent<HP>().TakeDamage(damage);
         }
     }
 }

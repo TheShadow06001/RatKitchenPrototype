@@ -5,6 +5,7 @@ using UnityEngine;
 public class Blender : MonoBehaviour
 {
     [Header("Variables")]
+    [SerializeField] private int damage = 1;
     [SerializeField] private float range;
     [SerializeField] private float dieRange;
     [SerializeField] private float fallPercentage;
@@ -35,7 +36,7 @@ public class Blender : MonoBehaviour
 
             if (CheckRange(true) <= dieRange && canTakeDamage)
             {
-                HealthDisplay.instance.TakeDamage();
+                player.GetComponent<HP>().TakeDamage(damage);
                 canTakeDamage = false;
                 StartCoroutine(TimerDie());
             }

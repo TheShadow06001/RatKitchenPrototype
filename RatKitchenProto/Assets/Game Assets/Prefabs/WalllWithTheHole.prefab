@@ -250,7 +250,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.0053918
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -258,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 6.702172
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -307,16 +307,31 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8051024191890000211}
+      addedObject: {fileID: 6982206978948559548}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2963344764260028000}
+      addedObject: {fileID: 8051024191890000211}
   m_SourcePrefab: {fileID: 100100000, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
 --- !u!1 &1504053007929169680 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
   m_PrefabInstance: {fileID: 1737846211671812673}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6982206978948559548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504053007929169680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f766bb5a7bb45a498aa3c967e244855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestinationTrigger
+  spawnPoint: {fileID: 0}
+  fadeDuration: 1
+  fader: {fileID: 0}
 --- !u!65 &8051024191890000211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -338,18 +353,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.09700656, y: 0.11679578, z: 0.17607152}
   m_Center: {x: -0.16886626, y: 1.1912774, z: -0.5340652}
---- !u!114 &-2963344764260028000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504053007929169680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c1c82f0d1e4fa43b372447da018fe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RatHoleTrigger
 --- !u!4 &2275629054437199274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 338954af857d7ce4aae3c88827a9b82c, type: 3}
