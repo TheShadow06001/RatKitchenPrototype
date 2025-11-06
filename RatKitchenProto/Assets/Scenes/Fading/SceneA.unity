@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestinationTrigger
   spawnPoint: {fileID: 400017950}
-  fadeDuration: 0.3
+  fadeDuration: 0.25
   fader: {fileID: 0}
 --- !u!1 &294078460
 GameObject:
