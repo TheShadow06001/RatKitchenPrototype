@@ -18,7 +18,7 @@ public class PlayingState : State
     public override void UpdateState()
     {
         base.UpdateState();
-        //TimerAndScore.UpdateTimer();
+        TimerAndScore.UpdateTimer();
         KitchenGenerator.UpdateKitchenGenerator();
     }
 }

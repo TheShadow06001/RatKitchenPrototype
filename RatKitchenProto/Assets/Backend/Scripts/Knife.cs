@@ -33,12 +33,15 @@ public class Knife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (isComplete)
+        if (GameManager.Instance.CheckState<PlayingState>())
         {
-            isComplete = false;
-            StartCoroutine(Chop());
+            if (isComplete)
+            {
+                isComplete = false;
+                StartCoroutine(Chop());
+            }
         }
+        
     }
 
     IEnumerator Chop()
@@ -47,7 +50,7 @@ public class Knife : MonoBehaviour
 
         int value1 = 0;
 
-
+        
         for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
             
