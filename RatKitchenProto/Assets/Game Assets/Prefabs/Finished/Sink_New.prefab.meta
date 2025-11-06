@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:RatKitchenProto/Assets/Game Assets/Prefabs/Finished/Sink_New.prefab.meta
 guid: 8550eec86f3111d41a3dc2e5025e70a1
+========
+guid: b7b7ed52d65c21d48b9b4477e0d43744
+>>>>>>>> 8e3b04a90708e0e762d503f621fec280a4e427d1:RatKitchenProto/Assets/Game Assets/Prefabs/SpawnPoint.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
