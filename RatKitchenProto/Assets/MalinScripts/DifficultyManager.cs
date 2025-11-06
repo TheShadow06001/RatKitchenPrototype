@@ -25,6 +25,8 @@ public class DifficultyManager : MonoBehaviour
             Instance = this;
 
         CurrentMaxPlatforms = basePlatformCount;
+
+        
     }
 
     public event Action OnLevelReset;

@@ -211,8 +211,8 @@ public class KitchenGenerator : MonoBehaviour
 
         foreach (var type in wallTypes)
         {
-            if (!type.CanSpawnAtLevel(currentLevel))
-                continue;
+            //if (!type.CanSpawnAtLevel(currentLevel))
+            //    continue;
 
             if (wallSpawnCounts[type] >= GetScaledMaxCount(type))
                 continue;
