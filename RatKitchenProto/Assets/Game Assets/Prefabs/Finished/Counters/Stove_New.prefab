@@ -933,8 +933,8 @@ MonoBehaviour:
   - {fileID: 1093310803282732080}
   - {fileID: 5841942752600224717}
   possibleObstacles:
-  - {fileID: 4868850252277391835, guid: ac7837f7c9a22d140832d331497f338c, type: 3}
-  - {fileID: 3479590279645862948, guid: 9b9738e8a4ee5da4c89660d866c9122b, type: 3}
+  - {fileID: 8158062840188239698, guid: 51b20838eabb9d54d93aec4e1f813e00, type: 3}
+  - {fileID: 6193306776060465271, guid: a9b8a68ae0c87c244a85ca6d4a8af257, type: 3}
   minObstacles: 1
   maxObstacles: 1
   needsObstacleAtStart: 0

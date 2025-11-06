@@ -33,15 +33,12 @@ public class Knife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.CheckState<PlayingState>())
+
+        if (isComplete && GameManager.Instance.CheckState<PlayingState>())
         {
-            if (isComplete)
-            {
-                isComplete = false;
-                StartCoroutine(Chop());
-            }
+            isComplete = false;
+            StartCoroutine(Chop());
         }
-        
     }
 
     IEnumerator Chop()
@@ -50,26 +47,30 @@ public class Knife : MonoBehaviour
 
         int value1 = 0;
 
-        
-        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
+        if (GameManager.Instance.CheckState<PlayingState>())
         {
-            
-            transform.position = Vector3.Lerp(startPosition, endPosition, i);
-            yield return null;
-
-            if (transform.position == endPosition && value1 == 0)
+            for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
             {
-                SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
-                value1++;
+
+                transform.position = Vector3.Lerp(startPosition, endPosition, i);
+                yield return null;
+
+                if (transform.position == endPosition && value1 == 0)
+                {
+                    SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
+                    value1++;
+                }
+            }
+
+            for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
+            {
+
+                transform.position = Vector3.Lerp(endPosition, startPosition, i);
+                yield return null;
             }
         }
 
-        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
-        {
-           
-            transform.position = Vector3.Lerp(endPosition, startPosition, i);
-            yield return null;
-        }
+        
 
         
         isComplete = true;
