@@ -10,7 +10,7 @@ public class CameraScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void UpdateCamera()
     {
         transform.position += direction * moveSpeed * Time.deltaTime;
     }

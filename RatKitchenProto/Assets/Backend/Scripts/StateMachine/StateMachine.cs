@@ -32,4 +32,10 @@ public class StateMachine : MonoBehaviour
         if (!currentState) return false;
         return currentState.GetType() == typeof(aState);
     }
+
+    public bool CheckState<aState>()
+    {
+        if (currentState.GetType() == typeof(aState)) return true;
+        else return false;
+    }
 }
