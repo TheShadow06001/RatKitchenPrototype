@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeed;
     float cameraSpeed;
 
+    RaycastHit hit;
     bool isGrounded;
     Rigidbody rigidBody;
     Animator animator;
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Update()
+    public void PlayerUpdate()
     {
         HandleForwardSpeed();
         Jump();
@@ -48,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetInteger("HurtCount", count + 1);
         }
     }
+    
+
+    
     void HandleForwardSpeed()
     {
         if (transform.position.z < anchorPoint.transform.position.z - 0.1f)
@@ -64,17 +68,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void Jump()
     {
-        RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, rayLength, groundLayer);
-        if (isGrounded)
+
+        if (rigidBody != null && Input.GetKeyDown(KeyCode.Space) && !laneChanger.isChangingLanes)
         {
-            if (rigidBody != null && Input.GetKeyDown(KeyCode.Space) && !laneChanger.isChangingLanes)
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, rayLength, groundLayer);
+            if (isGrounded)
             {
                 rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 animator.SetTrigger("Jump");
-
             }
         }
+
     }
     private void OnDrawGizmos()
     {

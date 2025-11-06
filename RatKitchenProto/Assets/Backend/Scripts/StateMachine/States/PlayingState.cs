@@ -5,6 +5,9 @@ public class PlayingState : State
 {
     [SerializeField] private S_TimerAndScore TimerAndScore;
     [SerializeField] private KitchenGenerator KitchenGenerator;
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private CameraScript cameraScript;
+
     public override void EnterState()
     {
         base.EnterState();
@@ -18,7 +21,12 @@ public class PlayingState : State
     public override void UpdateState()
     {
         base.UpdateState();
-        //TimerAndScore.UpdateTimer();
+
+        cameraScript.UpdateCamera();
+        playerMovement.PlayerUpdate();
+        TimerAndScore.UpdateTimer();
         KitchenGenerator.UpdateKitchenGenerator();
+
+        
     }
 }
