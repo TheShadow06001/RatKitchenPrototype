@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3796614020935131565}
   - component: {fileID: 7048528489907468265}
   - component: {fileID: 2910379255179244651}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BlackLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2991064485595761944}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ChoppingKnives 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1559113201866957907}
   - component: {fileID: 4239767729400485254}
   - component: {fileID: 7823621250851386286}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: choppingboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,6 +242,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2991064485595761944}
     m_Modifications:
+    - target: {fileID: 2713859075905553664, guid: 0b9a569fd1cf7b447a653ad188bc80d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3098551134441729065, guid: 0b9a569fd1cf7b447a653ad188bc80d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.039000034
@@ -289,6 +293,14 @@ PrefabInstance:
     - target: {fileID: 7714686618093285665, guid: 0b9a569fd1cf7b447a653ad188bc80d3, type: 3}
       propertyPath: m_Name
       value: PivotPoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714686618093285665, guid: 0b9a569fd1cf7b447a653ad188bc80d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258720830436200526, guid: 0b9a569fd1cf7b447a653ad188bc80d3, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

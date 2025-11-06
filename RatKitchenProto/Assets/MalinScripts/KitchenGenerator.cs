@@ -82,7 +82,7 @@ public class KitchenGenerator : MonoBehaviour
     // When game manager is used, rename to UpdateKitchenGenerator and call on ResetKitchenGenerator?
     public void UpdateKitchenGenerator()
     {
-        Debug.Log("KitchenGenerator: UpdateKitchenGenerator() called");
+        
 
         if (isLevelComplete)
             return;
