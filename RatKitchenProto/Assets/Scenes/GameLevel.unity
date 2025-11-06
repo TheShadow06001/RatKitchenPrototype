@@ -4511,6 +4511,18 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7947331472897996137, guid: 1d06f899a8d49af43a96444159654bbb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.1884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947331472897996137, guid: 1d06f899a8d49af43a96444159654bbb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.643
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947331472897996137, guid: 1d06f899a8d49af43a96444159654bbb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.5201
+      objectReference: {fileID: 0}
     - target: {fileID: 8097679836609680701, guid: 1d06f899a8d49af43a96444159654bbb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.07
@@ -10995,8 +11007,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
+      propertyPath: jumpForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
+      propertyPath: rayLength
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
       propertyPath: mainCamera
@@ -11006,9 +11026,21 @@ PrefabInstance:
       propertyPath: anchorPoint
       value: 
       objectReference: {fileID: 2029926094}
+    - target: {fileID: 1255399101103630193, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
+      propertyPath: forwardAcceleration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4162388791570179371, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
       propertyPath: m_UseGravity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162388791570179371, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491730838678199912, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5186239983539354338, guid: 9146d4a260fc4c94fba539eee67eef19, type: 3}
       propertyPath: m_Name
