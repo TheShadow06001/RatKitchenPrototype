@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    public void PlayerUpdate()
+    public void FixedUpdate()
     {
         HandleForwardSpeed();
         Jump();

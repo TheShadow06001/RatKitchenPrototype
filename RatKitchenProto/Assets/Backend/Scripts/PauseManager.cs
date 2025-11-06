@@ -10,7 +10,7 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            Debug.Log("Pause");   
             if (!isPaused)
             {
                 SoundManager.Instance.PlaySoundEffect(SoundEffects.OpenPause);

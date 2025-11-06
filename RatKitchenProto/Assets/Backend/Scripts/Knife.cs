@@ -33,7 +33,7 @@ public class Knife : MonoBehaviour
     void Update()
     {
 
-        if (isComplete && GameManager.Instance.CheckState<PlayingState>())
+        if (isComplete)
         {
             isComplete = false;
             StartCoroutine(Chop());
@@ -46,30 +46,26 @@ public class Knife : MonoBehaviour
 
         int value1 = 0;
 
-        if (GameManager.Instance.CheckState<PlayingState>())
+
+        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
         {
-            for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
+            
+            transform.position = Vector3.Lerp(startPosition, endPosition, i);
+            yield return null;
+
+            if (transform.position == endPosition && value1 == 0)
             {
-
-                transform.position = Vector3.Lerp(startPosition, endPosition, i);
-                yield return null;
-
-                if (transform.position == endPosition && value1 == 0)
-                {
-                    SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
-                    value1++;
-                }
-            }
-
-            for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
-            {
-
-                transform.position = Vector3.Lerp(endPosition, startPosition, i);
-                yield return null;
+                SoundManager.Instance.PlaySoundEffect(SoundEffects.KnifeTrapChop);
+                value1++;
             }
         }
 
-        
+        for (float i = 0; i < startPosition.y; i += Time.deltaTime * speed)
+        {
+           
+            transform.position = Vector3.Lerp(endPosition, startPosition, i);
+            yield return null;
+        }
 
         
         isComplete = true;
