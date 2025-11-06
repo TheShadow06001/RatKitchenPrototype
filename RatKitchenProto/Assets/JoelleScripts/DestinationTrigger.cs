@@ -3,25 +3,29 @@ using System.Collections;
 
 public class DestinationTrigger : MonoBehaviour
 {
-    [SerializeField] private Vector3 spawnPoint;
+    private Vector3 spawnPoint;
     [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private SceneFader fader;
+    private SceneFader fader;
 
     private void Awake()
     {
-        if (fader == null)
-            fader = FindFirstObjectByType<SceneFader>();
+        spawnPoint = GameObject.FindGameObjectWithTag("Destination").transform.position;
+        fader = FindFirstObjectByType<SceneFader>();
+        
+            
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FadeTeleport(other.transform));
+            other.transform.position = spawnPoint;
+            DifficultyManager.Instance.LevelComplete();
+            StartCoroutine(FadeTeleport());
         }
     }
 
-    private IEnumerator FadeTeleport(Transform player)
+    private IEnumerator FadeTeleport()
     {
         if (fader == null || spawnPoint == null) yield break;
 
@@ -29,15 +33,15 @@ public class DestinationTrigger : MonoBehaviour
         yield return StartCoroutine(fader.FadeOutRoutine(fadeDuration));
 
         // Move player back to SpawnPoint
-        player.position = spawnPoint;
+        
 
         // this one is optional which resets the velocity if/when using Rigidbody
-        var rb = player.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+        //var rb = player.GetComponent<Rigidbody>();
+        //if (rb != null)
+        //{
+        //    rb.linearVelocity = Vector3.zero;
+        //    rb.angularVelocity = Vector3.zero;
+        //}
 
         // Fade back in
         yield return StartCoroutine(fader.FadeInRoutine(fadeDuration));
