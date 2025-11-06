@@ -25,7 +25,6 @@ MonoBehaviour:
   variantPrefabs:
   - {fileID: 3495244411028611420, guid: 3f3a3ae839b86ef4f93291ee704543cf, type: 3}
   - {fileID: 1028907230323233284, guid: 05ff2e0bb5293a74f9c1c0cc8cb2afe2, type: 3}
-  - {fileID: 5691629376405205814, guid: b0fe45ba58c32424688a968d1a243657, type: 3}
   minLevelToAppear: 1
   maxLevelToAppear: 999
   spawnChanceCurve:

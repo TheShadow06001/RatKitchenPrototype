@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 4109567618371162419}
   - component: {fileID: 4997639428376720514}
   - component: {fileID: 2521837473597304631}
+  - component: {fileID: 7792171456074730541}
   m_Layer: 0
   m_Name: HoleContent
   m_TagString: Untagged
@@ -224,6 +225,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7792171456074730541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357339082763408782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f766bb5a7bb45a498aa3c967e244855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestinationTrigger
+  spawnPoint: {fileID: 6982909321585761558, guid: b7b7ed52d65c21d48b9b4477e0d43744, type: 3}
+  fadeDuration: 0.3
+  fader: {fileID: 0}
 --- !u!1001 &1737846211671812673
 PrefabInstance:
   m_ObjectHideFlags: 0
