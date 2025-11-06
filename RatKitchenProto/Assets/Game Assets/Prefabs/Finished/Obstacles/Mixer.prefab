@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 640840672347185144}
   - component: {fileID: 5043929782659147187}
   - component: {fileID: 8820716884691051631}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Mixer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6887149650596948794}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: DeathPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,10 +175,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -6254500160509358115, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: -3739073220949677422, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -195,17 +191,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -1598362790113089182, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
       propertyPath: m_Name
       value: BetterBestestBlender
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 5f2eac78ebba2604c8d34a502241aefc, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
