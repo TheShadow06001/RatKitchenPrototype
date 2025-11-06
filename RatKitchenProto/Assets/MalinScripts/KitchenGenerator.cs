@@ -23,6 +23,7 @@ public class KitchenGenerator : MonoBehaviour
     [SerializeField] private GameObject endPlatformPrefab;
     [SerializeField] private GameObject endWallPrefab;
     private GameObject spawnedEndWall;
+    private GameObject spawnedEndPlatform;
 
     private Dictionary<PlatformType, int> platformSpawnCounts = new();
     private Dictionary<WallType, int> wallSpawnCounts = new();
@@ -308,12 +309,22 @@ public class KitchenGenerator : MonoBehaviour
 
     private void SpawnEndPlatform()
     {
-         if (endWallPrefab)
-         {
-            Quaternion ratWallRotation = Quaternion.Euler(0f, 270f, 0f); 
-            Vector3 wallSpawnPos = transform.position + new Vector3(-0.8f, -0.09f, 0.2f);    // magic numbers
-            spawnedEndWall = Instantiate(endWallPrefab, wallSpawnPos, ratWallRotation);
-         }
+        if (endPlatformPrefab)
+        {
+            Vector3 platformSpawnPos = transform.position + new Vector3(-0.55f, 1.045f, -0.25f); // magic numbers
+            Quaternion platformRotation = Quaternion.Euler(0f, 90f, 0f);
+            spawnedEndPlatform = Instantiate(endPlatformPrefab, platformSpawnPos, platformRotation);
+        }
+
+
+
+
+         //if (endWallPrefab)
+         //{
+         //   Quaternion ratWallRotation = Quaternion.Euler(0f, 270f, 0f); 
+         //   Vector3 wallSpawnPos = transform.position + new Vector3(-0.8f, -0.09f, 0.2f);    // magic numbers
+         //   spawnedEndWall = Instantiate(endWallPrefab, wallSpawnPos, ratWallRotation);
+         //}
     }
 
     public void SetDifficulty(LevelSettings settings)

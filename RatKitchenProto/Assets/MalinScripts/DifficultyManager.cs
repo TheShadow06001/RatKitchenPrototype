@@ -11,7 +11,9 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private int basePlatformCount = 20;
     [SerializeField] private int platformsPerLevelIncrease = 5;
     [SerializeField] KitchenGenerator kitchenGenerator;
+    [SerializeField] private int sinkBaseMaxCount;
 
+    [SerializeField] private PlatformType platformType;
 
     [Header("Scaling - currently not being used")]
     public bool useDynamicScaling = true;
@@ -26,7 +28,8 @@ public class DifficultyManager : MonoBehaviour
 
         CurrentMaxPlatforms = basePlatformCount;
 
-        
+        //sinkBaseMaxCount = basePlatformCount
+
     }
 
     public event Action OnLevelReset;

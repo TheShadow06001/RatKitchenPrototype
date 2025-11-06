@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693e86cbf4dfab4cb0669f1d9643df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledPlatform
-  platformType: {fileID: 0}
+  platformType: {fileID: 11400000, guid: 1e51524b5817a6f47a4dda8a9ce34ee2, type: 2}
 --- !u!4 &5607376912213181269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
