@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+
 public class DestinationTrigger : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
@@ -22,15 +23,15 @@ public class DestinationTrigger : MonoBehaviour
 
     private IEnumerator FadeTeleport(Transform player)
     {
-        if (fader == null) yield break;
+        if (fader == null || spawnPoint == null) yield break;
 
-        // Fade to black
+        // fade to black
         yield return StartCoroutine(fader.FadeOutRoutine(fadeDuration));
 
-        // Move player back to spawn
+        // Move player back to SpawnPoint
         player.position = spawnPoint.position;
 
-        // Optional: reset velocity if using Rigidbody
+        // this one is optional which resets the velocity if/when using Rigidbody
         var rb = player.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -43,6 +44,3 @@ public class DestinationTrigger : MonoBehaviour
     }
 }
 
-
-
-// This script should be attached to the hole sprite or destination object (exit)
