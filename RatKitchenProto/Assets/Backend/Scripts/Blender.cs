@@ -5,7 +5,6 @@ using UnityEngine;
 public class Blender : MonoBehaviour
 {
     [Header("Variables")]
-    [SerializeField] private int damage = 1;
     [SerializeField] private float range;
     [SerializeField] private float dieRange;
     [SerializeField] private float fallPercentage;
@@ -30,18 +29,14 @@ public class Blender : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.CheckState<PlayingState>())
-        {
-            if (CheckRange(false) <= range) FallOver();
+        if (CheckRange(false) <= range) FallOver();
 
-            if (CheckRange(true) <= dieRange && canTakeDamage)
-            {
-                player.GetComponent<HP>().TakeDamage(damage);
-                canTakeDamage = false;
-                StartCoroutine(TimerDie());
-            }
+        if (CheckRange(true) <= dieRange && canTakeDamage)
+        {
+            HealthDisplay.instance.TakeDamage();
+            canTakeDamage = false;
+            StartCoroutine(TimerDie());
         }
-        
 
     }
 

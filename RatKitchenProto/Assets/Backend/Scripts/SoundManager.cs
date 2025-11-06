@@ -29,18 +29,16 @@ public enum SoundEffects
     GasStoveTick,
     GasStoveFire,
     BlenderBlending,
-    Heartbeat,
+    GameplayMusic,
 
     // Music
-    GameplayMusic,
 
 
     // UI Sounds
     ButtonPress,
     ButtonHover,
     OpenPause, 
-    ClosePause,
-    SliderBeSliding
+    ClosePause
 }
 
 public class SoundManager : MonoBehaviour

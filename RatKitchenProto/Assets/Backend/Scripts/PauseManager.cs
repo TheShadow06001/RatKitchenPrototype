@@ -4,7 +4,6 @@ using UnityEngine;
 public class PauseManager : MonoBehaviour
 {
     private bool isPaused = false;
-
     // Update is called once per frame
     void Update()
     {
