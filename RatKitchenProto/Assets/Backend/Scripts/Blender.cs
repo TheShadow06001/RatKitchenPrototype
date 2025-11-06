@@ -29,18 +29,14 @@ public class Blender : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.CheckState<PlayingState>())
-        {
-            if (CheckRange(false) <= range) FallOver();
+        if (CheckRange(false) <= range) FallOver();
 
-            if (CheckRange(true) <= dieRange && canTakeDamage)
-            {
-                HealthDisplay.instance.TakeDamage();
-                canTakeDamage = false;
-                StartCoroutine(TimerDie());
-            }
+        if (CheckRange(true) <= dieRange && canTakeDamage)
+        {
+            HealthDisplay.instance.TakeDamage();
+            canTakeDamage = false;
+            StartCoroutine(TimerDie());
         }
-        
 
     }
 

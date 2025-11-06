@@ -211,10 +211,6 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4f10d4287b03f044fa67e4e10d9307dc, type: 2}
-    - target: {fileID: -6973039140292087129, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: -6967787587791597853, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -230,18 +226,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
       propertyPath: m_Name
       value: Sink_New 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1714458535024757942, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2813025541751855568, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4846979710148789199, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
       propertyPath: m_LocalPosition.x
@@ -287,6 +271,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1236578753437962634}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6268347646643994813}
   m_SourcePrefab: {fileID: 100100000, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}
 --- !u!1 &5087580193980275183 stripped
 GameObject:
@@ -351,6 +338,19 @@ MonoBehaviour:
   maxObstacles: 1
   needsObstacleAtStart: 1
   needsObstacleAtEnd: 1
+--- !u!114 &6268347646643994813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087580193980275183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8693e86cbf4dfab4cb0669f1d9643df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledPlatform
+  platformType: {fileID: 11400000, guid: 1e51524b5817a6f47a4dda8a9ce34ee2, type: 2}
 --- !u!4 &5607376912213181269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae428726b50199a45bb0c0b5159e8b34, type: 3}

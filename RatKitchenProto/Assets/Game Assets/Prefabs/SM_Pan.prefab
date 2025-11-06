@@ -73,10 +73,6 @@ PrefabInstance:
       value: SM_Pan
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1dda22a713c335f4b992f0cb4a434bf5, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 1dda22a713c335f4b992f0cb4a434bf5, type: 3}
       propertyPath: m_TagString
       value: Pots&Pans
       objectReference: {fileID: 0}
