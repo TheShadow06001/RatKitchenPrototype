@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PlayingState : State
 {
     [SerializeField] private S_TimerAndScore TimerAndScore;
+    [SerializeField] private KitchenGenerator KitchenGenerator;
     public override void EnterState()
     {
         base.EnterState();
@@ -17,6 +18,7 @@ public class PlayingState : State
     public override void UpdateState()
     {
         base.UpdateState();
-        TimerAndScore.UpdateTimer();
+        //TimerAndScore.UpdateTimer();
+        KitchenGenerator.UpdateKitchenGenerator();
     }
 }

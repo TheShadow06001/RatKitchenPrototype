@@ -125,7 +125,7 @@ public class KitchenPool : MonoBehaviour
         }
         else
         {
-            obj = Instantiate(type.GetRandomPrefab()); // utökar poolen om det inte finns tillräckligt att hämta
+            obj = Instantiate(type.GetRandomPrefab());
             obj.transform.SetParent(transform);
         }
 
@@ -140,7 +140,7 @@ public class KitchenPool : MonoBehaviour
     {
         if (type == null || !platformDictionary.ContainsKey(type))
         {
-            Destroy(obj); // utifall att pool saknas för objektet
+            Destroy(obj);
             return;
         }
 

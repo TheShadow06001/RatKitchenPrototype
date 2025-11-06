@@ -11,6 +11,7 @@ public class RatHoleTrigger : MonoBehaviour
             // Fade?
             // Respawn
             Debug.Log("Player entered rathole, load next level");
+            DifficultyManager.Instance.LevelComplete();
 
         }
     }

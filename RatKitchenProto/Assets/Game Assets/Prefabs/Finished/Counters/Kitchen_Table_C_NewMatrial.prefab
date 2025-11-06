@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 8635053865025721535}
   - component: {fileID: 5469294133151536096}
   - component: {fileID: 5582543384552932696}
+  - component: {fileID: 2946929754265144194}
   m_Layer: 3
   m_Name: Kitchen_Table_C_NewMatrial
   m_TagString: Untagged
@@ -441,6 +442,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformDestroyer
   platformDestructionPoint: {fileID: 0}
+--- !u!114 &2946929754265144194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691629376405205814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8693e86cbf4dfab4cb0669f1d9643df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledPlatform
+  platformType: {fileID: 11400000, guid: 996a2fb11c89cc846b84497dfb569021, type: 2}
 --- !u!1 &6226145058298287306
 GameObject:
   m_ObjectHideFlags: 0
