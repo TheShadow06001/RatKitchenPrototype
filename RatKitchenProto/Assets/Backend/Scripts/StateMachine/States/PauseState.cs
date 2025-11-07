@@ -4,10 +4,12 @@ using UnityEngine;
 public class PauseState : State
 {
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject optionMenuUI;
 
     public override void EnterState()
     {
         pauseMenuUI.SetActive(true);
+        
     }
 
     public override void UpdateState()
@@ -16,7 +18,8 @@ public class PauseState : State
     }
 
     public override void ExitState()
-    {
-       pauseMenuUI.SetActive(false);
+    { 
+        optionMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
     }
 }
